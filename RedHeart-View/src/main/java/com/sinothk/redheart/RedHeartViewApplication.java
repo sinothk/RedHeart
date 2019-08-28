@@ -1,4 +1,4 @@
-package com.sinothk.redheart.view;
+package com.sinothk.redheart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
