@@ -1,4 +1,4 @@
-package com.sinothk.redheart.system;
+package com.sinothk.redheart.sys;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
