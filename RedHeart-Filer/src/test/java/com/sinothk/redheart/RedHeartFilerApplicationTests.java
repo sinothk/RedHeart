@@ -1,4 +1,4 @@
-package com.sinothk.redheart.filer;
+package com.sinothk.redheart;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

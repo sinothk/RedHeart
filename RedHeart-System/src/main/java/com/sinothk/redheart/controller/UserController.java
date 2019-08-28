@@ -1,4 +1,4 @@
-package com.sinothk.redheart.sys.controller;
+package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.ResultData;
 import org.springframework.web.bind.annotation.GetMapping;

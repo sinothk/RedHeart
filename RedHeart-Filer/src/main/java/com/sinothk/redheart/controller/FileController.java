@@ -1,4 +1,4 @@
-package com.sinothk.redheart.filer;
+package com.sinothk.redheart.controller;
 
 
 import org.springframework.web.bind.annotation.RestController;
