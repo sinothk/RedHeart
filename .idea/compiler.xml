@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="RedHeart-Filer" />
+        <module name="RedHeart-System" />
+        <module name="RedHeart-View" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RedHeart-Filer" target="1.8" />
+      <module name="RedHeart-System" target="1.8" />
+      <module name="RedHeart-View" target="1.8" />
+      <module name="RedHeartLib" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
