@@ -21,8 +21,8 @@ public class SystemSwaggerConfiguration {
     public Docket systemGroupRestApi() {
         // http://localhost:10002/doc.html
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("文件接口")
-                .description("接口包括：文件管理等！")
+                .title("RedHeart接口")
+                .description("Red Heart API")
                 .termsOfServiceUrl("http://www.sinothk.com/")
                 .contact(new Contact("LiangYT", "", "381518188@qq.com"))
                 .version("1.0")
@@ -30,7 +30,7 @@ public class SystemSwaggerConfiguration {
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
-                .groupName("文件接口")
+                .groupName("RedHeart接口")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.sinothk.redheart.controller"))
                 .paths(PathSelectors.any())
