@@ -8,7 +8,7 @@ import springfox.documentation.spring.web.SpringfoxWebMvcConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2 // api
+@EnableSwagger2 // api http://192.168.124.10:8086/redheart/
 @MapperScan("com.sinothk.redheart.repository")
 @ConditionalOnClass(SpringfoxWebMvcConfiguration.class) // https://doc.xiaominfo.com/guide/useful.html#注意事项
 public class RedHeartViewApplication {

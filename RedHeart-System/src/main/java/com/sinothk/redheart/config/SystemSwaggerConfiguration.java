@@ -19,7 +19,7 @@ public class SystemSwaggerConfiguration {
 
     @Bean(value = "systemGroupRestApi")
     public Docket systemGroupRestApi() {
-        // http://localhost:10002/doc.html
+        // http://localhost:8086/redheart/doc.html
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("RedHeart接口")
                 .description("Red Heart API")

@@ -24,7 +24,6 @@ public class WxBizController {
 
     @ApiOperation(value = "获得微信OpenId", notes = "获得微信OpenId")
     @GetMapping("/getOpenId")
-    @Deprecated
     public ResultData<WxApiEntity> getOpenId(@ApiParam("code") @RequestParam("code") String code) {
         // http://192.168.124.10:8086/redheart/wxBiz/getOpenId?code=043u9z8C1bQu360v3J9C1niD8C1u9z8s
         try {
@@ -36,12 +35,12 @@ public class WxBizController {
         }
     }
 
-    @ApiOperation(value = "通过微信code", notes = "通过微信code")
+    @ApiOperation(value = "新增：通过微信用户登录或注册", notes = "新增：通过微信用户登录或注册")
     @PostMapping("/loginByWx")
-    public ResultData<WxUserEntity> loginByWx(@ApiParam("wxUserVo") @RequestBody WxUserVo wxUserVo) {
+    public ResultData<WxUserEntity> loginByWx(@ApiParam("wxUser") @RequestBody WxUserVo wxUser) {
         // http://192.168.124.12:11000/wxBiz/loginByWx
         try {
-            WxUserEntity wxUserEntity = wxUserService.saveOrFindUser(wxUserVo);
+            WxUserEntity wxUserEntity = wxUserService.saveOrFindUser(wxUser);
             if (wxUserEntity == null) {
                 return ResultData.error("数据解析为空");
             } else {
