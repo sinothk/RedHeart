@@ -12,7 +12,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>RedHeart-Config</module>
         <module>RedHeart-Filer</module>
         <module>RedHeart-System</module>
         <module>RedHeart-View</module>
@@ -85,20 +84,8 @@
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>
-            <version>1.9.3</version>
+            <version>1.9.6</version>
         </dependency>
-
-        <!--fastjson-->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>fastjson</artifactId>-->
-            <!--<version>1.2.56</version>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash;html&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-        <!--</dependency>-->
 
         <!-- shiro包 -->
         <dependency>
