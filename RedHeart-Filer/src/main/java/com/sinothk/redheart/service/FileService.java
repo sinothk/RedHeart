@@ -22,6 +22,7 @@ public interface FileService {
 
     ResultData<List<FileCoverEntity>> findFileCoverByOwner(String ownerName);
 
-    ArrayList<FileEntity> save(MultipartFile[] files, String username, String fileType, String fileName, String bizType);
+//    ArrayList<FileEntity> saveFilesWhitCoverByWin(MultipartFile[] files, String username, String fileType, String fileName, String bizType);
 
+    ArrayList<FileEntity> saveFiles(MultipartFile[] fileList, FileEntity fileEntity, String sysType, boolean neesCover);
 }

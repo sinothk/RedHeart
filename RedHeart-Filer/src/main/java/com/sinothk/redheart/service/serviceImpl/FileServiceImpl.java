@@ -2,6 +2,7 @@ package com.sinothk.redheart.service.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.keyValue.Constant;
 import com.sinothk.redheart.config.ServerConfig;
 import com.sinothk.redheart.domain.FileCoverEntity;
 import com.sinothk.redheart.domain.FileEntity;
@@ -28,6 +29,78 @@ public class FileServiceImpl implements FileService {
     private FileMapper fileMapper;
     @Resource(name = "fileCoverMapper")
     private FileCoverMapper fileCoverMapper;
+
+    @Override
+    public ArrayList<FileEntity> saveFiles(MultipartFile[] fileList, FileEntity fileEntity, String sysType, boolean neesCover) {
+
+        try {
+            //
+            ArrayList<FileEntity> fileEntities = new ArrayList<>();
+            // 保存
+            Date currDate = new Date();
+            String photoId = String.valueOf(currDate.getTime());
+
+            for (int i = 0; i < fileList.length; i++) {
+
+                MultipartFile multipartFile = fileList[i];
+
+                // 原文件名
+                String oldFileName = multipartFile.getOriginalFilename();
+
+                // 新文件名
+                assert oldFileName != null;
+                String fileLocName = fileEntity.getOwnerUser() + "_" + getIdByDateTimeString() + oldFileName.substring(oldFileName.lastIndexOf("."));
+
+                // 相对目录
+                String locPath = fileEntity.getOwnerUser() + "/" + fileEntity.getFileType() + "/" + new SimpleDateFormat("yyyyMM").format(currDate) + "/";
+
+                String fileUrl = locPath + fileLocName;
+
+                // 保存到硬件
+                FileManager.getInstance().saveFileIntoDisk(sysType, serverConfig.getVirtualPath(), locPath, fileLocName, multipartFile);
+
+                if (neesCover && i == 0) {
+                    FileCoverEntity fileInfo = new FileCoverEntity();
+                    fileInfo.setFileCode(photoId);
+                    fileInfo.setFileOldName(oldFileName);
+                    fileInfo.setFileName(fileEntity.getFileName());
+                    fileInfo.setFileLocName(fileLocName);
+                    fileInfo.setFileUrl(fileUrl);
+                    fileInfo.setFileSize(multipartFile.getSize());
+                    fileInfo.setCreateTime(currDate);
+                    fileInfo.setFileType(fileEntity.getFileType());
+                    fileInfo.setOwnerUser(fileEntity.getOwnerUser());
+                    fileInfo.setBizType(fileEntity.getBizType());
+                    // 新增封面
+                    fileCoverMapper.insert(fileInfo);
+                }
+
+                // 新增图片文件
+                FileEntity fileDbEntity = new FileEntity();
+                fileDbEntity.setFileCode(photoId);
+                fileDbEntity.setFileOldName(oldFileName);
+                fileDbEntity.setFileName(fileEntity.getFileName());
+                fileDbEntity.setFileLocName(fileLocName);
+                fileDbEntity.setFileUrl(fileUrl);
+                fileDbEntity.setFileSize(multipartFile.getSize());
+                fileDbEntity.setCreateTime(currDate);
+                fileDbEntity.setOwnerUser(fileEntity.getOwnerUser());
+                fileDbEntity.setFileType(fileEntity.getFileType());
+                fileDbEntity.setBizType(fileEntity.getBizType());
+                fileMapper.insert(fileDbEntity);
+
+                fileEntities.add(fileDbEntity);
+            }
+
+            return fileEntities;
+
+        } catch (IllegalStateException e) {
+            if (serverConfig.isDebug()) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 //    @Override
 //    public ResultData<FileEntity> addFiles(FileEntity fileEntity, MultipartFile[] files) {
@@ -205,74 +278,74 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    @Override
-    public ArrayList<FileEntity> save(MultipartFile[] files, String username, String fileType, String fileName, String bizType) {
-        try {
-            //
-            ArrayList<FileEntity> fileEntities = new ArrayList<>();
-            // 保存
-            Date currDate = new Date();
-            String photoId = String.valueOf(currDate.getTime());
-
-            for (int i = 0; i < files.length; i++) {
-
-                MultipartFile multipartFile = files[i];
-
-                // 原文件名
-                String oldFileName = multipartFile.getOriginalFilename();
-                // 新文件名
-                String fileLocName = username + "_" + getIdByDateTimeString() + oldFileName.substring(oldFileName.lastIndexOf("."));
-                // 相对目录
-                String locPath = username + "/" + fileType + "/" + new SimpleDateFormat("yyyyMM").format(currDate) + "/";
-
-                String fileUrl = locPath + fileLocName;
-
-                // 保存到硬件
-                FileManager.getInstance().saveFile(serverConfig.getVirtualPath(), locPath, fileLocName, multipartFile);
-
-                if (i == 0) {
-                    // 新增封面
-                    FileCoverEntity fileInfo = new FileCoverEntity();
-                    fileInfo.setFileCode(photoId);
-                    fileInfo.setFileOldName(oldFileName);
-                    fileInfo.setFileName(fileName);
-                    fileInfo.setFileLocName(fileLocName);
-                    fileInfo.setFileUrl(fileUrl);
-                    fileInfo.setFileSize(multipartFile.getSize());
-                    fileInfo.setCreateTime(currDate);
-                    fileInfo.setFileType(fileType);
-                    fileInfo.setOwnerUser(username);
-                    fileInfo.setBizType(bizType);
-
-                    fileCoverMapper.insert(fileInfo);
-                }
-
-                // 新增图片文件
-                FileEntity fileEntity = new FileEntity();
-                fileEntity.setFileCode(photoId);
-                fileEntity.setFileOldName(oldFileName);
-                fileEntity.setFileName(fileName);
-                fileEntity.setFileLocName(fileLocName);
-                fileEntity.setFileUrl(fileUrl);
-                fileEntity.setFileSize(multipartFile.getSize());
-                fileEntity.setCreateTime(currDate);
-                fileEntity.setOwnerUser(username);
-                fileEntity.setFileType(fileType);
-                fileEntity.setBizType(bizType);
-                fileMapper.insert(fileEntity);
-
-                fileEntities.add(fileEntity);
-            }
-
-            return fileEntities;
-
-        } catch (IllegalStateException e) {
-            if (serverConfig.isDebug()) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
+//    @Override
+//    public ArrayList<FileEntity> saveFilesWhitCoverByWin(MultipartFile[] files, String username, String fileType, String fileName, String bizType) {
+//        try {
+//            //
+//            ArrayList<FileEntity> fileEntities = new ArrayList<>();
+//            // 保存
+//            Date currDate = new Date();
+//            String photoId = String.valueOf(currDate.getTime());
+//
+//            for (int i = 0; i < files.length; i++) {
+//
+//                MultipartFile multipartFile = files[i];
+//
+//                // 原文件名
+//                String oldFileName = multipartFile.getOriginalFilename();
+//                // 新文件名
+//                String fileLocName = username + "_" + getIdByDateTimeString() + oldFileName.substring(oldFileName.lastIndexOf("."));
+//                // 相对目录
+//                String locPath = username + "/" + fileType + "/" + new SimpleDateFormat("yyyyMM").format(currDate) + "/";
+//
+//                String fileUrl = locPath + fileLocName;
+//
+//                // 保存到硬件
+//                FileManager.getInstance().saveFile(serverConfig.getVirtualPath(), locPath, fileLocName, multipartFile);
+//
+//                if (i == 0) {
+//                    // 新增封面
+//                    FileCoverEntity fileInfo = new FileCoverEntity();
+//                    fileInfo.setFileCode(photoId);
+//                    fileInfo.setFileOldName(oldFileName);
+//                    fileInfo.setFileName(fileName);
+//                    fileInfo.setFileLocName(fileLocName);
+//                    fileInfo.setFileUrl(fileUrl);
+//                    fileInfo.setFileSize(multipartFile.getSize());
+//                    fileInfo.setCreateTime(currDate);
+//                    fileInfo.setFileType(fileType);
+//                    fileInfo.setOwnerUser(username);
+//                    fileInfo.setBizType(bizType);
+//
+//                    fileCoverMapper.insert(fileInfo);
+//                }
+//
+//                // 新增图片文件
+//                FileEntity fileEntity = new FileEntity();
+//                fileEntity.setFileCode(photoId);
+//                fileEntity.setFileOldName(oldFileName);
+//                fileEntity.setFileName(fileName);
+//                fileEntity.setFileLocName(fileLocName);
+//                fileEntity.setFileUrl(fileUrl);
+//                fileEntity.setFileSize(multipartFile.getSize());
+//                fileEntity.setCreateTime(currDate);
+//                fileEntity.setOwnerUser(username);
+//                fileEntity.setFileType(fileType);
+//                fileEntity.setBizType(bizType);
+//                fileMapper.insert(fileEntity);
+//
+//                fileEntities.add(fileEntity);
+//            }
+//
+//            return fileEntities;
+//
+//        } catch (IllegalStateException e) {
+//            if (serverConfig.isDebug()) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//    }
 
     public static String getIdByDateTimeString() {
         return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());

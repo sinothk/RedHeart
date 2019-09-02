@@ -1,5 +1,6 @@
 package com.sinothk.redheart.utils;
 
+import com.sinothk.base.keyValue.Constant;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -22,45 +23,31 @@ public class FileManager {
         return fileManager;
     }
 
-    /**
-     * @param virtualPath E:/SINOTHK/serverVMFiles/sinothk/
-     * @param locPath     liangyt/img/201907/
-     * @param fileNewName liangyt_20190716112744.zip
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    public void saveFile(String virtualPath, String locPath, String fileNewName, MultipartFile file){
-        if (file.isEmpty()) {
+
+
+    public void saveFileIntoDisk(String sysType, String virtualPath, String locPath, String fileNewName, MultipartFile multipartFile) {
+        if (multipartFile.isEmpty()) {
             return;
         }
 
-//        String allPath = virtualPath + locPath;
-//        File fp = new File(allPath);
-//        if (!fp.exists()) {
-//            fp.mkdirs();
-//        }
-//
-//        Path path = fp.toPath().resolve(fileNewName);
-//        try {
-//            Files.copy(file.getInputStream(), path);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        if (Constant.LINUX.equals(sysType)) {
 
-        new Thread(() -> {
-            String allPath = virtualPath + locPath;
-            File fp = new File(allPath);
-            if (!fp.exists()) {
-                fp.mkdirs();
-            }
+        } else {
+            new Thread(() -> {
+                try {
+                    String allPath = virtualPath + locPath;
+                    File fp = new File(allPath);
+                    if (!fp.exists()) {
+                        fp.mkdirs();
+                    }
 
-            Path path = fp.toPath().resolve(fileNewName);
-            try {
-                Files.copy(file.getInputStream(), path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+                    Path path = fp.toPath().resolve(fileNewName);
+
+                    Files.copy(multipartFile.getInputStream(), path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
     }
 }

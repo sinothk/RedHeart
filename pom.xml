@@ -116,7 +116,7 @@
         <dependency>
             <groupId>com.sinothk.base</groupId>
             <artifactId>sinothk-base</artifactId>
-            <version>1.19.0831</version>
+            <version>1.19.0902</version>
         </dependency>
     </dependencies>
 

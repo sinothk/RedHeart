@@ -1,6 +1,8 @@
 package com.sinothk.redheart.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.keyValue.Constant;
 import com.sinothk.base.utils.JWTUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.redheart.domain.FileCoverEntity;
@@ -25,11 +27,17 @@ public class FileController {
     @Resource(name = "fileService")
     private FileService fileService;
 
-    @ApiOperation(value = "新增：保存文件", notes = "新增文件")
-    @PostMapping("/add")
-    public ResultData<ArrayList<FileEntity>> add(@ApiParam(value = "文件信息", required = true) @RequestParam("fileInfo") String fileInfo,
-                                                 @ApiParam(value = "文件对象列表", required = true) @RequestParam("files") MultipartFile[] fileList) {
-        //http://localhost:8086/file/add
+    private ArrayList<FileEntity> saveFilesIntoDisk(MultipartFile[] fileList, String fileInfo, String sysType, boolean neesCover) {
+        FileEntity fileEntity = JSON.parseObject(fileInfo, FileEntity.class);
+        return fileService.saveFiles(fileList, fileEntity, sysType, neesCover);
+    }
+
+    @ApiOperation(value = "新增：保存文件不需要封面到Linux", notes = "新增：保存文件不需要封面到Linux")
+    @PostMapping("/saveFilesByLinux")
+    public ResultData<ArrayList<FileEntity>> saveFilesByLinux(@ApiParam(value = "文件信息", required = true) @RequestParam("fileInfo") String fileInfo,
+                                                              @ApiParam(value = "文件对象列表", required = true) @RequestParam("files") MultipartFile[] fileList) {
+        //http://localhost:8086/file/saveFilesByLinux
+
         if (fileList == null || fileList.length == 0) {
             return ResultData.error("文件对象不能为空");
         }
@@ -38,20 +46,100 @@ public class FileController {
             return ResultData.error("未填写文件信息");
         }
 
-        FileEntity fileEntity = new FileEntity();//JSON.parseObject(fileInfo, FileEntity.class);
-        fileEntity.setOwnerUser("liangyt");
-        fileEntity.setFileType("Img");
-        fileEntity.setFileName("hello.png");
-        fileEntity.setBizType("user_avatar");
-
-//        FileEntity fileEntity = JSON.parseObject(fileInfo, FileEntity.class);
-        ArrayList<FileEntity> fileEntities = fileService.save(fileList, fileEntity.getOwnerUser(), fileEntity.getFileType(), fileEntity.getFileName(), fileEntity.getBizType());
+        ArrayList<FileEntity> fileEntities = saveFilesIntoDisk(fileList, fileInfo, Constant.LINUX, false);
         if (fileEntities == null) {
             return ResultData.error("文件新增失败");
         } else {
             return ResultData.success(fileEntities);
         }
     }
+
+    @ApiOperation(value = "新增：保存文件需要封面到Win", notes = "新增：保存文件需要封面到Win")
+    @PostMapping("/saveFilesWhitCoverByLinux")
+    public ResultData<ArrayList<FileEntity>> saveFilesWhitCoverByLinux(@ApiParam(value = "文件信息", required = true) @RequestParam("fileInfo") String fileInfo,
+                                                                     @ApiParam(value = "文件对象列表", required = true) @RequestParam("files") MultipartFile[] fileList) {
+        if (fileList == null || fileList.length == 0) {
+            return ResultData.error("文件对象不能为空");
+        }
+
+        if (StringUtil.isEmpty(fileInfo)) {
+            return ResultData.error("未填写文件信息");
+        }
+
+        ArrayList<FileEntity> fileEntities = saveFilesIntoDisk(fileList, fileInfo, Constant.LINUX, true);
+        if (fileEntities == null) {
+            return ResultData.error("文件新增失败");
+        } else {
+            return ResultData.success(fileEntities);
+        }
+    }
+
+    @ApiOperation(value = "新增：保存文件不需要封面到Win", notes = "新增：保存文件不需要封面到Win")
+    @PostMapping("/saveFilesByWin")
+    public ResultData<ArrayList<FileEntity>> saveFilesByWin(@ApiParam(value = "文件信息", required = true) @RequestParam("fileInfo") String fileInfo,
+                                                            @ApiParam(value = "文件对象列表", required = true) @RequestParam("files") MultipartFile[] fileList) {
+        //http://localhost:8086/file/saveFilesByWin
+
+        if (fileList == null || fileList.length == 0) {
+            return ResultData.error("文件对象不能为空");
+        }
+
+        if (StringUtil.isEmpty(fileInfo)) {
+            return ResultData.error("未填写文件信息");
+        }
+
+        ArrayList<FileEntity> fileEntities = saveFilesIntoDisk(fileList, fileInfo, Constant.WIN, false);
+        if (fileEntities == null) {
+            return ResultData.error("文件新增失败");
+        } else {
+            return ResultData.success(fileEntities);
+        }
+    }
+
+    @ApiOperation(value = "新增：保存文件需要封面到Win", notes = "新增：保存文件需要封面到Win")
+    @PostMapping("/saveFilesWhitCoverByWin")
+    public ResultData<ArrayList<FileEntity>> saveFilesWhitCoverByWin(@ApiParam(value = "文件信息", required = true) @RequestParam("fileInfo") String fileInfo,
+                                                                     @ApiParam(value = "文件对象列表", required = true) @RequestParam("files") MultipartFile[] fileList) {
+        //http://localhost:8086/file/saveFilesWhitCoverByWin
+
+        if (fileList == null || fileList.length == 0) {
+            return ResultData.error("文件对象不能为空");
+        }
+
+        if (StringUtil.isEmpty(fileInfo)) {
+            return ResultData.error("未填写文件信息");
+        }
+
+        ArrayList<FileEntity> fileEntities = saveFilesIntoDisk(fileList, fileInfo, Constant.WIN, true);
+        if (fileEntities == null) {
+            return ResultData.error("文件新增失败");
+        } else {
+            return ResultData.success(fileEntities);
+        }
+    }
+
+//    @ApiOperation(value = "新增：保存文件需要封面到Win", notes = "新增：保存文件需要封面到Win")
+//    @PostMapping("/add")
+//    public ResultData<ArrayList<FileEntity>> add(@ApiParam(value = "文件信息", required = true) @RequestParam("fileInfo") String fileInfo,
+//                                                                     @ApiParam(value = "文件对象列表", required = true) @RequestParam("files") MultipartFile[] fileList) {
+//        //http://localhost:8086/file/saveFilesWhitCoverByWin
+//        if (fileList == null || fileList.length == 0) {
+//            return ResultData.error("文件对象不能为空");
+//        }
+//
+//        if (StringUtil.isEmpty(fileInfo)) {
+//            return ResultData.error("未填写文件信息");
+//        }
+//
+//        FileEntity fileEntity = JSON.parseObject(fileInfo, FileEntity.class);
+//        ArrayList<FileEntity> fileEntities = fileService.saveFilesWhitCoverByWin(fileList, fileEntity.getOwnerUser(), fileEntity.getFileType(), fileEntity.getFileName(), fileEntity.getBizType());
+//
+//        if (fileEntities == null) {
+//            return ResultData.error("文件新增失败");
+//        } else {
+//            return ResultData.success(fileEntities);
+//        }
+//    }
 
     @ApiOperation(value = "删除：根据Id删除文件", notes = "删除文件")
     @DeleteMapping("/delById/{id}")
