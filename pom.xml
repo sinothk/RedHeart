@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>RedHeart-Filer</module>
+        <module>RedHeart-Comm</module>
         <module>RedHeart-System</module>
         <module>RedHeart-View</module>
     </modules>

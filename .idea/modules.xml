@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RedHeart-Filer/RedHeart-Filer.iml" filepath="$PROJECT_DIR$/RedHeart-Filer/RedHeart-Filer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RedHeart-Comm/RedHeart-Comm.iml" filepath="$PROJECT_DIR$/RedHeart-Comm/RedHeart-Comm.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedHeart-System/RedHeart-System.iml" filepath="$PROJECT_DIR$/RedHeart-System/RedHeart-System.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedHeart-View/RedHeart-View.iml" filepath="$PROJECT_DIR$/RedHeart-View/RedHeart-View.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedHeartLib.iml" filepath="$PROJECT_DIR$/RedHeartLib.iml" />
