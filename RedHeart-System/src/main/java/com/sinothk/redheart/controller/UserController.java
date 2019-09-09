@@ -16,7 +16,7 @@ public class UserController {
     @GetMapping("/add")
     @ResponseBody
     public ResultData<String> add(@ApiParam(value = "用户信息", required = true) @RequestBody UserEntity user) {
-        // http://localhost:8086/redheart/user/add
+        // http://localhost:8080/redheart/user/add
         return ResultData.error("失败");
     }
 }
