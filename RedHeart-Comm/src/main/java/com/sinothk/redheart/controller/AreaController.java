@@ -1,10 +1,10 @@
 package com.sinothk.redheart.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.mysql.cj.protocol.x.Notice;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.GaoDeAreaEntity;
 import com.sinothk.redheart.service.AreaService;
+import com.sinothk.redheart.utils.HttpClientUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -29,23 +28,36 @@ public class AreaController {
 
     @ApiOperation(value = "初始化", notes = "初始化")
     @GetMapping("/create")
-    public ResultData<GaoDeAreaEntity> create(@ApiParam(value = "区域", required = true) @RequestParam("unit") String unit) {
-        //http://192.168.2.135:8080/redheart/area/create
+    public ResultData<String> create(
+            @ApiParam(value = "行政单位", required = true) @RequestParam("unit") String unit,
+            @ApiParam(value = "深度", required = true) @RequestParam("subdistrict") String subdistrict) {
+        //http://localhost:8081/redheart/area/create
 
-        RestTemplate restTemplate = new RestTemplate();
+        try {
+            String json = getHttpHelper(unit, subdistrict);
 
-        Map<String, String> map = new HashMap();
-        map.put("keywords", unit);
-        map.put("subdistrict", "5");
-        map.put("key", "a9301b47a533356426792775a4843439");
+            areaService.add(JSON.parseObject(json, GaoDeAreaEntity.class));
 
-        GaoDeAreaEntity areaEntity = restTemplate.getForObject("https://restapi.amap.com/v3/config/district"
-                , GaoDeAreaEntity.class, map);
+            return ResultData.success("成功");
 
-        areaService.add(areaEntity);
-
-        return ResultData.success(areaEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getMessage());
+        }
     }
 
+    public static String getHttpHelper(String unit, String subdistrict) {
+        try {
+            Map<String, String> map = new HashMap<>();
+            map.put("keywords", unit);
+            map.put("subdistrict", subdistrict);
+            map.put("key", "a9301b47a533356426792775a4843439");
 
+            String url = "https://restapi.amap.com/v3/config/district";
+            return new HttpClientUtil().doGet(url, map);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

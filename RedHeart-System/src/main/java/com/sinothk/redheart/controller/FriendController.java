@@ -2,6 +2,7 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.config.ServerConfig;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.service.FriendService;
 import io.swagger.annotations.Api;
@@ -28,6 +29,7 @@ public class FriendController {
     public ResultData<PageData<ArrayList<FriendEntity>>> getFriendsList(@ApiParam(value = "username") @RequestParam("username") String username,
                                                                         @ApiParam(value = "pageNum") @RequestParam("pageNum") int pageNum) {
         // http://192.168.124.3:11000/friend/getFriendsList
+
         return friendService.getFriendsList(username, pageNum);
     }
 }

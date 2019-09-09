@@ -21,12 +21,17 @@ public class AreaServiceImpl implements AreaService {
         if (areaEntity.getDistricts().size() > 0) {
 
             for (AreaEntity item : areaEntity.getDistricts()) {
+
+                item.setParent("100000");
                 areaMapper.insert(item); // 1
 
                 for (AreaEntity item2 : item.getDistricts()) { // 2
+
+                    item2.setParent(item.getAdcode());
                     areaMapper.insert(item2);
 
                     for (AreaEntity item3 : item2.getDistricts()) { // 3
+                        item3.setParent(item2.getAdcode());
                         areaMapper.insert(item3);
                     }
                 }

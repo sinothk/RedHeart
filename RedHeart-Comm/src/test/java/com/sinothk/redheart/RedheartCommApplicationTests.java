@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RedHeartFilerApplicationTests {
+public class RedheartCommApplicationTests {
 
     @Test
     public void contextLoads() {

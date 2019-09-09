@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>RedHeart-Comm</module>
+        <module>redheart-comm</module>
         <module>RedHeart-System</module>
         <module>RedHeart-View</module>
     </modules>
@@ -110,6 +110,12 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.7</version>
         </dependency>
 
         <!--sinothk-base-->

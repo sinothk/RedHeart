@@ -55,4 +55,8 @@ public class AreaEntity {
     @ApiModelProperty(value = "")
     @TableField(exist = false)
     private ArrayList<AreaEntity> districts;
+
+    @ApiModelProperty(value = "")
+    @TableField("parent")
+    private String parent;
 }
