@@ -26,7 +26,14 @@ public class AreaController {
     @Resource(name = "areaService")
     private AreaService areaService;
 
-    @ApiOperation(value = "初始化", notes = "初始化")
+    /**
+     * 使用高德地图数据
+     *
+     * @param unit
+     * @param subdistrict
+     * @return
+     */
+    @ApiOperation(value = "初始化：使用高德地图数据", notes = "初始化：使用高德地图数据")
     @GetMapping("/create")
     public ResultData<String> create(
             @ApiParam(value = "行政单位", required = true) @RequestParam("unit") String unit,
