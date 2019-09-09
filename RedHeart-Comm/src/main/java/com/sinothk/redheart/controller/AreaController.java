@@ -52,7 +52,7 @@ public class AreaController {
         }
     }
 
-    public static String getHttpHelper(String unit, String subdistrict) {
+    private static String getHttpHelper(String unit, String subdistrict) {
         try {
             Map<String, String> map = new HashMap<>();
             map.put("keywords", unit);
