@@ -9,13 +9,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.spring.web.SpringfoxWebMvcConfiguration;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @MapperScan("com.sinothk.redheart.repository")
-@ConditionalOnClass(SpringfoxWebMvcConfiguration.class) // api http://localhost:8086/redheart/doc.html // https://doc.xiaominfo.com/guide/useful.html#注意事项
+@ConditionalOnClass(SpringfoxWebMvcConfiguration.class)
+// api http://localhost:8086/redheart/doc.html // https://doc.xiaominfo.com/guide/useful.html#注意事项
 public class RedHeartViewApplication extends AsyncConfigurerSupport implements WebMvcConfigurer {
 
     public static void main(String[] args) {
