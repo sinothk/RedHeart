@@ -16,10 +16,10 @@ import java.util.concurrent.Executor;
 @MapperScan("com.sinothk.redheart.repository")
 @ConditionalOnClass(SpringfoxWebMvcConfiguration.class)
 // api http://localhost:8086/redheart/doc.html // https://doc.xiaominfo.com/guide/useful.html#注意事项
-public class RedHeartViewApplication extends AsyncConfigurerSupport implements WebMvcConfigurer {
+public class RedHeartApplication extends AsyncConfigurerSupport implements WebMvcConfigurer {
 
     public static void main(String[] args) {
-        SpringApplication.run(RedHeartViewApplication.class, args);
+        SpringApplication.run(RedHeartApplication.class, args);
     }
 
     @Override

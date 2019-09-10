@@ -7,11 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="redheart-comm" />
-        <module name="RedHeart-Comm" />
         <module name="redheart-system" />
-        <module name="RedHeart-System" />
         <module name="redheart-view" />
-        <module name="RedHeart-View" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
