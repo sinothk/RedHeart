@@ -6,16 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="redheart-comm" />
         <module name="RedHeart-Comm" />
+        <module name="redheart-system" />
         <module name="RedHeart-System" />
+        <module name="redheart-view" />
         <module name="RedHeart-View" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RedHeart-Comm" target="1.8" />
-      <module name="RedHeart-Config" target="1.5" />
-      <module name="RedHeart-System" target="1.8" />
-      <module name="RedHeart-View" target="1.8" />
+      <module name="redheart-comm" target="1.8" />
+      <module name="redheart-system" target="1.8" />
+      <module name="redheart-view" target="1.8" />
       <module name="RedHeartLib" target="1.8" />
     </bytecodeTargetLevel>
   </component>

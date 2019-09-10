@@ -2,7 +2,6 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
-import com.sinothk.redheart.config.ServerConfig;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.service.FriendService;
 import io.swagger.annotations.Api;
