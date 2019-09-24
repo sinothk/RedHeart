@@ -9,54 +9,37 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
-import java.util.ArrayList;
-
-@ApiModel(description = "行政单位信息")
 @Data
 @ToString
+@ApiModel("区域实体")
 @TableName(value = "tb_area")
 public class AreaEntity {
 
-//    /*列信息*/-----------
-//
-//    Field     Type         Collation        Null    Key     Default  Extra           Privileges                       Comment
-//--------  -----------  ---------------  ------  ------  -------  --------------  -------------------------------  ---------
-//    id        bigint(20)   (NULL)           NO      PRI     (NULL)   auto_increment  select,insert,update,references
-//    adcode    varchar(32)  utf8_general_ci  YES             (NULL)                   select,insert,update,references
-//    name      varchar(32)  utf8_general_ci  YES             (NULL)                   select,insert,update,references
-//    center    varchar(32)  utf8_general_ci  YES             (NULL)                   select,insert,update,references
-//    citycode  varchar(32)  utf8_general_ci  YES             (NULL)                   select,insert,update,references
-//    level     varchar(32)  utf8_general_ci  YES             (NULL)                   select,insert,update,references
-
-    @ApiModelProperty(value = "ID")
-    @TableId(value = "id", type = IdType.INPUT)
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "")
-    @TableField("adcode")
-    private String adcode;
+    @ApiModelProperty(value = "父编码")
+    @TableField(value = "parent")
+    private String parent;
 
-    @ApiModelProperty(value = "")
-    @TableField("name")
+    @ApiModelProperty(value = "地址编码")
+    @TableField(value = "adcode")
+    private String adCode;
+
+    @ApiModelProperty(value = "地名")
+    @TableField(value = "name")
     private String name;
 
-    @ApiModelProperty(value = "")
-    @TableField("center")
+    @ApiModelProperty(value = "行政中心经纬度")
+    @TableField(value = "center")
     private String center;
 
-    @ApiModelProperty(value = "")
-    @TableField("citycode")
-    private String citycode;
+    @ApiModelProperty(value = "所属城市编码")
+    @TableField(value = "citycode")
+    private String cityCode;
 
-    @ApiModelProperty(value = "")
-    @TableField("level")
+    @ApiModelProperty(value = "当前级别")
+    @TableField(value = "level")
     private String level;
-
-    @ApiModelProperty(value = "")
-    @TableField(exist = false)
-    private ArrayList<AreaEntity> districts;
-
-    @ApiModelProperty(value = "")
-    @TableField("parent")
-    private String parent;
 }

@@ -18,7 +18,7 @@ public class SwaggerConfiguration {
     public Docket createRestApi() {
 
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("RedHeart接口")
+                .title("红心接口")
                 .description("RedHeart接口  APIs")
                 .termsOfServiceUrl("http://www.sinothk.com/")
                 .contact(new Contact("lyt", "http://www.sinothk.com/", "381518188@qq.com"))

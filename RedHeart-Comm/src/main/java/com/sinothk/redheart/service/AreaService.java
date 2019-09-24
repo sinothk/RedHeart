@@ -12,4 +12,6 @@ public interface AreaService {
     ArrayList<AreaEntity> findAllDistricts();
 
     void initDistrict(GaoDeAreaEntity parseObject);
+
+    ArrayList<AreaEntity> getAreaList(String adCode);
 }
