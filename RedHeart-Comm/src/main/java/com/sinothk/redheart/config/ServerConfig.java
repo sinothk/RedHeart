@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component("serverConfig")
 public class ServerConfig {
 
-    @Value("${config.virtualPath}")
-    private String virtualPath;
+//    @Value("${config.virtualPath}")
+//    private String virtualPath;
 
     @Value("${config.isDebug}")
     private boolean isDebug;

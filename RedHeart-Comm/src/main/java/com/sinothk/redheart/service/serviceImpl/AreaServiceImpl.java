@@ -66,13 +66,18 @@ public class AreaServiceImpl implements AreaService {
     @SuppressWarnings("unchecked")
     @Override
     public ArrayList<AreaEntity> getAreaList(String adCode) {
-        QueryWrapper<AreaEntity> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(AreaEntity::getParent, adCode).groupBy(AreaEntity::getCenter).orderByAsc(AreaEntity::getAdCode, AreaEntity::getId);
-        List<AreaEntity> list = areaMapper.selectList(wrapper);
-        if (list == null) {
+        try {
+
+            QueryWrapper<AreaEntity> wrapper = new QueryWrapper<>();
+            wrapper.lambda().eq(AreaEntity::getParent, adCode).orderByAsc(AreaEntity::getAdCode, AreaEntity::getId); //groupBy(AreaEntity::getCenter).
+            List<AreaEntity> list = areaMapper.selectList(wrapper);
+            if (list == null) {
+                return new ArrayList<>();
+            } else {
+                return (ArrayList<AreaEntity>) list;
+            }
+        } catch (Exception e) {
             return new ArrayList<>();
-        } else {
-            return (ArrayList<AreaEntity>) list;
         }
     }
 }
