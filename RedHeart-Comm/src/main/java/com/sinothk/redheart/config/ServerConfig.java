@@ -14,6 +14,6 @@ public class ServerConfig {
 //    @Value("${config.virtualPath}")
 //    private String virtualPath;
 
-    @Value("${config.isDebug}")
-    private boolean isDebug;
+//    @Value("${config.isDebug}")
+//    private boolean isDebug;
 }
