@@ -10,6 +10,6 @@ import java.util.Set;
 @Repository("userMapper")
 public interface UserMapper extends BaseMapper<UserEntity> {
 
-    @Select("select u_account from tb_user")
+    @Select("select u_account from tb_user ORDER BY id ASC")
     Set<Long> getUserAccountSet();
 }

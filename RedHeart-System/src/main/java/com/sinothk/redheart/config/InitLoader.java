@@ -35,7 +35,6 @@ public class InitLoader implements InitializingBean, ServletContextAware {
             accSet2.add(9999L);
             accSet2.add(10000L);
             AccountUtil.init(accSet2);
-
         } else {
             AccountUtil.init(accSet);
         }
