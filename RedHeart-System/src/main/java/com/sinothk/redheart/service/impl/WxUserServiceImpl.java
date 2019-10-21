@@ -33,15 +33,16 @@ public class WxUserServiceImpl implements WxUserService {
         WxUserOpenIdEntity wxUserOpenIdEntity = wxUserOpenIdMapper.selectOne(wrapper);
         if (wxUserOpenIdEntity == null) {
             // 不存在当前用户，则注册
-            String account = String.valueOf(AccountUtil.create(AccountInitLoader.sysKeepAccountSet)); //AccountInitLoader.getInitAccountSet()
+            Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet); //AccountInitLoader.getInitAccountSet()
+
             // 保存微信账号信息
-            WxUserOpenIdEntity wxUserOpenIdNewEntity = new WxUserOpenIdEntity(wxApiEntity.getOpenid(), account);
+            WxUserOpenIdEntity wxUserOpenIdNewEntity = new WxUserOpenIdEntity(wxApiEntity.getOpenid(), "" + account);
             wxUserOpenIdMapper.insert(wxUserOpenIdNewEntity);
 
             // 保存注册用户
             UserEntity userEntity = new UserEntity();
             userEntity.setAccount(account);
-            userEntity.setUserName(account);
+            userEntity.setUserName("" + account);
             userEntity.setAvatar(wxApiEntity.getAvatarUrl());
             userEntity.setSex(wxApiEntity.getGender());
             userEntity.setNickname(wxApiEntity.getNickName());

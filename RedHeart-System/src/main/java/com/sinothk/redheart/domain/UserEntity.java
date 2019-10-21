@@ -36,7 +36,7 @@ public class UserEntity {
 
     @ApiModelProperty(value = "账号")
     @TableField("u_account")
-    private String account;
+    private Long account;
 
     @ApiModelProperty(value = "姓名")
     @TableField("user_name")
