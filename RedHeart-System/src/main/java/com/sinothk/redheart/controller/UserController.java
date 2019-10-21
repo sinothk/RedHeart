@@ -4,6 +4,7 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
 import com.sinothk.redheart.domain.UserEntity;
+import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +17,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    @Resource(name = "userMapper")
+    private UserMapper userMapper;
 
     @Resource(name = "userService")
     private UserService userService;
@@ -37,9 +40,12 @@ public class UserController {
 
         System.out.println("email : " + email);
         System.out.println("password : " + password);
-        System.out.println("account : " + AccountUtil.create(AccountInitLoader.getInitAccountSet()));
+
+        Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet);
+
+        System.out.println("account : " + account);
 
 
-        return ResultData.error("失败");
+        return ResultData.success("" + account);
     }
 }

@@ -20,6 +20,8 @@ public class AccountInitLoader implements InitializingBean, ServletContextAware 
     @Resource(name = "userMapper")
     UserMapper userMapper;
 
+    public static Set<Long> sysKeepAccountSet;
+
     @Override
     public void afterPropertiesSet() {
 
@@ -29,6 +31,8 @@ public class AccountInitLoader implements InitializingBean, ServletContextAware 
     public void setServletContext(ServletContext servletContext) {
         // 查询现有账号，并缓存
         Set<Long> accSet = userMapper.getUserAccountSet();
+        sysKeepAccountSet = userMapper.getSysKeepAccountSet();
+
         if (accSet == null) {
             accSet = new HashSet<>();
             accSet.add(100000L);
@@ -38,24 +42,24 @@ public class AccountInitLoader implements InitializingBean, ServletContextAware 
         }
     }
 
-    /**
-     * 系统预留账号
-     *
-     * @return
-     */
-    public static Set<Long> getInitAccountSet() {
-        Set<Long> set = new HashSet<>();
-        set.add(99999L);
-        set.add(100000L);
-
-        set.add(100002L);
-        set.add(100003L);
-
-        set.add(100006L);
-
-        set.add(100008L);
-
-        set.add(88888888L);
-        return set;
-    }
+//    /**
+//     * 系统预留账号
+//     *
+//     * @return
+//     */
+//    public static Set<Long> getInitAccountSet() {
+//        Set<Long> set = new HashSet<>();
+//        set.add(99999L);
+//        set.add(100000L);
+//
+//        set.add(100002L);
+//        set.add(100003L);
+//
+//        set.add(100006L);
+//
+//        set.add(100008L);
+//
+//        set.add(88888888L);
+//        return set;
+//    }
 }
