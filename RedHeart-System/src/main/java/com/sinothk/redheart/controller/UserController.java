@@ -57,4 +57,25 @@ public class UserController {
         }
         return userService.updateUser(user);
     }
+
+    @ApiOperation(value = "登录：邮箱及密码", notes = "登录：邮箱及密码")
+    @GetMapping("/login")
+    @ResponseBody
+    public ResultData<UserEntity> login(@ApiParam(value = "用户邮箱", required = true) @RequestParam("email") String email,
+                                      @ApiParam(value = "用户密码", required = true) @RequestParam("password") String password) {
+        if (StringUtil.isEmpty(email)) {
+            // 验证邮箱
+            return ResultData.error("邮箱不能为空");
+        }
+        if (StringUtil.isEmpty(password)) {
+            // 验证密码
+            return ResultData.error("密码不能为空");
+        }
+
+        UserEntity user = new UserEntity();
+        user.setEmail(email);
+        user.setUserPwd(password);
+
+        return userService.login(user);
+    }
 }

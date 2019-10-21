@@ -7,4 +7,6 @@ public interface UserService {
     ResultData<UserEntity> addUser(UserEntity user);
 
     ResultData<UserEntity> updateUser(UserEntity user);
+
+    ResultData<UserEntity> login(UserEntity user);
 }
