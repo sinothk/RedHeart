@@ -1,6 +1,7 @@
 package com.sinothk.redheart.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
@@ -33,9 +34,41 @@ public class UserServiceImpl implements UserService {
             user.setAccount(account);
             userMapper.insert(user);
 
-            // 查询返回新增数据
+            // 返回新数据
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
             wrapper.lambda().eq(UserEntity::getEmail, user.getEmail());
+            UserEntity dbUser = userMapper.selectOne(wrapper);
+
+            if (dbUser != null) {
+                return ResultData.success(dbUser);
+            } else {
+                return ResultData.error("暂无数据");
+            }
+        } catch (Exception e) {
+            return ResultData.error(e.getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<UserEntity> updateUser(UserEntity user) {
+
+        try {
+            // 保存数据前核对
+            QueryWrapper<UserEntity> wrapperOld = new QueryWrapper<>();
+            wrapperOld.lambda().eq(UserEntity::getAccount, user.getAccount());
+            UserEntity dbOldUser = userMapper.selectOne(wrapperOld);
+            if (dbOldUser == null) {
+                return ResultData.error("用户不存在，请核对Account是否正确");
+            }
+
+            // 更新数据
+            UpdateWrapper<UserEntity> uWrapperOld = new UpdateWrapper<>();
+            uWrapperOld.lambda().eq(UserEntity::getAccount, user.getAccount());
+            userMapper.update(user, uWrapperOld);
+
+            // 返回新数据
+            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+            wrapper.lambda().eq(UserEntity::getAccount, user.getAccount());
             UserEntity dbUser = userMapper.selectOne(wrapper);
 
             if (dbUser != null) {

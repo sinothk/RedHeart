@@ -5,4 +5,6 @@ import com.sinothk.redheart.domain.UserEntity;
 
 public interface UserService {
     ResultData<UserEntity> addUser(UserEntity user);
+
+    ResultData<UserEntity> updateUser(UserEntity user);
 }

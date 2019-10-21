@@ -29,11 +29,11 @@ public class UserController {
                                       @ApiParam(value = "用户密码", required = true) @RequestParam("password") String password) {
         if (StringUtil.isEmpty(email)) {
             // 验证邮箱
-            return ResultData.error("");
+            return ResultData.error("邮箱不能为空");
         }
         if (StringUtil.isEmpty(password)) {
             // 验证密码
-            return ResultData.error("");
+            return ResultData.error("密码不能为空");
         }
 
         UserEntity user = new UserEntity();
@@ -42,11 +42,19 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @ApiOperation(value = "新增：用户实体", notes = "新增：用户实体")
+    @ApiOperation(value = "更新：更新用户实体", notes = "更新：更新用户实体")
     @GetMapping("/update")
     @ResponseBody
-    public ResultData<String> update(@ApiParam(value = "用户信息", required = true) @RequestBody UserEntity user) {
-        // http://localhost:8080/redheart/user/add
-        return ResultData.error("失败");
+    public ResultData<UserEntity> update(@ApiParam(value = "用户信息", required = true) @RequestBody UserEntity user) {
+        if (user == null) {
+            // 验证用户信息
+            return ResultData.error("用户信息不能为空");
+        }
+
+        if (user.getAccount() != null) {
+            // 验证用户账号不能为空
+            return ResultData.error("账号不能为空");
+        }
+        return userService.updateUser(user);
     }
 }
