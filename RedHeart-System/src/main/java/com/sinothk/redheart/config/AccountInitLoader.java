@@ -15,7 +15,7 @@ import java.util.Set;
  * 读取数据库参数，设置初始值！
  */
 @Service
-public class InitLoader implements InitializingBean, ServletContextAware {
+public class AccountInitLoader implements InitializingBean, ServletContextAware {
 
     @Resource(name = "userMapper")
     UserMapper userMapper;
@@ -27,8 +27,7 @@ public class InitLoader implements InitializingBean, ServletContextAware {
 
     @Override
     public void setServletContext(ServletContext servletContext) {
-
-        // 查询现有账号
+        // 查询现有账号，并缓存
         Set<Long> accSet = userMapper.getUserAccountSet();
         if (accSet == null) {
             accSet = new HashSet<>();

@@ -2,17 +2,15 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
-import com.sinothk.redheart.config.InitLoader;
+import com.sinothk.redheart.config.AccountInitLoader;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.log4j.Log4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.logging.Logger;
 
 @Api(tags = "用户系统")
 @RestController
@@ -39,7 +37,7 @@ public class UserController {
 
         System.out.println("email : " + email);
         System.out.println("password : " + password);
-        System.out.println("account : " + AccountUtil.create(InitLoader.getInitAccountSet()));
+        System.out.println("account : " + AccountUtil.create(AccountInitLoader.getInitAccountSet()));
 
 
         return ResultData.error("失败");
