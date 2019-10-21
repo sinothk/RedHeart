@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "更新：更新用户实体", notes = "更新：更新用户实体")
-    @GetMapping("/update")
+    @PostMapping("/update")
     @ResponseBody
     public ResultData<UserEntity> update(@ApiParam(value = "用户信息", required = true) @RequestBody UserEntity user) {
         if (user == null) {
@@ -51,7 +51,7 @@ public class UserController {
             return ResultData.error("用户信息不能为空");
         }
 
-        if (user.getAccount() != null) {
+        if (user.getAccount() == null) {
             // 验证用户账号不能为空
             return ResultData.error("账号不能为空");
         }
