@@ -1,6 +1,8 @@
 package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.utils.AccountUtil;
+import com.sinothk.redheart.config.InitLoader;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.service.UserService;
 import io.swagger.annotations.Api;
@@ -37,6 +39,8 @@ public class UserController {
 
         System.out.println("email : " + email);
         System.out.println("password : " + password);
+        System.out.println("account : " + AccountUtil.create(InitLoader.getInitAccountSet()));
+
 
         return ResultData.error("失败");
     }

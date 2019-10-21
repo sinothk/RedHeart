@@ -28,15 +28,35 @@ public class InitLoader implements InitializingBean, ServletContextAware {
     @Override
     public void setServletContext(ServletContext servletContext) {
 
+        // 查询现有账号
         Set<Long> accSet = userMapper.getUserAccountSet();
-
-        if (accSet == null || accSet.size() == 0) {
-            Set<Long> accSet2 = new HashSet<>();
-            accSet2.add(9999L);
-            accSet2.add(10000L);
-            AccountUtil.init(accSet2);
+        if (accSet == null) {
+            accSet = new HashSet<>();
+            accSet.add(100000L);
+            AccountUtil.init(accSet);
         } else {
             AccountUtil.init(accSet);
         }
+    }
+
+    /**
+     * 系统预留账号
+     *
+     * @return
+     */
+    public static Set<Long> getInitAccountSet() {
+        Set<Long> set = new HashSet<>();
+        set.add(99999L);
+        set.add(100000L);
+
+        set.add(100002L);
+        set.add(100003L);
+
+        set.add(100006L);
+
+        set.add(100008L);
+
+        set.add(88888888L);
+        return set;
     }
 }

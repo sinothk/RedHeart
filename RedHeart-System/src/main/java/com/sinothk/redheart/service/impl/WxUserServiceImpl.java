@@ -2,6 +2,7 @@ package com.sinothk.redheart.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sinothk.base.utils.AccountUtil;
+import com.sinothk.redheart.config.InitLoader;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.WxUserEntity;
 import com.sinothk.redheart.domain.WxUserOpenIdEntity;
@@ -32,7 +33,7 @@ public class WxUserServiceImpl implements WxUserService {
         WxUserOpenIdEntity wxUserOpenIdEntity = wxUserOpenIdMapper.selectOne(wrapper);
         if (wxUserOpenIdEntity == null) {
             // 不存在当前用户，则注册
-            String account = String.valueOf(AccountUtil.create());
+            String account = String.valueOf(AccountUtil.create(InitLoader.getInitAccountSet()));
             // 保存微信账号信息
             WxUserOpenIdEntity wxUserOpenIdNewEntity = new WxUserOpenIdEntity(wxApiEntity.getOpenid(), account);
             wxUserOpenIdMapper.insert(wxUserOpenIdNewEntity);
