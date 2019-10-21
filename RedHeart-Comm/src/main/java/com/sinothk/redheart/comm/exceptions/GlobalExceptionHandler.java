@@ -11,9 +11,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ResponseBody
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-//    @Resource(name = "serverConfig")
-//    private ServerConfig serverConfig;
-
     @ExceptionHandler(Exception.class)
     public ResultData handleException(Exception e) {
         e.printStackTrace();
@@ -34,7 +31,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResultData.error("文件大小超出限制"); //" + serverConfig.getFileMaxSize() + "
     }
 
-
 //    //这是实体类 参数校验注解不通过会抛出的异常 只有全局异常能拦截到
 //    @ExceptionHandler(MethodArgumentNotValidException.class)
 //    public ApiResult handleIllegalParamException(MethodArgumentNotValidException e) {
@@ -47,5 +43,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //        ApiResult result = new ApiResult(Constants.RESP_STATUS_BADREQUEST,message);
 //        return result;
 //    }
-
 }
