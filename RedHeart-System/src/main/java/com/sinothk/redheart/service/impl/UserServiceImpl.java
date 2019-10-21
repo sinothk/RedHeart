@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
                 return ResultData.error("暂无数据");
             }
         } catch (Exception e) {
-            return ResultData.error(e.getMessage());
+            return ResultData.error(e.getCause().getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
                 return ResultData.error("暂无数据");
             }
         } catch (Exception e) {
-            return ResultData.error(e.getMessage());
+            return ResultData.error(e.getCause().getMessage());
         }
     }
 }
