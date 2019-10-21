@@ -14,7 +14,7 @@ import java.util.Date;
 @ApiModel(description = "用户信息")
 @Data
 @ToString
-@TableName(value = "tb_user")
+@TableName(value = "tb_comm_user")
 public class UserEntity {
 
 //    Field        Type           Collation        Null    Key     Default  Extra           Privileges                       Comment

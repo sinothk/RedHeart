@@ -12,7 +12,7 @@ import lombok.ToString;
 @ApiModel(description = "用户信息")
 @Data
 @ToString
-@TableName(value = "tb_user_openid")
+@TableName(value = "tb_comm_user_openid")
 public class WxUserOpenIdEntity {
 //    Field      Type         Collation        Null    Key     Default  Extra           Privileges                       Comment
 //---------  -----------  ---------------  ------  ------  -------  --------------  -------------------------------  ---------------------

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository("wxUserOpenIdMapper")
 public interface WxUserOpenIdMapper extends BaseMapper<WxUserOpenIdEntity> {
 
-//    @Select("select u_account from tb_user")
+//    @Select("select u_account from tb_comm_user")
 //    Set<Long> getUserAccountSet();
 }
