@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
+import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
 import com.sinothk.redheart.domain.UserEntity;
@@ -30,10 +31,16 @@ public class UserServiceImpl implements UserService {
             if (dbOldUser != null) {
                 return ResultData.error("此邮箱已被暂用");
             }
-
             // 保存数据
             Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet);
             userVo.setAccount(account);
+            // 设置用户昵称
+            String email = userVo.getEmail();
+            if (isEmail(email)) {
+                userVo.setNickname(email.substring(0, email.indexOf("@")));
+            } else {
+                userVo.setNickname(String.valueOf(account));
+            }
             userMapper.insert(userVo);
 
             // 返回新数据
@@ -49,6 +56,12 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
+    }
+
+    public boolean isEmail(String email) {
+        if (email == null || "".equals(email)) return false;
+        String regex = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        return email.matches(regex);
     }
 
     @Override

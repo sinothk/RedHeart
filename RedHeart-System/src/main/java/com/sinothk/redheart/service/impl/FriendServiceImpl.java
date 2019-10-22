@@ -1,60 +1,49 @@
 package com.sinothk.redheart.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.FriendEntity;
+import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.service.FriendService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
+import java.util.List;
 
 @Service("friendService")
 public class FriendServiceImpl implements FriendService {
-    int index = 0;
+
+
+    @Resource(name = "friendMapper")
+    private FriendMapper friendMapper;
 
     @Override
-    public ResultData<PageData<ArrayList<FriendEntity>>> getFriendsList(String username, int pageNum) {
+    public ResultData<PageData<List<FriendEntity>>> getLikeUserList(Long account, int currPage, int pageSize) {
+        try {
+            Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
+            IPage pageInfo = friendMapper.getLikeUserList(pageVo, account);
+            PageData<List<FriendEntity>> pageEntity = new PageData<>();
+            pageEntity.setData(pageInfo.getRecords());
 
-        PageData<ArrayList<FriendEntity>> page = new PageData<>();
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
 
-        if (pageNum == 1) {
+    @Override
+    public ResultData<PageData<List<FriendEntity>>> getFensUserList(Long account, int currPage, int pageSize) {
+        try {
+            Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
+            IPage pageInfo = friendMapper.getFensUserList(pageVo, account);
+            PageData<List<FriendEntity>> pageEntity = new PageData<>();
+            pageEntity.setData(pageInfo.getRecords());
 
-            index = 0;
-
-            page.setHasMore(true);
-            page.setPageSize(10);
-
-            ArrayList<FriendEntity> fList = new ArrayList<>();
-
-            for (int i = 0; i < page.getPageSize(); i++) {
-                index = i;
-
-                FriendEntity friend = new FriendEntity();
-                friend.setUserName("name" + i);
-                friend.setAvatar("https://wx.qlogo.cn/mmhead/k947icPboBqBtOchX0uVF2iaJ1bNEXBUfOMibsKaQPXPr9YqpVTEN0I5w/0");
-                fList.add(friend);
-            }
-
-            page.setData(fList);
-            return ResultData.success(page);
-        } else {
-            page.setHasMore(false);
-            page.setPageSize(10);
-
-            ArrayList<FriendEntity> fList = new ArrayList<>();
-
-            for (int j = 0; j < page.getPageSize(); j++) {
-
-                index += 1;
-
-                FriendEntity friend = new FriendEntity();
-                friend.setUserName("name_" + index);
-                friend.setAvatar("https://wx.qlogo.cn/mmhead/k947icPboBqBtOchX0uVF2iaJ1bNEXBUfOMibsKaQPXPr9YqpVTEN0I5w/0");
-                fList.add(friend);
-            }
-
-            page.setData(fList);
-            return ResultData.success(page);
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
         }
     }
 }
