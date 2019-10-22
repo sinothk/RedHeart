@@ -67,9 +67,8 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public ArrayList<AreaEntity> getAreaList(String adCode) {
         try {
-
             QueryWrapper<AreaEntity> wrapper = new QueryWrapper<>();
-            wrapper.lambda().eq(AreaEntity::getParent, adCode).orderByAsc(AreaEntity::getAdCode, AreaEntity::getId); //groupBy(AreaEntity::getCenter).
+            wrapper.lambda().eq(AreaEntity::getParent, adCode).groupBy(AreaEntity::getCenter).orderByAsc(AreaEntity::getAdCode, AreaEntity::getId); //groupBy(AreaEntity::getCenter).
             List<AreaEntity> list = areaMapper.selectList(wrapper);
             if (list == null) {
                 return new ArrayList<>();
