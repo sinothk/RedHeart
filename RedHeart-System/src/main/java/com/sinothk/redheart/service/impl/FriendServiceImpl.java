@@ -22,17 +22,6 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     @Resource(name = "friendMapper")
     private FriendMapper friendMapper;
 
-//    SELECT tcu.*, tcf.like_time FROM tb_comm_user tcu,
-//	(
-//    SELECT t2.*
-//    FROM
-//            (SELECT f.* FROM tb_comm_friends f WHERE f.`liking_account` = '10001') t1,
-//		(SELECT f.* FROM tb_comm_friends f WHERE f.`liked_account` = '10001') t2
-//            WHERE
-//    t1.liking_account = t2.liked_account GROUP BY t2.liking_account
-//	) tcf
-//    WHERE tcu.`u_account` = tcf.`liking_account` ORDER BY tcf.like_time DESC;
-
     @Override
     public ResultData<PageData<List<FriendEntity>>> getLikeUserList(Long account, int currPage, int pageSize) {
         try {
