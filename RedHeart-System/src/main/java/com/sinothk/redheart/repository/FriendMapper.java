@@ -3,12 +3,13 @@ package com.sinothk.redheart.repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sinothk.redheart.domain.FriendEntity;
+import com.sinothk.redheart.domain.FriendRelationshipEntity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository("friendMapper")
-public interface FriendMapper extends BaseMapper<FriendEntity> {
+public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
 
     @Select("SELECT " +
             "tcu.id as id, " +

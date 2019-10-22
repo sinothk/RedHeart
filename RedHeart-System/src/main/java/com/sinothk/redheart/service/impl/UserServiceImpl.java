@@ -113,8 +113,10 @@ public class UserServiceImpl implements UserService {
             // 登录成功,组装信息
             // Token部分
             HashMap<String, Object> tokenParam = new HashMap<>();
+            tokenParam.put("account", "" + dbOldUser.getAccount());
             tokenParam.put("userName", dbOldUser.getUserName());
             tokenParam.put("role", dbOldUser.getRole());
+
             String token = TokenUtil.createToken(TokenUtil.EXPIRE_TIME_15D, tokenParam);
             dbOldUser.setToken(token);
 
