@@ -22,17 +22,29 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     @Resource(name = "friendMapper")
     private FriendMapper friendMapper;
 
+//    SELECT tcu.*, tcf.like_time FROM tb_comm_user tcu,
+//	(
+//    SELECT t2.*
+//    FROM
+//            (SELECT f.* FROM tb_comm_friends f WHERE f.`liking_account` = '10001') t1,
+//		(SELECT f.* FROM tb_comm_friends f WHERE f.`liked_account` = '10001') t2
+//            WHERE
+//    t1.liking_account = t2.liked_account GROUP BY t2.liking_account
+//	) tcf
+//    WHERE tcu.`u_account` = tcf.`liking_account` ORDER BY tcf.like_time DESC;
+
     @Override
     public ResultData<PageData<List<FriendEntity>>> getLikeUserList(Long account, int currPage, int pageSize) {
         try {
             Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<FriendEntity> pageInfo = friendMapper.getLikeUserList(pageVo, account);
+
             PageData<List<FriendEntity>> pageEntity = new PageData<>();
-            pageEntity.setData(pageInfo.getRecords());
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
-            pageEntity.setTotal((int) pageInfo.getTotal());
 
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = currPage * pageSize;
             pageEntity.setHasMore(currSize < pageInfo.getTotal());
 
@@ -47,12 +59,34 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
         try {
             Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<FriendEntity> pageInfo = friendMapper.getFensUserList(pageVo, account);
+
             PageData<List<FriendEntity>> pageEntity = new PageData<>();
-            pageEntity.setData(pageInfo.getRecords());
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
-            pageEntity.setTotal((int) pageInfo.getTotal());
 
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = currPage * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<PageData<List<FriendEntity>>> getFriendsList(Long account, int currPage, int pageSize) {
+        try {
+            Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
+            IPage<FriendEntity> pageInfo = friendMapper.getFriendsList(pageVo, account);
+
+            PageData<List<FriendEntity>> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(currPage);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = currPage * pageSize;
             pageEntity.setHasMore(currSize < pageInfo.getTotal());
 

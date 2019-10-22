@@ -26,7 +26,7 @@ public class FriendController {
     @Resource(name = "friendService")
     private FriendService friendService;
 
-    @ApiOperation(value = "获取好友信息", notes = "获取好友信息")
+    @ApiOperation(value = "获取关注人分页列表信息", notes = "获取关注人分页列表信息")
     @GetMapping("/getLikeUserList")
     @TokenCheck
     public ResultData<PageData<List<FriendEntity>>> getLikeUserList(
@@ -56,6 +56,22 @@ public class FriendController {
         }
 
         return friendService.getFensUserList(Long.valueOf(likingAccount), pageNum, pageSize);
+    }
+
+    @ApiOperation(value = "获取互相关注人分页列表信息", notes = "获取互相关注人分页列表信息")
+    @GetMapping("/getFriendsList")
+    @TokenCheck
+    public ResultData<PageData<List<FriendEntity>>> getFriendsList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String likingAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(likingAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return friendService.getFriendsList(Long.valueOf(likingAccount), pageNum, pageSize);
     }
 
     @ApiOperation(value = "新增关系信息", notes = "新增关系信息")
