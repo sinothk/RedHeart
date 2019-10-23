@@ -101,4 +101,23 @@ public class FriendController {
 
         return friendService.addFriend(frEntity);
     }
+
+    @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
+    @GetMapping("/getUserInfo")
+    @TokenCheck
+    public ResultData<FriendEntity> getUserInfo(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "被喜欢用户账号", required = true) @RequestParam("targetAccount") String targetAccount) {
+
+        if (StringUtil.isEmpty(targetAccount)) {
+            return ResultData.error("用户账号不能为空");
+        }
+
+        String loginAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(loginAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return friendService.getUserInfo(loginAccount, targetAccount);
+    }
 }

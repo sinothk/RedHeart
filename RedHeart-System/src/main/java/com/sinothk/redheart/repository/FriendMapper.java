@@ -2,7 +2,6 @@ package com.sinothk.redheart.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;
 import org.apache.ibatis.annotations.Param;
@@ -72,4 +71,21 @@ public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
             "\t) tcf \n" +
             "WHERE tcu.`u_account` = tcf.`liking_account` ORDER BY tcf.like_time DESC")
     IPage<FriendEntity> getFriendsList(IPage page, @Param("account") Long account);
+
+    @Select("SELECT " +
+            "tcu.id as id, " +
+            "tcu.u_account as account, " +
+            "tcu.u_email as email, " +
+            "tcu.user_name as userName, " +
+            "tcu.u_nickname as nickname, " +
+            "tcu.u_avatar as avatar, " +
+            "tcu.u_sex as sex, " +
+            "tcu.u_idcard as idCard, " +
+            "tcu.u_phone_num as phoneNum, " +
+            "tcu.user_status as userStatus, " +
+            "tcu.user_borthday as userBorthday, " +
+            "(SELECT COUNT(f.liking_account) FROM tb_comm_friends f WHERE (f.`liking_account` = ${loginAccount} AND f.`liked_account` = ${targetAccount})) likingNum, " +
+            "(SELECT COUNT(f.liking_account) FROM tb_comm_friends f WHERE (f.`liking_account` = ${targetAccount} AND f.`liked_account` = ${loginAccount})) likedNum " +
+            "FROM tb_comm_user tcu WHERE tcu.`u_account` = ${targetAccount}")
+    FriendEntity getUserInfo(@Param("loginAccount") String loginAccount, @Param("targetAccount") String targetAccount);
 }

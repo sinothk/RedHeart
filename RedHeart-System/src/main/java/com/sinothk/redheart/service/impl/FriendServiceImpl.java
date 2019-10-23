@@ -18,7 +18,6 @@ import java.util.List;
 @Service("friendService")
 public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelationshipEntity> implements FriendService {
 
-
     @Resource(name = "friendMapper")
     private FriendMapper friendMapper;
 
@@ -101,6 +100,17 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
                 friendMapper.deleteById(frDbEntity.getId());
                 return ResultData.success("取消关注");
             }
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<FriendEntity> getUserInfo(String loginAccount, String targetAccount) {
+        try {
+            // 获取用户信息
+            FriendEntity frInfoEntity = friendMapper.getUserInfo(loginAccount, targetAccount);
+            return ResultData.success(frInfoEntity);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }

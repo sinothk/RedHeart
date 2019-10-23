@@ -46,7 +46,12 @@ public class FriendEntity {
     @ApiModelProperty(value = "用户生日")
     private Date userBorthday;
 
-    @ApiModelProperty(value = "用户生日")
-    @TableField("like_time")
+    @ApiModelProperty(value = "关注或被关注时间")
     private Date likeTime;
+
+    @ApiModelProperty(value = "是否喜欢")
+    private Integer likingNum;
+
+    @ApiModelProperty(value = "是否被喜欢")
+    private Integer likedNum;
 }
