@@ -33,4 +33,13 @@ public interface DataCenterMapper {
                     "GROUP BY DATE_FORMAT(login_time, '%Y-%m-%d'), account) " +
             " ORDER BY login_time DESC")
     IPage<UserLoginAOEntity> getTodayLoginUserPageList(Page<UserEntity> pageVo);
+
+    @Select("SELECT " +
+                "id AS id, u_account AS account, u_email AS email, user_name AS userName, u_nickname AS nickname, u_avatar AS avatar, u_sex AS sex, u_idcard AS idCard, u_phone_num AS phoneNum, user_status AS userStatus, user_borthday AS userBorthday, login_lat AS loginLat, login_lon AS loginLon, login_time AS loginTime \n" +
+            "FROM tb_comm_user WHERE u_account IN " +
+            "(" +
+                " SELECT account FROM tb_comm_login_record WHERE login_time >= DATE_FORMAT(DATE_SUB(DATE_SUB(NOW(), INTERVAL WEEKDAY(NOW()) DAY), INTERVAL 1 WEEK), '%Y-%m-%d') GROUP BY DATE_FORMAT(login_time, '%Y-%m-%d'), account" +
+            ")" +
+            "ORDER BY login_time DESC")
+    IPage<UserLoginAOEntity> getWeekLoginUserPageList(Page<UserEntity> pageVo);
 }

@@ -31,4 +31,13 @@ public class DataCenterController {
         return dataCenterService.getTodayLoginUserPageList(pageNum, pageSize);
     }
 
+    @ApiOperation(value = "登录统计：最近一周(完整周)登录用户列表", notes = "最近一周(完整周)登录用户列表")
+    @GetMapping("/getWeekLoginUserPageList")
+    @TokenCheck
+    public ResultData<PageData<List<UserLoginAOEntity>>> getWeekLoginUserPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+        return dataCenterService.getWeekLoginUserPageList(pageNum, pageSize);
+    }
 }
