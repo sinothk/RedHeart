@@ -3,6 +3,7 @@ package com.sinothk.redheart.controller;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.DataCenterEntity;
 import com.sinothk.redheart.domain.UserLoginAOEntity;
 import com.sinothk.redheart.service.DataCenterService;
 import io.swagger.annotations.Api;
@@ -49,5 +50,14 @@ public class DataCenterController {
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
         return dataCenterService.getThisMonthLoginUserPageList(pageNum, pageSize);
+    }
+
+    @ApiOperation(value = "登录统计：某年每个月的用户登录量统计", notes = "登录统计：某年每个月的用户登录量统计")
+    @GetMapping("/getYearLoginUserPageList")
+    @TokenCheck
+    public ResultData<List<DataCenterEntity>> getYearLoginUserPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "年号：形如\"2019\"") @RequestParam("yearStr") String yearStr) {
+        return dataCenterService.getYearLoginUserPageList(yearStr);
     }
 }

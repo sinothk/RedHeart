@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.domain.DataCenterEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserLoginAOEntity;
 import com.sinothk.redheart.repository.DataCenterMapper;
@@ -11,6 +12,7 @@ import com.sinothk.redheart.service.DataCenterService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("dataCenterService")
@@ -77,6 +79,29 @@ public class DataCenterServiceImpl implements DataCenterService {
             pageEntity.setHasMore(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<List<DataCenterEntity>> getYearLoginUserPageList(String yearStr) {
+        try {
+//            Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
+//            IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getThisMonthLoginUserPageList(pageVo);
+//
+//            PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
+//            pageEntity.setPageSize(pageSize);
+//            pageEntity.setPageNum(currPage);
+//
+//            pageEntity.setData(pageInfo.getRecords());
+//            pageEntity.setTotal((int) pageInfo.getTotal());
+//            int currSize = currPage * pageSize;
+//            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            List<DataCenterEntity> yearData = dataCenterMapper.getYearLoginUserPageList(yearStr);
+
+            return ResultData.success(yearData);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }

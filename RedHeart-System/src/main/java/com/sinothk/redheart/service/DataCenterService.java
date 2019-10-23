@@ -2,6 +2,7 @@ package com.sinothk.redheart.service;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.domain.DataCenterEntity;
 import com.sinothk.redheart.domain.UserLoginAOEntity;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface DataCenterService {
     ResultData<PageData<List<UserLoginAOEntity>>> getWeekLoginUserPageList(int pageNum, int pageSize);
 
     ResultData<PageData<List<UserLoginAOEntity>>> getThisMonthLoginUserPageList(int pageNum, int pageSize);
+
+    ResultData<List<DataCenterEntity>> getYearLoginUserPageList(String yearStr);
 }

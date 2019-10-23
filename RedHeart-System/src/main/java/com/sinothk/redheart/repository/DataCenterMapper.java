@@ -2,10 +2,14 @@ package com.sinothk.redheart.repository;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sinothk.redheart.domain.DataCenterEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserLoginAOEntity;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 
 @Repository("dataCenterMapper")
 public interface DataCenterMapper {
@@ -66,4 +70,12 @@ public interface DataCenterMapper {
                 "SELECT account FROM tb_comm_login_record WHERE MONTH(login_time) = MONTH(CURDATE())  GROUP BY account" +
             ")  ORDER BY login_time DESC")
     IPage<UserLoginAOEntity> getThisMonthLoginUserPageList(Page<UserEntity> pageVo);
+
+    @Select("SELECT " +
+                " MONTH as mouthNum, " +
+                " COUNT(*) AS total" +
+            " FROM " +
+                "( SELECT DATE_FORMAT(login_time, '%m') MONTH FROM tb_comm_login_record WHERE DATE_FORMAT(login_time, '%Y') = ${yearStr}) a " +
+            " GROUP BY MONTH ORDER BY MONTH")
+    ArrayList<DataCenterEntity> getYearLoginUserPageList(@Param("yearStr") String yearStr);
 }
