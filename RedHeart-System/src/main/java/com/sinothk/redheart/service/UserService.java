@@ -9,4 +9,6 @@ public interface UserService {
     ResultData<UserEntity> updateUser(UserEntity user);
 
     ResultData<UserEntity> login(UserEntity user);
+
+    ResultData<Boolean> changePwd(String account, String oldPwd, String newPwd);
 }

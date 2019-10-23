@@ -125,4 +125,29 @@ public class UserServiceImpl implements UserService {
             return ResultData.error(e.getCause().getMessage());
         }
     }
+
+    @Override
+    public ResultData<Boolean> changePwd(String account, String oldPwd, String newPwd) {
+        try {
+            QueryWrapper<UserEntity> wrapperOld = new QueryWrapper<>();
+            wrapperOld.lambda().eq(UserEntity::getAccount, account);
+            UserEntity dbOldUser = userMapper.selectOne(wrapperOld);
+
+            if (dbOldUser == null) {
+                return ResultData.error("用户不存在");
+            }
+            if (!oldPwd.equals(dbOldUser.getUserPwd())) {
+                return ResultData.error("原密码不正确");
+            }
+
+            UserEntity userNewEntity = new UserEntity();
+            userNewEntity.setId(dbOldUser.getId());
+            userNewEntity.setUserPwd(newPwd);
+            userMapper.updateById(userNewEntity);
+
+            return ResultData.success(true);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
 }

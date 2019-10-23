@@ -2,6 +2,7 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
+import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.service.UserService;
@@ -75,5 +76,35 @@ public class UserController {
         user.setUserPwd(password);
 
         return userService.login(user);
+    }
+
+    @ApiOperation(value = "更新：修改密码", notes = "更新：修改密码")
+    @PostMapping("/changePwd")
+    @ResponseBody
+    @TokenCheck
+    public ResultData<Boolean> changePwd(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "原密码", required = true) @RequestParam("oldPwd") String oldPwd,
+            @ApiParam(value = "新密码", required = true) @RequestParam("newPwd") String newPwd) {
+
+        if (StringUtil.isEmpty(oldPwd)) {
+            return ResultData.error("旧密码不能为空");
+        }
+        if (StringUtil.isEmpty(newPwd)) {
+            return ResultData.error("新密码不能为空");
+        }
+        if (newPwd.equals(oldPwd)) {
+            return ResultData.error("新密码不能和旧密码相同");
+        }
+        if (newPwd.length() < 6 || newPwd.length() > 18) {
+            return ResultData.error("密码应在6至18个数之间");
+        }
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return userService.changePwd(account, oldPwd, newPwd);
     }
 }
