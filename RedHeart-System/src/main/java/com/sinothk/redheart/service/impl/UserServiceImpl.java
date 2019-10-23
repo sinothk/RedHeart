@@ -7,12 +7,16 @@ import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
+import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
+import com.sinothk.redheart.domain.UserVo;
+import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 
 @Service("userService")
@@ -20,6 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name = "userMapper")
     private UserMapper userMapper;
+    @Resource(name = "loginReordMapper")
+    private LoginReordMapper loginReordMapper;
 
     @Override
     public ResultData<UserEntity> addUser(UserEntity userVo) {
@@ -97,7 +103,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultData<UserEntity> login(UserEntity userVo) {
+    public ResultData<UserEntity> login(UserVo userVo) {
         try {
             QueryWrapper<UserEntity> wrapperOld = new QueryWrapper<>();
             wrapperOld.lambda().eq(UserEntity::getEmail, userVo.getEmail());
@@ -116,9 +122,29 @@ public class UserServiceImpl implements UserService {
             tokenParam.put("account", "" + dbOldUser.getAccount());
             tokenParam.put("userName", dbOldUser.getUserName());
             tokenParam.put("role", dbOldUser.getRole());
-
             String token = TokenUtil.createToken(TokenUtil.EXPIRE_TIME_15D, tokenParam);
             dbOldUser.setToken(token);
+
+            // 登录信息设置
+            if (userVo.getLoginLat() != null || userVo.getLoginLon() != null) {
+                dbOldUser.setLoginLat(userVo.getLoginLat());
+                dbOldUser.setLoginLon(userVo.getLoginLon());
+                dbOldUser.setImei(userVo.getImei());
+
+                new Thread(() -> {
+                    // 更新数据库用户信息
+                    userMapper.updateById(dbOldUser);
+
+                    // 保存登录记录
+                    LoginRecordEntity lRecordEntity = new LoginRecordEntity();
+                    lRecordEntity.setAccount(dbOldUser.getAccount());
+                    lRecordEntity.setLoginTime(new Date());
+                    lRecordEntity.setLoginLat(userVo.getLoginLat());
+                    lRecordEntity.setLoginLon(userVo.getLoginLon());
+                    lRecordEntity.setImei(userVo.getImei());
+                    loginReordMapper.insert(lRecordEntity);
+                }).start();
+            }
 
             return ResultData.success(dbOldUser);
         } catch (Exception e) {

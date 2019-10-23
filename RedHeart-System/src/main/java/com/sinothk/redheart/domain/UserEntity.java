@@ -78,6 +78,14 @@ public class UserEntity {
     @TableField("user_borthday")
     private Date userBorthday;
 
+    @ApiModelProperty(value = "登录纬度")
+    @TableField("login_lat")
+    private Double loginLat;
+
+    @ApiModelProperty(value = "登录经度")
+    @TableField("login_lon")
+    private Double loginLon;
+
     // ==================================================
     @ApiModelProperty(value = "角色")
     @TableField(exist = false)
@@ -90,4 +98,8 @@ public class UserEntity {
     @ApiModelProperty(value = "Token")
     @TableField(exist = false)
     private String token;
+
+    @ApiModelProperty(value = "IMEI")
+    @TableField(exist = false)
+    private String imei;
 }
