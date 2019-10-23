@@ -12,8 +12,7 @@ import com.sinothk.redheart.service.DataCenterService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service("dataCenterService")
 public class DataCenterServiceImpl implements DataCenterService {
@@ -87,21 +86,41 @@ public class DataCenterServiceImpl implements DataCenterService {
     @Override
     public ResultData<List<DataCenterEntity>> getYearLoginUserPageList(String yearStr) {
         try {
-//            Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
-//            IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getThisMonthLoginUserPageList(pageVo);
-//
-//            PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
-//            pageEntity.setPageSize(pageSize);
-//            pageEntity.setPageNum(currPage);
-//
-//            pageEntity.setData(pageInfo.getRecords());
-//            pageEntity.setTotal((int) pageInfo.getTotal());
-//            int currSize = currPage * pageSize;
-//            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            List<DataCenterEntity> yearDataList = dataCenterMapper.getYearLoginUserPageList(yearStr);
 
-            List<DataCenterEntity> yearData = dataCenterMapper.getYearLoginUserPageList(yearStr);
+            // 转为Map
+            HashMap<String, Integer> tempHashMap = new HashMap<>();
+            for (DataCenterEntity yearData : yearDataList) {
+                tempHashMap.put(yearData.getMouthNum(), yearData.getTotal());
+            }
 
-            return ResultData.success(yearData);
+            // 循环查找不存在的月份
+            for (int i = 1; i < 13; i++) {
+                String monthStr;
+                if (i < 10) {
+                    monthStr = "0" + i;
+                } else {
+                    monthStr = "" + i;
+                }
+                // 不存在则设置为0
+                tempHashMap.putIfAbsent(monthStr, 0);
+
+//                Integer v = tempHashMap.get(monthStr);
+//                if (v == null) {
+//                    tempHashMap.put(monthStr, 0);
+//                }
+            }
+
+            Iterator iter = tempHashMap.entrySet().iterator();
+            yearDataList.clear();
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+                String key = String.valueOf(entry.getKey());
+                yearDataList.add(new DataCenterEntity(key, tempHashMap.get(key)));
+            }
+
+            Collections.sort(yearDataList);
+            return ResultData.success(yearDataList);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
