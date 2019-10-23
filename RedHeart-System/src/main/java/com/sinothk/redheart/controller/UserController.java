@@ -80,7 +80,7 @@ public class UserController {
         return userService.login(userVo);
     }
 
-    @ApiOperation(value = "登录：邮箱及密码、位置信息", notes = "登录：邮箱及密码、位置信息")
+    @ApiOperation(value = "登录：邮箱及密码、位置信息（移动端）", notes = "登录：邮箱及密码、位置信息")
     @PostMapping("/loginApp")
     @ResponseBody
     public ResultData<UserEntity> loginApp(

@@ -132,13 +132,15 @@ public class UserServiceImpl implements UserService {
                 dbOldUser.setImei(userVo.getImei());
 
                 new Thread(() -> {
+                    Date date = new Date();
                     // 更新数据库用户信息
+                    dbOldUser.setLoginTime(date);
                     userMapper.updateById(dbOldUser);
 
                     // 保存登录记录
                     LoginRecordEntity lRecordEntity = new LoginRecordEntity();
                     lRecordEntity.setAccount(dbOldUser.getAccount());
-                    lRecordEntity.setLoginTime(new Date());
+                    lRecordEntity.setLoginTime(date);
                     lRecordEntity.setLoginLat(userVo.getLoginLat());
                     lRecordEntity.setLoginLon(userVo.getLoginLon());
                     lRecordEntity.setImei(userVo.getImei());
