@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
-import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserLoginAOEntity;
 import com.sinothk.redheart.repository.DataCenterMapper;
@@ -46,6 +45,27 @@ public class DataCenterServiceImpl implements DataCenterService {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getWeekLoginUserPageList(pageVo);
+
+            PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(currPage);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = currPage * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<PageData<List<UserLoginAOEntity>>> getThisMonthLoginUserPageList(int currPage, int pageSize) {
+        try {
+            Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
+            IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getThisMonthLoginUserPageList(pageVo);
 
             PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);

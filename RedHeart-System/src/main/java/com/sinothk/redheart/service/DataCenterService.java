@@ -10,4 +10,6 @@ public interface DataCenterService {
     ResultData<PageData<List<UserLoginAOEntity>>> getTodayLoginUserPageList(int pageNum, int pageSize);
 
     ResultData<PageData<List<UserLoginAOEntity>>> getWeekLoginUserPageList(int pageNum, int pageSize);
+
+    ResultData<PageData<List<UserLoginAOEntity>>> getThisMonthLoginUserPageList(int pageNum, int pageSize);
 }
