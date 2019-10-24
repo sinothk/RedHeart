@@ -37,10 +37,6 @@ public class TopicEntity {
     @TableField("topic_id")
     private String topicId;
 
-    @ApiModelProperty("业务类型")
-    @TableField("biz_type")
-    private String bizType;
-
     @ApiModelProperty("发布人账号")
     @TableField("account")
     private Long account;
@@ -48,10 +44,6 @@ public class TopicEntity {
     @ApiModelProperty("发布内容")
     @TableField("topic_content")
     private String topicContent;
-
-    @ApiModelProperty("发布时间")
-    @TableField("create_time")
-    private Date createTime;
 
     @ApiModelProperty("发布纬度")
     @TableField("loc_lat")
@@ -64,4 +56,12 @@ public class TopicEntity {
     @ApiModelProperty("发布地址")
     @TableField("loc_address")
     private String locAddress;
+
+    @ApiModelProperty("发布时间")
+    @TableField("create_time")
+    private Date createTime;
+
+    @ApiModelProperty("发布时间")
+    @TableField("update_time")
+    private Date updateTime;
 }

@@ -29,24 +29,16 @@ public class TopicController {
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "话题实体信息", required = true) @RequestBody TopicEntity topicEntity) {
 
-
-//        if (StringUtil.isEmpty(email)) {
-//            // 验证邮箱
-//            return ResultData.error("邮箱不能为空");
-//        }
-//        if (StringUtil.isEmpty(password)) {
-//            // 验证密码
-//            return ResultData.error("密码不能为空");
-//        }
+        if (StringUtil.isEmpty(topicEntity.getTopicContent())) {
+            return ResultData.error("话题内容不能为空");
+        }
 
         String account = TokenUtil.getTokenValue(token, "account");
         if (StringUtil.isEmpty(account)) {
             return ResultData.error("Token解析失败");
         }
-
-//        TopicVo topicVo = new TopicVo();
         topicEntity.setAccount(Long.valueOf(account));
-//        user.setUserPwd(password);
+
         return topicService.addTopic(topicEntity);
     }
 

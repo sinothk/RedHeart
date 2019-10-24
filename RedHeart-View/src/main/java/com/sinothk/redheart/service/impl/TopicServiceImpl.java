@@ -21,12 +21,14 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public ResultData<Boolean> addTopic(TopicEntity topicEntity) {
         try {
-            topicEntity.setBizType(KeyValue.BIZ_TYPE_TOPIC);
             // 处理topicId
             if (StringUtil.isEmpty(topicEntity.getTopicId())) {
                 topicEntity.setTopicId(IdUtil.generateShortUuid());
             }
-            topicEntity.setCreateTime(new Date());
+
+            Date pubTime = new Date();
+            topicEntity.setCreateTime(pubTime);
+            topicEntity.setUpdateTime(pubTime);
             topicMapper.insert(topicEntity);
 
             return ResultData.success(true);

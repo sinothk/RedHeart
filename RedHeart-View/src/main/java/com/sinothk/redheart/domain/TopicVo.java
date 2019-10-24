@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class TopicVo {
+public class TopicVo extends TopicEntity{
 
     @ApiModelProperty("发布人账号")
     private Long account;
