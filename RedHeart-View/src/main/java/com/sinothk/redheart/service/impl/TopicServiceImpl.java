@@ -3,7 +3,6 @@ package com.sinothk.redheart.service.impl;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.IdUtil;
 import com.sinothk.base.utils.StringUtil;
-import com.sinothk.redheart.domain.KeyValue;
 import com.sinothk.redheart.domain.TopicEntity;
 import com.sinothk.redheart.repository.TopicMapper;
 import com.sinothk.redheart.service.TopicService;
