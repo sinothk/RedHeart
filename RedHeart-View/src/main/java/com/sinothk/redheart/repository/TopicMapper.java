@@ -18,7 +18,6 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.id as id, " +
             "topic.topic_id as topicId, " +
             "topic.account as account, " +
-            "topic.topic_theme as topicTheme, " +
             "topic.topic_content as topicContent, " +
             "topic.loc_lat as locLat, " +
             "topic.loc_lng as locLng, " +
@@ -29,10 +28,11 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
             " usr.`u_nickname` as nickname," +
-            " usr.`u_sex` as sex" +
+            " usr.`u_sex` as sex," +
+            "theme.theme_txt AS topicTheme" +
 
-            " FROM tb_app_topic topic, tb_comm_user usr" +
-            " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account`" +
+            " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
+            " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
             " ORDER BY topic.`create_time` DESC")
     IPage<TopicAo> getTopicFromMePageList(IPage page, @Param("account") Long account);
 }
