@@ -11,33 +11,25 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@ApiModel("话题实体")
+@ApiModel("主题用户实体")
 @Data
 @ToString
-@TableName(value = "tb_app_topic_theme")
-public class TopicThemeEntity {
+@TableName(value = "tb_app_topic_theme_user")
+public class TopicThemeUserEntity {
 
     @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.INPUT)
     private Integer id;
 
+    @ApiModelProperty("喜欢人账号")
+    @TableField("account")
+    private Long account;
+
     @ApiModelProperty("主题编码")
     @TableField("theme_code")
     private String themeCode;
 
-    @ApiModelProperty("主题名称")
-    @TableField("theme_txt")
-    private String themeTxt;
-
-    @ApiModelProperty("主题图标")
-    @TableField("theme_icon")
-    private String themeIcon;
-
-    @ApiModelProperty("主题备注")
-    @TableField("remark")
-    private String remark;
-
     @ApiModelProperty("排序编号")
-    @TableField("sort_num")
-    private Integer sortNum;
+    @TableField("create_time")
+    private Date createTime;
 }
