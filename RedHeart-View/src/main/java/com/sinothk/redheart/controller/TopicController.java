@@ -1,9 +1,11 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
 import com.sinothk.redheart.service.TopicService;
 import io.swagger.annotations.Api;
@@ -12,6 +14,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Api(tags = "话题")
 @RestController
@@ -38,8 +41,22 @@ public class TopicController {
             return ResultData.error("Token解析失败");
         }
         topicEntity.setAccount(Long.valueOf(account));
-
         return topicService.addTopic(topicEntity);
     }
 
+    @ApiOperation(value = "查询：话题列表,由我发布的", notes = "查询：话题列表,由我发布的")
+    @GetMapping("/getTopicFromMePageList")
+    @TokenCheck
+    public ResultData<PageData<List<TopicAo>>> getTopicFromMePageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicService.getTopicFromMePageList(Long.valueOf(account), pageNum, pageSize);
+    }
 }
