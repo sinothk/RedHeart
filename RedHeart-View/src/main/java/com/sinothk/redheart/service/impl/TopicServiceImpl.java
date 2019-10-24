@@ -31,8 +31,6 @@ public class TopicServiceImpl implements TopicService {
                 topicEntity.setTopicId(IdUtil.generateShortUuid());
             }
 
-            topicEntity.setTopicTheme(KeyValue.getTopicValue(topicEntity.getTopicTheme()));
-
             Date pubTime = new Date();
             topicEntity.setCreateTime(pubTime);
             topicEntity.setUpdateTime(pubTime);

@@ -19,17 +19,26 @@ public class KeyValue {
     private static final String TOPIC_THEME_SEX = "TOPIC_THEME_SEX";
     private static final String TOPIC_THEME_PLANT = "TOPIC_THEME_PLANT";
 
-    public static String getTopicValue(String key) {
-        if (topicThemMap == null) {
-            topicThemMap = getTopicThemMap();
-        }
-        return topicThemMap.get(key);
-    }
-
-    private static HashMap<String, String> getTopicThemMap() {
-        HashMap<String, String> topicThemMap = new HashMap<>();
-        topicThemMap.put(TOPIC_THEME_SEX, "两性话题");
-        topicThemMap.put(TOPIC_THEME_PLANT, "绿植养心");
-        return topicThemMap;
-    }
+//    public static String getTopicValue(String key) {
+//        if (topicThemMap == null) {
+//            topicThemMap = getTopicThemMap();
+//        }
+//        return topicThemMap.get(key);
+//    }
+//
+//    private static HashMap<String, String> getTopicThemMap() {
+//        HashMap<String, String> topicThemMap = new HashMap<>();
+//        topicThemMap.put(TOPIC_THEME_SEX, "两性话题");
+//        topicThemMap.put(TOPIC_THEME_PLANT, "绿植养心");
+////        topicThemMap.put(, "");
+////        topicThemMap.put(, "");
+////        topicThemMap.put(, "");
+////
+////        topicThemMap.put(, "");
+////        topicThemMap.put(, "");
+////        topicThemMap.put(, "");
+////        topicThemMap.put(, "");
+////        topicThemMap.put(, "");
+//        return topicThemMap;
+//    }
 }
