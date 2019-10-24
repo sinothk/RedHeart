@@ -60,4 +60,20 @@ public class TopicController {
 
         return topicService.getTopicFromMePageList(Long.valueOf(account), pageNum, pageSize);
     }
+
+    @ApiOperation(value = "话题：查询关注人发布的话题列表", notes = "话题：查询关注人发布的话题列表")
+    @GetMapping("/getTopicFromILikePageList")
+    @TokenCheck
+    public ResultData<PageData<List<TopicAo>>> getTopicFromILikePageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicService.getTopicFromILikePageList(Long.valueOf(account), pageNum, pageSize);
+    }
 }
