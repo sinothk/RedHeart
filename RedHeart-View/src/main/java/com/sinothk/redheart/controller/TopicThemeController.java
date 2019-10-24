@@ -25,7 +25,7 @@ public class TopicThemeController {
     @Resource(name = "topicThemeService")
     private TopicThemeService topicThemeService;
 
-    @ApiOperation(value = "主题新增：主题实体信息", notes = "主题新增：主题实体信息")
+    @ApiOperation(value = "主题：新增主题实体信息", notes = "主题：新增主题实体信息")
     @PostMapping("/add")
     @ResponseBody
     @TokenCheck
@@ -49,7 +49,7 @@ public class TopicThemeController {
         return topicThemeService.add(topicThemeEntity);
     }
 
-    @ApiOperation(value = "主题查询：所有主题列表", notes = "主题查询：所有主题列表")
+    @ApiOperation(value = "主题：查询所有主题列表", notes = "主题：查询所有主题列表")
     @GetMapping("/getAllTopicThemeList")
     @TokenCheck
     public ResultData<List<TopicThemeEntity>> getAllTopicThemeList(
@@ -57,7 +57,7 @@ public class TopicThemeController {
         return topicThemeService.getAllTopicThemeList();
     }
 
-    @ApiOperation(value = "主题关注: 关注或取消关注主题", notes = "主题关注: 关注或取消关注主题")
+    @ApiOperation(value = "主题: 关注或取消关注主题", notes = "主题: 关注或取消关注主题")
     @GetMapping("/like")
     @TokenCheck
     public ResultData<String> like(
@@ -80,7 +80,7 @@ public class TopicThemeController {
         return topicThemeService.likeTheme(ttuEntity);
     }
 
-    @ApiOperation(value = "主题查询：用户关注的主题列表", notes = "主题查询：用户关注的主题列表")
+    @ApiOperation(value = "主题：查询用户关注的主题列表", notes = "主题：查询用户关注的主题列表")
     @GetMapping("/getMyTopicThemeList")
     @TokenCheck
     public ResultData<List<TopicThemeAo>> getMyTopicThemeList(
