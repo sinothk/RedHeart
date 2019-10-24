@@ -45,7 +45,7 @@ public class TopicController {
         return topicService.addTopic(topicEntity);
     }
 
-    @ApiOperation(value = "话题：查询由我发布的话题列表,", notes = "话题：查询由我发布的话题列表")
+    @ApiOperation(value = "话题：查询由我发布的话题列表", notes = "话题：查询由我发布的话题列表")
     @GetMapping("/getTopicFromMePageList")
     @TokenCheck
     public ResultData<PageData<List<TopicAo>>> getTopicFromMePageList(
