@@ -6,6 +6,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.IdUtil;
 import com.sinothk.base.utils.StringUtil;
+import com.sinothk.redheart.domain.KeyValue;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
 import com.sinothk.redheart.repository.TopicMapper;
@@ -29,6 +30,8 @@ public class TopicServiceImpl implements TopicService {
             if (StringUtil.isEmpty(topicEntity.getTopicId())) {
                 topicEntity.setTopicId(IdUtil.generateShortUuid());
             }
+
+            topicEntity.setTopicTheme(KeyValue.getTopicValue(topicEntity.getTopicTheme()));
 
             Date pubTime = new Date();
             topicEntity.setCreateTime(pubTime);

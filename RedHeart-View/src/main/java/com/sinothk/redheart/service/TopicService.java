@@ -4,8 +4,6 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
-import com.sinothk.redheart.domain.TopicVo;
-import com.sinothk.redheart.domain.UserEntity;
 
 import java.util.List;
 

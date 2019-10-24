@@ -19,7 +19,10 @@ public class TopicAo extends TopicEntity{
     @ApiModelProperty("发布人账号")
     private Long account;
 
-    @ApiModelProperty("发布内容")
+    @ApiModelProperty("话题主题")
+    private String topicTheme;
+
+    @ApiModelProperty("话题内容")
     private String topicContent;
 
     @ApiModelProperty("发布纬度")

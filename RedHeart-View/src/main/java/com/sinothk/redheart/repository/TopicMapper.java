@@ -18,12 +18,14 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.id as id, " +
             "topic.topic_id as topicId, " +
             "topic.account as account, " +
+            "topic.topic_theme as topicTheme, " +
             "topic.topic_content as topicContent, " +
             "topic.loc_lat as locLat, " +
             "topic.loc_lng as locLng, " +
             "topic.loc_address as locAddress, " +
             "topic.create_time as createTime, " +
             "topic.update_time as updateTime, " +
+
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
             " usr.`u_nickname` as nickname," +

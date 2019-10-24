@@ -16,18 +16,6 @@ import java.util.Date;
 @ToString
 @TableName(value = "tb_app_topic")
 public class TopicEntity {
-//    /*列信息*/-----------
-//
-//    Field          Type           Collation        Null    Key     Default  Extra           Privileges                       Comment
-//-------------  -------------  ---------------  ------  ------  -------  --------------  -------------------------------  -----------------
-//    id             int(11)        (NULL)           NO      PRI     (NULL)   auto_increment  select,insert,update,references
-//    account        bigint(20)     (NULL)           NO              (NULL)                   select,insert,update,references  发布人账号
-//    topic_content  varchar(2048)  utf8_general_ci  YES             (NULL)                   select,insert,update,references  发布内容
-//    create_time    datetime       (NULL)           YES             (NULL)                   select,insert,update,references  发布时间
-//    loc_lat        double         (NULL)           YES             (NULL)                   select,insert,update,references  纬度
-//    loc_lng        double         (NULL)           YES             (NULL)                   select,insert,update,references  经度
-//    loc_address    varchar(512)   utf8_general_ci  YES             (NULL)                   select,insert,update,references  位置
-//    biz_type         varchar(64)    utf8_general_ci  YES             (NULL)                   select,insert,update,references  业务类型
 
     @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.INPUT)
@@ -41,7 +29,11 @@ public class TopicEntity {
     @TableField("account")
     private Long account;
 
-    @ApiModelProperty("发布内容")
+    @ApiModelProperty("话题主题")
+    @TableField("topic_theme")
+    private String topicTheme;
+
+    @ApiModelProperty("话题内容")
     @TableField("topic_content")
     private String topicContent;
 
