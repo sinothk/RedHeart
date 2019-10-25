@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
-import com.sinothk.redheart.domain.FriendEntity;
-import com.sinothk.redheart.domain.NoticeEntity;
-import com.sinothk.redheart.domain.NoticeReaderEntity;
-import com.sinothk.redheart.domain.NoticeVo;
+import com.sinothk.redheart.domain.*;
 import com.sinothk.redheart.repository.NoticeMapper;
 import com.sinothk.redheart.repository.NoticeReaderMapper;
 import com.sinothk.redheart.service.NoticeService;
@@ -44,6 +41,27 @@ public class NoticeServiceImpl implements NoticeService {
             IPage<NoticeVo> pageInfo = noticeMapper.getAllNoticeList(pageVo, account);
 
             PageData<List<NoticeVo>> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<PageData<List<NoticeReaderVo>>> getNoticeReaderList(Long noticeId, int pageNum, int pageSize) {
+        try {
+            Page<NoticeReaderVo> pageVo = new Page<>(pageNum, pageSize);
+            IPage<NoticeReaderVo> pageInfo = noticeMapper.getNoticeReaderList(pageVo, noticeId);
+
+            PageData<List<NoticeReaderVo>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 

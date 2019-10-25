@@ -6,7 +6,9 @@ import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.NoticeEntity;
+import com.sinothk.redheart.domain.NoticeReaderVo;
 import com.sinothk.redheart.domain.NoticeVo;
+import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -66,6 +68,21 @@ public class NoticeController {
         return noticeService.getAllNoticeList(Long.valueOf(account), pageNum, pageSize);
     }
 
+    @ApiOperation(value = "通知：获取所有阅读人员", notes = "通知：获取所有阅读人员")
+    @GetMapping("/getNoticeReaderList")
+    @TokenCheck
+    public ResultData<PageData<List<NoticeReaderVo>>> getNoticeReaderList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "通知Id") @RequestParam("noticeId") String noticeId,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        if (StringUtil.isEmpty(noticeId)) {
+            return ResultData.error("通知Id不能为空");
+        }
+
+        return noticeService.getNoticeReaderList(Long.valueOf(noticeId), pageNum, pageSize);
+    }
 
     @ApiOperation(value = "阅读：新增阅读信息", notes = "阅读：新增阅读信息")
     @PostMapping("/addRead")
