@@ -28,7 +28,7 @@ public interface TopicCommentMapper extends BaseMapper<TopicCommentEntity> {
             "\tusr.`u_sex` AS sex" +
 
             "\tFROM tb_app_topic_comment comm, tb_comm_user usr " +
-            "\tWHERE comm.`topic_id` = ${topicId} AND comm.`send_account` = usr.`u_account`" +
+            "\tWHERE comm.`topic_id` = '${topicId}' AND comm.`send_account` = usr.`u_account`" +
             "\tORDER BY comm.`create_time` DESC")
     IPage<TopicCommentVo> getTopicCommentPageList(Page<TopicCommentVo> pageVo, @Param("topicId") String topicId);
 }
