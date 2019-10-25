@@ -1,10 +1,12 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.NoticeEntity;
+import com.sinothk.redheart.domain.NoticeVo;
 import com.sinothk.redheart.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "通知管理")
 @RestController
@@ -46,6 +49,23 @@ public class NoticeController {
 
         return noticeService.add(noticeEntity);
     }
+
+    @ApiOperation(value = "通知：获取所有分页通知", notes = "通知：获取所有分页通知")
+    @GetMapping("/getAllNoticeList")
+    @TokenCheck
+    public ResultData<PageData<List<NoticeVo>>> getAllNoticeList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return noticeService.getAllNoticeList(Long.valueOf(account), pageNum, pageSize);
+    }
+
 
     @ApiOperation(value = "阅读：新增阅读信息", notes = "阅读：新增阅读信息")
     @PostMapping("/addRead")
