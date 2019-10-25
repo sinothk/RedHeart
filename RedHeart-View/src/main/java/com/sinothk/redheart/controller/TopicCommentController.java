@@ -1,10 +1,12 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.TopicCommentEntity;
+import com.sinothk.redheart.domain.TopicCommentVo;
 import com.sinothk.redheart.service.TopicCommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Api(tags = "话题相关")
 @RestController
@@ -74,40 +77,21 @@ public class TopicCommentController {
 
         return topicCommentService.del(Long.valueOf(account), comId);
     }
-//
-//    @ApiOperation(value = "主题: 关注或取消关注主题", notes = "主题: 关注或取消关注主题")
-//    @GetMapping("/like")
-//    @TokenCheck
-//    public ResultData<String> like(
-//            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
-//            @ApiParam(value = "被喜欢主题编码", required = true) @RequestParam("themeCode") String themeCode) {
-//
-//        if (StringUtil.isEmpty(themeCode)) {
-//            return ResultData.error("主题编码不能为空");
-//        }
-//
-//        String account = TokenUtil.getTokenValue(token, "account");
-//        if (StringUtil.isEmpty(account)) {
-//            return ResultData.error("Token解析失败");
-//        }
-//
-//        TopicThemeUserEntity ttuEntity = new TopicThemeUserEntity();
-//        ttuEntity.setAccount(Long.valueOf(account));
-//        ttuEntity.setThemeCode(themeCode);
-//        ttuEntity.setCreateTime(new Date());
-//        return topicThemeService.likeTheme(ttuEntity);
-//    }
-//
-//    @ApiOperation(value = "主题：查询用户关注的主题列表", notes = "主题：查询用户关注的主题列表")
-//    @GetMapping("/getMyTopicThemeList")
-//    @TokenCheck
-//    public ResultData<List<TopicThemeAo>> getMyTopicThemeList(
-//            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token) {
-//
-//        String account = TokenUtil.getTokenValue(token, "account");
-//        if (StringUtil.isEmpty(account)) {
-//            return ResultData.error("Token解析失败");
-//        }
-//        return topicThemeService.getMyTopicThemeList(Long.valueOf(account));
-//    }
+
+    @ApiOperation(value = "评论：查询话题的分页评论列表", notes = "评论：查询话题的分页评论列表")
+    @GetMapping("/getTopicCommentPageList")
+    @TokenCheck
+    public ResultData<PageData<List<TopicCommentVo>>> getTopicFromMePageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "话题Id", required = true) @RequestParam("topicId") String topicId,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicCommentService.getTopicCommentPageList(topicId, pageNum, pageSize);
+    }
 }
