@@ -1,5 +1,6 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Api(tags = "用户系统")
 @RestController
@@ -135,5 +137,21 @@ public class UserController {
         }
 
         return userService.changePwd(account, oldPwd, newPwd);
+    }
+
+    @ApiOperation(value = "查询：获取最近登录的用户", notes = "查询：获取最近登录的用户")
+    @GetMapping("/getLastLoginUserPageList")
+    @TokenCheck
+    public ResultData<PageData<List<UserEntity>>> getLastLoginUserPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String likingAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(likingAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return userService.getLastLoginUserPageList(pageNum, pageSize);
     }
 }

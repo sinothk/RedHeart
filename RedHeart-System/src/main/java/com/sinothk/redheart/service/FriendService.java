@@ -5,6 +5,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;
+import com.sinothk.redheart.domain.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;

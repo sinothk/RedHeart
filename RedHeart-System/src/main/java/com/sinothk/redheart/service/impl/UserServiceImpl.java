@@ -2,22 +2,33 @@ package com.sinothk.redheart.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
+import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.config.AccountInitLoader;
+import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserVo;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -174,6 +185,30 @@ public class UserServiceImpl implements UserService {
             userMapper.updateById(userNewEntity);
 
             return ResultData.success(true);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<PageData<List<UserEntity>>> getLastLoginUserPageList(int pageNum, int pageSize) {
+        try {
+            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+            wrapper.lambda().orderByDesc(UserEntity::getLoginTime);
+
+            IPage<UserEntity> pageInfo = userMapper.selectPage( new Page<>(pageNum, pageSize), wrapper);
+
+            //
+            PageData<List<UserEntity>> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
