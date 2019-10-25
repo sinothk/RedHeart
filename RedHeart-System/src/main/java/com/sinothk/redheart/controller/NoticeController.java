@@ -68,7 +68,7 @@ public class NoticeController {
         return noticeService.getAllNoticeList(Long.valueOf(account), pageNum, pageSize);
     }
 
-    @ApiOperation(value = "阅读：新增阅读信息", notes = "阅读：新增阅读信息")
+    @ApiOperation(value = "通知：新增阅读信息", notes = "阅读：新增阅读信息")
     @PostMapping("/addNoticeReader")
     @ResponseBody
     @TokenCheck
