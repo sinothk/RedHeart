@@ -1,0 +1,50 @@
+package com.sinothk.redheart.controller;
+
+import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.utils.StringUtil;
+import com.sinothk.base.utils.TokenUtil;
+import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.NoticeEntity;
+import com.sinothk.redheart.service.NoticeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.Date;
+
+@Api(tags = "通知管理")
+@RestController
+@RequestMapping("/notice")
+public class NoticeController {
+
+    @Resource(name = "noticeService")
+    private NoticeService noticeService;
+
+    @ApiOperation(value = "新增：发布通知", notes = "新增：发布通知")
+    @PostMapping("/add")
+    @ResponseBody
+    @TokenCheck
+    public ResultData<Boolean> add(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "通知实体信息", required = true) @RequestBody NoticeEntity noticeEntity) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+        if (StringUtil.isEmpty(noticeEntity.getTitle())) {
+            return ResultData.error("通知标题不能为空");
+        }
+        if (StringUtil.isEmpty(noticeEntity.getContent())) {
+            return ResultData.error("通知内容不能为空");
+        }
+
+        noticeEntity.setCreateAccount(Long.valueOf(account));
+        noticeEntity.setCreateTime(new Date());
+
+        return noticeService.add(noticeEntity);
+    }
+
+}

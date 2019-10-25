@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository("topicMapper")
 public interface TopicMapper extends BaseMapper<TopicEntity> {
 
-
-
     @Select("SELECT " +
 
             "topic.id as id, " +
@@ -36,8 +34,6 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
             " ORDER BY topic.`create_time` DESC")
     IPage<TopicAo> getTopicFromMePageList(IPage page, @Param("account") Long account);
-
-
 
     @Select("SELECT " +
 
