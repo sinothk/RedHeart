@@ -5,4 +5,6 @@ import com.sinothk.redheart.domain.TopicCommentEntity;
 
 public interface TopicCommentService {
     ResultData<Boolean> add(TopicCommentEntity topicCommentEntity);
+
+    ResultData<Boolean> del(Long account, Long comId);
 }

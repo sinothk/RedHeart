@@ -5,11 +5,7 @@ import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.TopicCommentEntity;
-import com.sinothk.redheart.domain.TopicThemeAo;
-import com.sinothk.redheart.domain.TopicThemeEntity;
-import com.sinothk.redheart.domain.TopicThemeUserEntity;
 import com.sinothk.redheart.service.TopicCommentService;
-import com.sinothk.redheart.service.TopicThemeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 @Api(tags = "话题相关")
 @RestController
@@ -65,13 +60,20 @@ public class TopicCommentController {
         return topicCommentService.add(tcEntity);
     }
 
-//    @ApiOperation(value = "主题：查询所有主题列表", notes = "主题：查询所有主题列表")
-//    @GetMapping("/getAllTopicThemeList")
-//    @TokenCheck
-//    public ResultData<List<TopicThemeEntity>> getAllTopicThemeList(
-//            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token) {
-//        return topicThemeService.getAllTopicThemeList();
-//    }
+    @ApiOperation(value = "评论：删除", notes = "评论：删除")
+    @GetMapping("/del")
+    @TokenCheck
+    public ResultData<Boolean> del(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "评论Id", required = true) @RequestParam("comId") Long comId) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicCommentService.del(Long.valueOf(account), comId);
+    }
 //
 //    @ApiOperation(value = "主题: 关注或取消关注主题", notes = "主题: 关注或取消关注主题")
 //    @GetMapping("/like")
