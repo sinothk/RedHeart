@@ -2,7 +2,6 @@ package com.sinothk.redheart.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
 import org.apache.ibatis.annotations.Param;
@@ -72,16 +71,16 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\ttopic.loc_address AS locAddress, \n" +
             "\ttopic.create_time AS createTime, \n" +
             "\ttopic.update_time AS updateTime, \n" +
-            "\t\n" +
+
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
             "\tusr.`u_nickname` AS nickname, \n" +
             "\tusr.`u_sex` AS sex,\n" +
             "\ttheme.theme_txt AS topicTheme \n" +
-            "FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
-            "\n" +
-            "WHERE  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
-            "\n" +
-            "ORDER BY topic.`create_time` DESC")
+            "\tFROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
+
+            "\tWHERE  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
+
+            "\tORDER BY topic.`create_time` DESC")
     IPage<TopicAo> getNewTopicPageList(IPage page);
 }
