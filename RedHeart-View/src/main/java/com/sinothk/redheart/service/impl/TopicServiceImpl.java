@@ -82,4 +82,25 @@ public class TopicServiceImpl implements TopicService {
             return ResultData.error(e.getCause().getMessage());
         }
     }
+
+    @Override
+    public ResultData<PageData<List<TopicAo>>> getNewTopicPageList(int pageNum, int pageSize) {
+        try {
+            Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
+            IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo);
+
+            PageData<List<TopicAo>> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
 }

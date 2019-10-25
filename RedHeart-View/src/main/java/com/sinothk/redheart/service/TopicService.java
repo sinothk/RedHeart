@@ -14,4 +14,6 @@ public interface TopicService {
     ResultData<PageData<List<TopicAo>>> getTopicFromMePageList(Long account, int pageNum, int pageSize);
 
     ResultData<PageData<List<TopicAo>>> getTopicFromILikePageList(Long valueOf, int pageNum, int pageSize);
+
+    ResultData<PageData<List<TopicAo>>> getNewTopicPageList(int pageNum, int pageSize);
 }
