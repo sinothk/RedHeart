@@ -5,8 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.utils.IdUtil;
+import com.sinothk.base.utils.StringUtil;
 import com.sinothk.redheart.domain.AdvertiseEntity;
-import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.repository.AdvertiseMapper;
 import com.sinothk.redheart.service.AdvertiseService;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     @Override
     public ResultData<Boolean> add(AdvertiseEntity adEntity) {
         try {
+            // 处理BizId
+            if (StringUtil.isEmpty(adEntity.getAdId())) {
+                adEntity.setAdId(IdUtil.generateShortUuid());
+            }
             advertiseMapper.insert(adEntity);
             return ResultData.success(true);
         } catch (Exception e) {

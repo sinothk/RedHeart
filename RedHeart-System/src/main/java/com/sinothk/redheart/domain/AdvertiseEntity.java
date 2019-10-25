@@ -38,6 +38,10 @@ public class AdvertiseEntity {
     @TableField(value = "create_account")
     private Long createAccount;
 
+    @ApiModelProperty("广告ID")
+    @TableField(value = "ad_id")
+    private String adId;
+
     @ApiModelProperty("标题")
     @TableField(value = "ad_title")
     private String adTitle;
