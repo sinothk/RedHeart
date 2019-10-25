@@ -19,7 +19,7 @@ public class TopicThemeUserEntity {
 
     @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.INPUT)
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty("喜欢人账号")
     @TableField("account")

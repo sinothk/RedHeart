@@ -13,7 +13,7 @@ import java.util.Date;
 public class TopicThemeAo {
 
     @ApiModelProperty("id")
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty("主题编码")
     private String themeCode;

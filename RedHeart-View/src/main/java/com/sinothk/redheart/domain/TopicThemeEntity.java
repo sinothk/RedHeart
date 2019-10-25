@@ -19,7 +19,7 @@ public class TopicThemeEntity {
 
     @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.INPUT)
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty("主题编码")
     @TableField("theme_code")

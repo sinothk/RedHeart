@@ -19,7 +19,7 @@ public class TopicEntity {
 
     @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.INPUT)
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty("话题Id")
     @TableField("topic_id")

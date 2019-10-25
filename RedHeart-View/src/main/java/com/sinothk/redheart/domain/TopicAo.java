@@ -11,7 +11,7 @@ import java.util.Date;
 public class TopicAo extends TopicEntity{
 
     @ApiModelProperty("id")
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty("话题Id")
     private String topicId;
