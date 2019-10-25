@@ -8,7 +8,6 @@ import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.NoticeEntity;
 import com.sinothk.redheart.domain.NoticeReaderVo;
 import com.sinothk.redheart.domain.NoticeVo;
-import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
