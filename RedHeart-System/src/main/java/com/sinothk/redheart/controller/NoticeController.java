@@ -68,6 +68,25 @@ public class NoticeController {
         return noticeService.getAllNoticeList(Long.valueOf(account), pageNum, pageSize);
     }
 
+    @ApiOperation(value = "阅读：新增阅读信息", notes = "阅读：新增阅读信息")
+    @PostMapping("/addNoticeReader")
+    @ResponseBody
+    @TokenCheck
+    public ResultData<Boolean> addNoticeReader(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "通知Id", required = true) @RequestParam("noticeId") String noticeId) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+        if (StringUtil.isEmpty(noticeId)) {
+            return ResultData.error("通知ID不能为空");
+        }
+
+        return noticeService.addRead(Long.valueOf(noticeId), Long.valueOf(account));
+    }
+
     @ApiOperation(value = "通知：获取所有阅读人员", notes = "通知：获取所有阅读人员")
     @GetMapping("/getNoticeReaderList")
     @TokenCheck
@@ -82,24 +101,5 @@ public class NoticeController {
         }
 
         return noticeService.getNoticeReaderList(Long.valueOf(noticeId), pageNum, pageSize);
-    }
-
-    @ApiOperation(value = "阅读：新增阅读信息", notes = "阅读：新增阅读信息")
-    @PostMapping("/addRead")
-    @ResponseBody
-    @TokenCheck
-    public ResultData<Boolean> addRead(
-            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
-            @ApiParam(value = "通知Id", required = true) @RequestParam("noticeId") String noticeId) {
-
-        String account = TokenUtil.getTokenValue(token, "account");
-        if (StringUtil.isEmpty(account)) {
-            return ResultData.error("Token解析失败");
-        }
-        if (StringUtil.isEmpty(noticeId)) {
-            return ResultData.error("通知ID不能为空");
-        }
-
-        return noticeService.addRead(Long.valueOf(noticeId), Long.valueOf(account));
     }
 }
