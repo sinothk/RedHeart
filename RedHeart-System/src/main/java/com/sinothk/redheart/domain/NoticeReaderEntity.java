@@ -34,10 +34,10 @@ public class NoticeReaderEntity {
     private Long noticeId;
 
     @ApiModelProperty("阅读人账号")
-    @TableField(value = "create_account")
-    private Long createAccount;
+    @TableField(value = "reader_account")
+    private Long readerAccount;
 
     @ApiModelProperty("发布时间")
-    @TableField(value = "public_time")
-    private Date publicTime;
+    @TableField(value = "read_time")
+    private Date readTime;
 }

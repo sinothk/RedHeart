@@ -22,7 +22,7 @@ public class NoticeController {
     @Resource(name = "noticeService")
     private NoticeService noticeService;
 
-    @ApiOperation(value = "新增：发布通知", notes = "新增：发布通知")
+    @ApiOperation(value = "通知：发布通知", notes = "通知：发布通知")
     @PostMapping("/add")
     @ResponseBody
     @TokenCheck
@@ -47,4 +47,22 @@ public class NoticeController {
         return noticeService.add(noticeEntity);
     }
 
+    @ApiOperation(value = "阅读：新增阅读信息", notes = "阅读：新增阅读信息")
+    @PostMapping("/addRead")
+    @ResponseBody
+    @TokenCheck
+    public ResultData<Boolean> addRead(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "通知Id", required = true) @RequestParam("noticeId") String noticeId) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+        if (StringUtil.isEmpty(noticeId)) {
+            return ResultData.error("通知ID不能为空");
+        }
+
+        return noticeService.addRead(Long.valueOf(noticeId), Long.valueOf(account));
+    }
 }
