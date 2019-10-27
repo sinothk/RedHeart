@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @ToString
-public class TopicAo extends TopicEntity{
+public class TopicAo {
 
     @ApiModelProperty("id")
     private Long id;
@@ -39,4 +39,18 @@ public class TopicAo extends TopicEntity{
 
     @ApiModelProperty("发布时间")
     private Date updateTime;
+
+    // ======================================
+
+    @ApiModelProperty("发布人姓名")
+    private String userName;
+
+    @ApiModelProperty("发布人头像")
+    private String userAvatar;
+
+    @ApiModelProperty("发布人昵称")
+    private String nickname;
+
+    @ApiModelProperty("发布人性别")
+    private String sex;
 }
