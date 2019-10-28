@@ -23,6 +23,8 @@ public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
             "tcu.u_phone_num as phoneNum, " +
             "tcu.user_status as userStatus, " +
             "tcu.user_borthday as userBorthday, " +
+            "tcu.login_time as loginTime, " +
+
             "tcf.like_time as likeTime " +
             "FROM tb_comm_user tcu, (SELECT f.* FROM tb_comm_friends f WHERE f.`liking_account` = ${account}) tcf \n" +
             "WHERE tcu.`u_account` = tcf.`liked_account` ORDER BY tcf.like_time DESC")
@@ -41,6 +43,8 @@ public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
             "tcu.u_phone_num as phoneNum, " +
             "tcu.user_status as userStatus, " +
             "tcu.user_borthday as userBorthday, " +
+            "tcu.login_time as loginTime, " +
+
             "tcf.like_time as likeTime " +
             "FROM tb_comm_user tcu, (SELECT f.* FROM tb_comm_friends f WHERE f.`liked_account` = ${account}) tcf \n" +
             "WHERE tcu.`u_account` = tcf.`liking_account` ORDER BY tcf.like_time DESC")
@@ -59,6 +63,8 @@ public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
             "tcu.u_phone_num as phoneNum, " +
             "tcu.user_status as userStatus, " +
             "tcu.user_borthday as userBorthday, " +
+            "tcu.login_time as loginTime, " +
+
             "tcf.like_time as likeTime " +
 
             "FROM tb_comm_user tcu, \n" +

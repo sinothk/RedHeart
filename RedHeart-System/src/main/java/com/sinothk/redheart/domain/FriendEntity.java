@@ -45,6 +45,9 @@ public class FriendEntity {
     @ApiModelProperty(value = "用户生日")
     private Date userBorthday;
 
+    @ApiModelProperty(value = "登录时间")
+    private Date loginTime;
+
     @ApiModelProperty(value = "关注或被关注时间")
     private Date likeTime;
 
