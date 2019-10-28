@@ -10,7 +10,7 @@ import java.util.Date;
 @Api(value = "通知返回实体")
 @Data
 @ToString
-public class NoticeVo {
+public class NoticeAo {
 
     @ApiModelProperty("ID")
     private Long id;

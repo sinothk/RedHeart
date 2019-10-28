@@ -7,7 +7,7 @@ import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.NoticeEntity;
 import com.sinothk.redheart.domain.NoticeReaderVo;
-import com.sinothk.redheart.domain.NoticeVo;
+import com.sinothk.redheart.domain.NoticeAo;
 import com.sinothk.redheart.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,7 +54,7 @@ public class NoticeController {
     @ApiOperation(value = "通知：获取所有分页通知", notes = "通知：获取所有分页通知")
     @GetMapping("/getAllNoticeList")
     @TokenCheck
-    public ResultData<PageData<List<NoticeVo>>> getAllNoticeList(
+    public ResultData<PageData<List<NoticeAo>>> getAllNoticeList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页大小") @RequestParam("pageSize") int pageSize) {

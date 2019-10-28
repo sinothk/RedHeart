@@ -7,7 +7,6 @@ import com.sinothk.redheart.domain.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Repository("noticeMapper")
 public interface NoticeMapper extends BaseMapper<NoticeEntity> {
@@ -32,7 +31,7 @@ public interface NoticeMapper extends BaseMapper<NoticeEntity> {
             "\tFROM tb_comm_notice notice, tb_comm_user usr " +
             "\tWHERE notice.`create_account` = usr.`u_account`" +
             "\tORDER BY notice.`create_time` DESC")
-    IPage<NoticeVo> getAllNoticeList(Page<NoticeVo> pageVo, @Param("account") Long account);
+    IPage<NoticeAo> getAllNoticeList(Page<NoticeAo> pageVo, @Param("account") Long account);
 
 
     @Select("SELECT \n" +

@@ -4,8 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.NoticeEntity;
 import com.sinothk.redheart.domain.NoticeReaderVo;
-import com.sinothk.redheart.domain.NoticeVo;
-import com.sinothk.redheart.domain.UserEntity;
+import com.sinothk.redheart.domain.NoticeAo;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface NoticeService {
 
     ResultData<Boolean> addRead(Long noticeId, Long account);
 
-    ResultData<PageData<List<NoticeVo>>> getAllNoticeList(Long account, int pageNum, int pageSize);
+    ResultData<PageData<List<NoticeAo>>> getAllNoticeList(Long account, int pageNum, int pageSize);
 
     ResultData<PageData<List<NoticeReaderVo>>> getNoticeReaderList(Long noticeId, int pageNum, int pageSize);
 }
