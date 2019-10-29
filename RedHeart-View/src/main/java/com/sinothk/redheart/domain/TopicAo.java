@@ -40,6 +40,9 @@ public class TopicAo {
     @ApiModelProperty("发布时间")
     private Date updateTime;
 
+    @ApiModelProperty("话题图片")
+    private String topicImg;
+
     // ======================================
 
     @ApiModelProperty("发布人姓名")

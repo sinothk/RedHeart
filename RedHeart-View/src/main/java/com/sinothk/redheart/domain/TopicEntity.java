@@ -56,4 +56,9 @@ public class TopicEntity {
     @ApiModelProperty("发布时间")
     @TableField("update_time")
     private Date updateTime;
+
+    @ApiModelProperty("话题图片")
+    @TableField("topic_img")
+    private String topicImg;
+
 }

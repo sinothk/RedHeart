@@ -22,6 +22,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.loc_address as locAddress, " +
             "topic.create_time as createTime, " +
             "topic.update_time as updateTime, " +
+            "topic.topic_img as topicImg, " +
 
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
@@ -45,6 +46,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.loc_address as locAddress, " +
             "topic.create_time as createTime, " +
             "topic.update_time as updateTime, " +
+            "topic.topic_img as topicImg, " +
 
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
@@ -71,6 +73,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\ttopic.loc_address AS locAddress, \n" +
             "\ttopic.create_time AS createTime, \n" +
             "\ttopic.update_time AS updateTime, \n" +
+            "\ttopic.topic_img as topicImg, \n" +
 
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
