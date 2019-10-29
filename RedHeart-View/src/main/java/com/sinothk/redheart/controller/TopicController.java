@@ -91,4 +91,21 @@ public class TopicController {
 
         return topicService.getNewTopicPageList(pageNum, pageSize);
     }
+
+    @ApiOperation(value = "话题：查询某种话题分页列表", notes = "话题：查询某种话题分页列表")
+    @GetMapping("/getTopicByThemePageList")
+    @TokenCheck
+    public ResultData<PageData<List<TopicAo>>> getTopicByThemePageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "主题编码") @RequestParam("themeCode") String themeCode,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicService.getTopicByThemePageList(themeCode, pageNum, pageSize);
+    }
 }
