@@ -33,11 +33,9 @@ public class TopicController {
     public ResultData<Boolean> addTopic(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "话题实体信息", required = true) @RequestBody TopicEntity topicEntity) {
-
         if (StringUtil.isEmpty(topicEntity.getTopicContent())) {
             return ResultData.error("话题内容不能为空");
         }
-
         String account = TokenUtil.getTokenValue(token, "account");
         if (StringUtil.isEmpty(account)) {
             return ResultData.error("Token解析失败");
