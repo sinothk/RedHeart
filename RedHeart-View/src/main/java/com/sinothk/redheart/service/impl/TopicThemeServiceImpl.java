@@ -35,12 +35,12 @@ public class TopicThemeServiceImpl implements TopicThemeService {
     }
 
     @Override
-    public ResultData<List<TopicThemeEntity>> getAllTopicThemeList() {
+    public ResultData<List<TopicThemeAo>> getAllTopicThemeList() {
         try {
-            QueryWrapper<TopicThemeEntity> wrapper = new QueryWrapper<>();
-            wrapper.lambda().orderByAsc(TopicThemeEntity::getSortNum);
+//            QueryWrapper<TopicThemeEntity> wrapper = new QueryWrapper<>();
+//            wrapper.lambda().orderByAsc(TopicThemeEntity::getSortNum);
 
-            List<TopicThemeEntity> list = topicThemeMapper.selectList(wrapper);
+            List<TopicThemeAo> list = topicThemeMapper.getAllTopicThemeList();
             return ResultData.success(list);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());

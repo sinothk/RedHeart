@@ -21,7 +21,9 @@ public interface TopicThemeUserMapper extends BaseMapper<TopicThemeUserEntity> {
             " tatt.remark as remark, " +
             " tatt.sort_num as sortNum," +
             " tattu.account as account, " +
-            " tattu.create_time as createTime" +
+            " tattu.create_time as createTime, " +
+
+            "(SELECT COUNT(topic.id) FROM tb_app_topic topic WHERE topic.topic_theme = tatt.theme_code ) AS topicNum" +
 
             " FROM tb_app_topic_theme tatt, tb_app_topic_theme_user tattu " +
             " WHERE tatt.theme_code = tattu.theme_code AND tattu.account = ${account} ORDER BY tattu.create_time DESC")

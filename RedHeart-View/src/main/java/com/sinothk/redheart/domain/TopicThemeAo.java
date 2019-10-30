@@ -30,6 +30,10 @@ public class TopicThemeAo {
     @ApiModelProperty("排序编号")
     private Integer sortNum;
 
+    @ApiModelProperty("主题下的话题总数")
+    private Integer topicNum;
+
+    // ========================================
     @ApiModelProperty("用户账号")
     private Long account;
 

@@ -11,7 +11,7 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@ApiModel("话题实体")
+@ApiModel("话题主题实体")
 @Data
 @ToString
 @TableName(value = "tb_app_topic_theme")

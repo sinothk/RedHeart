@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
+import com.sinothk.redheart.domain.TopicThemeAo;
 import com.sinothk.redheart.domain.TopicThemeEntity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository("topicThemeMapper")
 public interface TopicThemeMapper extends BaseMapper<TopicThemeEntity> {
@@ -34,4 +37,21 @@ public interface TopicThemeMapper extends BaseMapper<TopicThemeEntity> {
             " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account`" +
             " ORDER BY topic.`create_time` DESC")
     IPage<TopicAo> getTopicFromMePageList(IPage page, @Param("account") Long account);
+
+    @Select("SELECT " +
+
+            "\ttopicTheme.id as id," +
+            "\ttopicTheme.theme_code as themeCode," +
+            "\ttopicTheme.theme_txt as themeTxt," +
+            "\ttopicTheme.theme_icon as themeIcon," +
+            "\ttopicTheme.remark as remark," +
+            "\ttopicTheme.sort_num as sortNum," +
+
+            "\t( SELECT COUNT(topic.id) FROM tb_app_topic topic WHERE topic.topic_theme = topicTheme.theme_code ) AS topicNum" +
+
+            "\tFROM tb_app_topic_theme topicTheme " +
+
+            "\tORDER BY sort_num ASC")
+    List<TopicThemeAo> getAllTopicThemeList();
+
 }

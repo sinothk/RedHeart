@@ -11,7 +11,7 @@ public interface TopicThemeService {
 
     ResultData<Boolean> add(TopicThemeEntity topicThemeEntity);
 
-    ResultData<List<TopicThemeEntity>> getAllTopicThemeList();
+    ResultData<List<TopicThemeAo>> getAllTopicThemeList();
 
 
     ResultData<String> likeTheme(TopicThemeUserEntity ttuEntity);

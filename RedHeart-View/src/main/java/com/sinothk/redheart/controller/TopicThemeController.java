@@ -26,10 +26,10 @@ public class TopicThemeController {
     private TopicThemeService topicThemeService;
 
     @ApiOperation(value = "主题：新增主题实体信息", notes = "主题：新增主题实体信息")
-    @PostMapping("/add")
+    @PostMapping("/addTheme")
     @ResponseBody
     @TokenCheck
-    public ResultData<Boolean> add(
+    public ResultData<Boolean> addTheme(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "主题实体信息", required = true) @RequestBody TopicThemeEntity topicThemeEntity) {
 
@@ -52,7 +52,7 @@ public class TopicThemeController {
     @ApiOperation(value = "主题：查询所有主题列表", notes = "主题：查询所有主题列表")
     @GetMapping("/getAllTopicThemeList")
     @TokenCheck
-    public ResultData<List<TopicThemeEntity>> getAllTopicThemeList(
+    public ResultData<List<TopicThemeAo>> getAllTopicThemeList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token) {
         return topicThemeService.getAllTopicThemeList();
     }

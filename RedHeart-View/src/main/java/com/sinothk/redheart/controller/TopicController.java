@@ -7,6 +7,8 @@ import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
+import com.sinothk.redheart.domain.TopicThemeEntity;
+import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.service.TopicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,11 +26,11 @@ public class TopicController {
     @Resource(name = "topicService")
     private TopicService topicService;
 
-    @ApiOperation(value = "话题：新增话题实体信息", notes = "话题：新增话题实体信息")
-    @PostMapping("/add")
+    @ApiOperation(value = "话题：新增话题", notes = "话题：新增话题")
+    @PostMapping("/addTopic")
     @ResponseBody
     @TokenCheck
-    public ResultData<Boolean> add(
+    public ResultData<Boolean> addTopic(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "话题实体信息", required = true) @RequestBody TopicEntity topicEntity) {
 
