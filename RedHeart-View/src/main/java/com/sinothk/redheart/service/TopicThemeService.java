@@ -1,6 +1,7 @@
 package com.sinothk.redheart.service;
 
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.domain.ThemeOtherInfoAo;
 import com.sinothk.redheart.domain.TopicThemeAo;
 import com.sinothk.redheart.domain.TopicThemeEntity;
 import com.sinothk.redheart.domain.TopicThemeUserEntity;
@@ -17,4 +18,6 @@ public interface TopicThemeService {
     ResultData<String> likeTheme(TopicThemeUserEntity ttuEntity);
 
     ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account);
+
+    ResultData<ThemeOtherInfoAo> getUserWhitThemeRelation(Long account, String themeCode);
 }

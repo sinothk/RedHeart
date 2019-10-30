@@ -4,6 +4,7 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.ThemeOtherInfoAo;
 import com.sinothk.redheart.domain.TopicThemeAo;
 import com.sinothk.redheart.domain.TopicThemeEntity;
 import com.sinothk.redheart.domain.TopicThemeUserEntity;
@@ -91,5 +92,24 @@ public class TopicThemeController {
             return ResultData.error("Token解析失败");
         }
         return topicThemeService.getMyTopicThemeList(Long.valueOf(account));
+    }
+
+    @ApiOperation(value = "主题：查询主题下关注人数、话题数及当前人和当前主题的关系", notes = "主题：查询主题下关注人数、话题数及当前人和当前主题的关系")
+    @GetMapping("/getUserWhitThemeRelation")
+    @TokenCheck
+    public ResultData<ThemeOtherInfoAo> getUserWhitThemeRelation(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "被喜欢主题编码", required = true) @RequestParam("themeCode") String themeCode) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        if (StringUtil.isEmpty(themeCode)) {
+            return ResultData.error("主题编码不能为空");
+        }
+
+        return topicThemeService.getUserWhitThemeRelation(Long.valueOf(account), themeCode);
     }
 }

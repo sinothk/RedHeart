@@ -28,4 +28,13 @@ public interface TopicThemeUserMapper extends BaseMapper<TopicThemeUserEntity> {
             " FROM tb_app_topic_theme tatt, tb_app_topic_theme_user tattu " +
             " WHERE tatt.theme_code = tattu.theme_code AND tattu.account = ${account} ORDER BY tattu.create_time DESC")
     List<TopicThemeAo> getMyTopicThemeList(@Param("account") Long account);
+
+    @Select("SELECT COUNT(id) AS members FROM tb_app_topic_theme_user WHERE theme_code = '${themeCode}'")
+    int getThemeMemberNum(@Param("themeCode") String themeCode);
+
+    @Select("SELECT COUNT(id) AS members FROM tb_app_topic WHERE topic_theme = '${themeCode}'")
+    int getThemeTopicNum(@Param("themeCode") String themeCode);
+
+    @Select("SELECT COUNT(id) AS members FROM tb_app_topic_theme_user WHERE theme_code = '${themeCode}' AND account = ${account}")
+    int getThemeUserRelation(@Param("themeCode") String themeCode, @Param("account") Long account);
 }

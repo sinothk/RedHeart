@@ -78,4 +78,31 @@ public class TopicThemeServiceImpl implements TopicThemeService {
             return ResultData.error(e.getCause().getMessage());
         }
     }
+
+    @Override
+    public ResultData<ThemeOtherInfoAo> getUserWhitThemeRelation(Long account, String themeCode) {
+
+        try {
+            int themeMemberNum = topicThemeUserMapper.getThemeMemberNum(themeCode);
+
+            int themeTopicNum = topicThemeUserMapper.getThemeTopicNum(themeCode);
+
+            int themeUserNum = topicThemeUserMapper.getThemeUserRelation(themeCode, account);
+
+            ThemeOtherInfoAo data = new ThemeOtherInfoAo();
+            data.setThemeMemberNum(themeMemberNum);
+            data.setThemeTopicNum(themeTopicNum);
+            data.setThemeUserRela(themeUserNum > 0);
+
+            return ResultData.success(data);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+
+//        SELECT COUNT(id) AS members FROM tb_app_topic_theme_user WHERE theme_code = 'TOPIC_THEME_ANIMAL'
+//
+//        SELECT COUNT(id) AS members FROM tb_app_topic WHERE topic_theme = 'TOPIC_THEME_PLANT'
+//
+//        SELECT COUNT(id) AS members FROM tb_app_topic_theme_user WHERE theme_code = 'TOPIC_THEME_PLANT' AND account = 10002
+    }
 }
