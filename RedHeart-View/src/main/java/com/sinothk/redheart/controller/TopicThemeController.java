@@ -55,7 +55,13 @@ public class TopicThemeController {
     @TokenCheck
     public ResultData<List<TopicThemeAo>> getAllTopicThemeList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token) {
-        return topicThemeService.getAllTopicThemeList();
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicThemeService.getAllTopicThemeList(Long.valueOf(account));
     }
 
     @ApiOperation(value = "主题: 关注或取消关注主题", notes = "主题: 关注或取消关注主题")

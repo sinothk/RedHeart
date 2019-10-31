@@ -39,4 +39,8 @@ public class TopicThemeAo {
 
     @ApiModelProperty("关注时间")
     private Date createTime;
+
+    @ApiModelProperty("当前用户是否关注：0：否；1：关注")
+    private Integer relNum;
+
 }

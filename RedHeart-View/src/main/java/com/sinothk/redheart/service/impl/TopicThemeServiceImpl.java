@@ -35,12 +35,9 @@ public class TopicThemeServiceImpl implements TopicThemeService {
     }
 
     @Override
-    public ResultData<List<TopicThemeAo>> getAllTopicThemeList() {
+    public ResultData<List<TopicThemeAo>> getAllTopicThemeList(Long account) {
         try {
-//            QueryWrapper<TopicThemeEntity> wrapper = new QueryWrapper<>();
-//            wrapper.lambda().orderByAsc(TopicThemeEntity::getSortNum);
-
-            List<TopicThemeAo> list = topicThemeMapper.getAllTopicThemeList();
+            List<TopicThemeAo> list = topicThemeMapper.getAllTopicThemeList(account);
             return ResultData.success(list);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
@@ -98,11 +95,5 @@ public class TopicThemeServiceImpl implements TopicThemeService {
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
-
-//        SELECT COUNT(id) AS members FROM tb_app_topic_theme_user WHERE theme_code = 'TOPIC_THEME_ANIMAL'
-//
-//        SELECT COUNT(id) AS members FROM tb_app_topic WHERE topic_theme = 'TOPIC_THEME_PLANT'
-//
-//        SELECT COUNT(id) AS members FROM tb_app_topic_theme_user WHERE theme_code = 'TOPIC_THEME_PLANT' AND account = 10002
     }
 }
