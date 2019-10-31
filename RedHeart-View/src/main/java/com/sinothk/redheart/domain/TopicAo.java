@@ -43,6 +43,9 @@ public class TopicAo {
     @ApiModelProperty("话题图片")
     private String topicImg;
 
+    @ApiModelProperty("话题封面图片")
+    private String topicCover;
+
     // ======================================
 
     @ApiModelProperty("发布人姓名")

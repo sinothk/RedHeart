@@ -24,6 +24,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.create_time as createTime, " +
             "topic.update_time as updateTime, " +
             "topic.topic_img as topicImg, " +
+            "topic.topic_cover as topicCover, " +
 
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
@@ -33,7 +34,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
             " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
-            " ORDER BY topic.`create_time` DESC")
+            " ORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getTopicFromMePageList(IPage page, @Param("account") Long account);
 
     @Select("SELECT " +
@@ -48,6 +49,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.create_time as createTime, " +
             "topic.update_time as updateTime, " +
             "topic.topic_img as topicImg, " +
+            "topic.topic_cover as topicCover, " +
 
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
@@ -59,10 +61,8 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " WHERE " +
             " topic.`account` IN (SELECT f.liked_account FROM tb_comm_friends f WHERE f.`liking_account` = ${account}) " +
             " AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
-            " ORDER BY topic.`create_time` DESC")
+            " ORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getTopicFromILikePageList(IPage page, @Param("account") Long account);
-
-
 
     @Select("SELECT \n" +
             "\ttopic.id AS id, \n" +
@@ -75,6 +75,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\ttopic.create_time AS createTime, \n" +
             "\ttopic.update_time AS updateTime, \n" +
             "\ttopic.topic_img as topicImg, \n" +
+            "\ttopic.topic_cover as topicCover, " +
 
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
@@ -85,7 +86,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
 
             "\tWHERE  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
 
-            "\tORDER BY topic.`create_time` DESC")
+            "\tORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getNewTopicPageList(IPage page);
 
     @Select("SELECT topic.id AS id, \n" +
@@ -98,6 +99,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\ttopic.create_time AS createTime, \n" +
             "\ttopic.update_time AS updateTime, \n" +
             "\ttopic.topic_img AS topicImg, \n" +
+            "\ttopic.topic_cover as topicCover, " +
 
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
@@ -109,6 +111,6 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
 
             "WHERE topic.`topic_theme` = '${themeCode}' AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
 
-            "ORDER BY topic.`create_time` DESC")
+            "ORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getTopicByThemePageList(Page<TopicAo> pageVo, @Param("themeCode") String themeCode);
 }

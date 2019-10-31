@@ -61,4 +61,7 @@ public class TopicEntity {
     @TableField("topic_img")
     private String topicImg;
 
+    @ApiModelProperty("话题封面图片")
+    @TableField("topic_cover")
+    private String topicCover;
 }
