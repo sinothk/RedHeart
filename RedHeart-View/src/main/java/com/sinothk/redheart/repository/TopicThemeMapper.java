@@ -67,7 +67,7 @@ public interface TopicThemeMapper extends BaseMapper<TopicThemeEntity> {
 
             "\tFROM tb_app_topic_theme topicTheme " +
 
-            "\tORDER BY relNum DESC, sortNum ASC")
+            "\tORDER BY  sortNum ASC") //relNum DESC,
     List<TopicThemeAo> getAllTopicThemeList(@Param("account") Long account);
 
 }
