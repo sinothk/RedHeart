@@ -35,10 +35,10 @@ public class TopicCommentServiceImpl implements TopicCommentService {
             UpdateWrapper<TopicEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().eq(TopicEntity::getTopicId, topicCommentEntity.getTopicId());
 
+            // 更新话题的时间，为了排序
             TopicEntity topicEntity = new TopicEntity();
             topicEntity.setTopicId(topicCommentEntity.getTopicId());
             topicEntity.setUpdateTime(new Date());
-
             topicMapper.update(topicEntity, updateWrapper);
 
             return ResultData.success(true);
