@@ -10,7 +10,7 @@ import java.util.Date;
 @ApiModel(description = "用户AO信息")
 @Data
 @ToString
-public class UserLoginAOEntity {
+public class UserLoginAO {
 
     @ApiModelProperty(value = "ID")
     private Long id;
@@ -53,4 +53,7 @@ public class UserLoginAOEntity {
 
     @ApiModelProperty(value = "登录时间")
     private Date loginTime;
+
+    @ApiModelProperty(value = "注册时间")
+    private Date createTime;
 }

@@ -4,7 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.DataCenterEntity;
-import com.sinothk.redheart.domain.UserLoginAOEntity;
+import com.sinothk.redheart.domain.UserLoginAO;
 import com.sinothk.redheart.service.DataCenterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ public class DataCenterController {
     @ApiOperation(value = "登录统计：今日登录用户列表", notes = "登录统计：今日登录用户列表")
     @GetMapping("/getTodayLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserLoginAOEntity>>> getTodayLoginUserPageList(
+    public ResultData<PageData<List<UserLoginAO>>> getTodayLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -35,7 +35,7 @@ public class DataCenterController {
     @ApiOperation(value = "登录统计：最近一周登录用户列表", notes = "登录统计：最近一周登录用户列表")
     @GetMapping("/getWeekLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserLoginAOEntity>>> getWeekLoginUserPageList(
+    public ResultData<PageData<List<UserLoginAO>>> getWeekLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -45,7 +45,7 @@ public class DataCenterController {
     @ApiOperation(value = "登录统计：本月登录用户列表", notes = "登录统计：本月登录用户列表")
     @GetMapping("/getThisMonthLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserLoginAOEntity>>> getThisMonthLoginUserPageList(
+    public ResultData<PageData<List<UserLoginAO>>> getThisMonthLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {

@@ -86,6 +86,10 @@ public class UserEntity {
     @TableField("login_lon")
     private Double loginLon;
 
+    @ApiModelProperty(value = "注册时间")
+    @TableField("create_time")
+    private Date createTime;
+
     @ApiModelProperty(value = "登录时间")
     @TableField("login_time")
     private Date loginTime;

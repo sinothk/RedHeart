@@ -6,7 +6,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.DataCenterEntity;
 import com.sinothk.redheart.domain.UserEntity;
-import com.sinothk.redheart.domain.UserLoginAOEntity;
+import com.sinothk.redheart.domain.UserLoginAO;
 import com.sinothk.redheart.repository.DataCenterMapper;
 import com.sinothk.redheart.service.DataCenterService;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,12 @@ public class DataCenterServiceImpl implements DataCenterService {
     private DataCenterMapper dataCenterMapper;
 
     @Override
-    public ResultData<PageData<List<UserLoginAOEntity>>> getTodayLoginUserPageList(int currPage, int pageSize) {
+    public ResultData<PageData<List<UserLoginAO>>> getTodayLoginUserPageList(int currPage, int pageSize) {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
-            IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getTodayLoginUserPageList(pageVo);
+            IPage<UserLoginAO> pageInfo = dataCenterMapper.getTodayLoginUserPageList(pageVo);
 
-            PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
+            PageData<List<UserLoginAO>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 
@@ -42,12 +42,12 @@ public class DataCenterServiceImpl implements DataCenterService {
     }
 
     @Override
-    public ResultData<PageData<List<UserLoginAOEntity>>> getWeekLoginUserPageList(int currPage, int pageSize) {
+    public ResultData<PageData<List<UserLoginAO>>> getWeekLoginUserPageList(int currPage, int pageSize) {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
-            IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getWeekLoginUserPageList(pageVo);
+            IPage<UserLoginAO> pageInfo = dataCenterMapper.getWeekLoginUserPageList(pageVo);
 
-            PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
+            PageData<List<UserLoginAO>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 
@@ -63,12 +63,12 @@ public class DataCenterServiceImpl implements DataCenterService {
     }
 
     @Override
-    public ResultData<PageData<List<UserLoginAOEntity>>> getThisMonthLoginUserPageList(int currPage, int pageSize) {
+    public ResultData<PageData<List<UserLoginAO>>> getThisMonthLoginUserPageList(int currPage, int pageSize) {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
-            IPage<UserLoginAOEntity> pageInfo = dataCenterMapper.getThisMonthLoginUserPageList(pageVo);
+            IPage<UserLoginAO> pageInfo = dataCenterMapper.getThisMonthLoginUserPageList(pageVo);
 
-            PageData<List<UserLoginAOEntity>> pageEntity = new PageData<>();
+            PageData<List<UserLoginAO>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 

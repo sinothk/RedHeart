@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserService {
             } else {
                 userVo.setNickname(String.valueOf(account));
             }
+
+            Date currTime = new Date();
+            userVo.setCreateTime(currTime);
+            userVo.setLoginTime(currTime);
+
             userMapper.insert(userVo);
 
             // 返回新数据
