@@ -9,11 +9,14 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.FriendAo;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;
+import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.repository.FriendMapper;
+import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.FriendService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("friendService")
@@ -21,6 +24,9 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
 
     @Resource(name = "friendMapper")
     private FriendMapper friendMapper;
+
+    @Resource(name = "userMapper")
+    private UserMapper userMapper;
 
     @Override
     public ResultData<PageData<List<FriendEntity>>> getLikeUserList(Long account, int currPage, int pageSize) {
@@ -121,12 +127,25 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     public ResultData<FriendAo> getOtherUserInfo(String loginAccount, String targetAccount) {
         try {
             // 获取用户信息
-//            FriendEntity frInfoEntity = friendMapper.getUserInfo(loginAccount, targetAccount);
+            QueryWrapper<UserEntity> userWrapper = new QueryWrapper<>();
+            userWrapper.lambda().eq(UserEntity::getAccount, targetAccount);
+            UserEntity userEntity = userMapper.selectOne(userWrapper);
+
+            // 获得喜欢的人数
+            QueryWrapper<FriendRelationshipEntity> likeWrapper = new QueryWrapper<>();
+            likeWrapper.lambda().eq(FriendRelationshipEntity::getLikingAccount, targetAccount);
+            List<FriendRelationshipEntity> likeList = friendMapper.selectList(likeWrapper);
+
+            // 获得喜欢我的人数
+            QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
+            fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, targetAccount);
+            List<FriendRelationshipEntity> fansList = friendMapper.selectList(fansWrapper);
 
             FriendAo friendAo = new FriendAo();
-            friendAo.setSex(0);
-            friendAo.setLikeUserNum(12);
-            friendAo.setFansUserNum(25);
+            friendAo.setSex(userEntity.getSex());
+
+            friendAo.setLikeUserNum(likeList.size());
+            friendAo.setFansUserNum(fansList.size());
 
             return ResultData.success(friendAo);
         } catch (Exception e) {
