@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.domain.FriendAo;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;
 import com.sinothk.redheart.repository.FriendMapper;
@@ -111,6 +112,23 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
             // 获取用户信息
             FriendEntity frInfoEntity = friendMapper.getUserInfo(loginAccount, targetAccount);
             return ResultData.success(frInfoEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<FriendAo> getOtherUserInfo(String loginAccount, String targetAccount) {
+        try {
+            // 获取用户信息
+//            FriendEntity frInfoEntity = friendMapper.getUserInfo(loginAccount, targetAccount);
+
+            FriendAo friendAo = new FriendAo();
+            friendAo.setSex(0);
+            friendAo.setLikeUserNum(12);
+            friendAo.setFansUserNum(25);
+
+            return ResultData.success(friendAo);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }

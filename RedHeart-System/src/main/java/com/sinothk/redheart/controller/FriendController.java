@@ -5,6 +5,7 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.FriendAo;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;
 import com.sinothk.redheart.service.FriendService;
@@ -118,5 +119,24 @@ public class FriendController {
         }
 
         return friendService.getUserInfo(loginAccount, targetAccount);
+    }
+
+    @ApiOperation(value = "获取其他用户关系信息", notes = "获取其他用户关系信息")
+    @GetMapping("/getOtherUserInfo")
+    @TokenCheck
+    public ResultData<FriendAo> getOtherUserInfo(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "用户账号", required = true) @RequestParam("targetAccount") String targetAccount) {
+
+        if (StringUtil.isEmpty(targetAccount)) {
+            return ResultData.error("目标用户账号不能为空");
+        }
+
+        String loginAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(loginAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return friendService.getOtherUserInfo(loginAccount, targetAccount);
     }
 }
