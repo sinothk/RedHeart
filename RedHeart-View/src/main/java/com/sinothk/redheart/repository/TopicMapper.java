@@ -35,7 +35,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
             " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
             " ORDER BY topic.`update_time` DESC")
-    IPage<TopicAo> getTopicFromMePageList(IPage page, @Param("account") Long account);
+    IPage<TopicAo> getTopicFromUserPageList(IPage page, @Param("account") Long account);
 
     @Select("SELECT " +
 

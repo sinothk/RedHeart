@@ -38,21 +38,6 @@ public interface TopicThemeMapper extends BaseMapper<TopicThemeEntity> {
             " ORDER BY topic.`create_time` DESC")
     IPage<TopicAo> getTopicFromMePageList(IPage page, @Param("account") Long account);
 
-//    @Select("SELECT " +
-//
-//            "\ttopicTheme.id as id," +
-//            "\ttopicTheme.theme_code as themeCode," +
-//            "\ttopicTheme.theme_txt as themeTxt," +
-//            "\ttopicTheme.theme_icon as themeIcon," +
-//            "\ttopicTheme.remark as remark," +
-//            "\ttopicTheme.sort_num as sortNum," +
-//
-//            "\t( SELECT COUNT(topic.id) FROM tb_app_topic topic WHERE topic.topic_theme = topicTheme.theme_code ) AS topicNum" +
-//
-//            "\tFROM tb_app_topic_theme topicTheme " +
-//
-//            "\tORDER BY sort_num ASC")
-
     @Select("SELECT " +
             "\ttopicTheme.id AS id," +
             "\ttopicTheme.theme_code AS themeCode," +

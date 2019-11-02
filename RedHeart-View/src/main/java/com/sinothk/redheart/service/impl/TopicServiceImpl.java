@@ -42,10 +42,10 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicAo>>> getTopicFromMePageList(Long account, int pageNum, int pageSize) {
+    public ResultData<PageData<List<TopicAo>>> getTopicFromUserPageList(Long account, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
-            IPage<TopicAo> pageInfo = topicMapper.getTopicFromMePageList(pageVo, account);
+            IPage<TopicAo> pageInfo = topicMapper.getTopicFromUserPageList(pageVo, account);
 
             PageData<List<TopicAo>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);

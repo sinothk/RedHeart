@@ -11,7 +11,7 @@ public interface TopicService {
 
     ResultData<Boolean> addTopic(TopicEntity topicEntity);
 
-    ResultData<PageData<List<TopicAo>>> getTopicFromMePageList(Long account, int pageNum, int pageSize);
+    ResultData<PageData<List<TopicAo>>> getTopicFromUserPageList(Long account, int pageNum, int pageSize);
 
     ResultData<PageData<List<TopicAo>>> getTopicFromILikePageList(Long valueOf, int pageNum, int pageSize);
 
