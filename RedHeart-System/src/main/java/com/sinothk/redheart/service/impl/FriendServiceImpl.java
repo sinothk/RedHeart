@@ -143,7 +143,6 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
 
             FriendAo friendAo = new FriendAo();
             friendAo.setSex(userEntity.getSex());
-
             friendAo.setLikeUserNum(likeList.size());
             friendAo.setFansUserNum(fansList.size());
 
