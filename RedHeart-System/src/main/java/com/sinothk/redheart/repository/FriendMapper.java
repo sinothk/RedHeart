@@ -94,4 +94,7 @@ public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
             "(SELECT COUNT(f.liking_account) FROM tb_comm_friends f WHERE (f.`liking_account` = ${targetAccount} AND f.`liked_account` = ${loginAccount})) likedNum " +
             "FROM tb_comm_user tcu WHERE tcu.`u_account` = ${targetAccount}")
     FriendEntity getUserInfo(@Param("loginAccount") String loginAccount, @Param("targetAccount") String targetAccount);
+
+    @Select("SELECT COUNT(id) FROM `tb_comm_friends` WHERE liking_account = ${account} AND liked_account = ${targetAccount} ")
+    Integer findUserLike(@Param("account") String account, @Param("targetAccount") String targetAccount);
 }

@@ -29,6 +29,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
             " usr.`u_nickname` as nickname," +
+            "\tusr.`user_borthday` AS userBorthday," +
             " usr.`u_sex` as sex," +
             "theme.theme_txt AS topicTheme" +
 
@@ -54,6 +55,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
             " usr.`u_nickname` as nickname," +
+            "\tusr.`user_borthday` AS userBorthday," +
             " usr.`u_sex` as sex," +
             "theme.theme_txt AS topicTheme" +
 
@@ -80,6 +82,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
             "\tusr.`u_nickname` AS nickname, \n" +
+            "\tusr.`user_borthday` AS userBorthday," +
             "\tusr.`u_sex` AS sex,\n" +
             "\ttheme.theme_txt AS topicTheme \n" +
             "\tFROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
@@ -104,6 +107,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
             "\tusr.`u_nickname` AS nickname, \n" +
+            "\tusr.`user_borthday` AS userBorthday," +
             "\tusr.`u_sex` AS sex,\n" +
 
             "\ttheme.theme_txt AS topicTheme \n" +

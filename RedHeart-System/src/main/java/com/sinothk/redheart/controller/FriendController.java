@@ -77,7 +77,7 @@ public class FriendController {
     @ApiOperation(value = "新增关系信息", notes = "新增关系信息")
     @GetMapping("/add")
     @TokenCheck
-    public ResultData<String> add(
+    public ResultData<FriendAo> add(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "被喜欢用户账号", required = true) @RequestParam("likedAccount") String likedAccount) {
 
@@ -121,10 +121,10 @@ public class FriendController {
         return friendService.getUserInfo(loginAccount, targetAccount);
     }
 
-    @ApiOperation(value = "获取其他用户关系信息", notes = "获取其他用户关系信息")
-    @GetMapping("/getOtherUserInfo")
+    @ApiOperation(value = "关系: 获取用户关系信息", notes = "获取用户关系信息")
+    @GetMapping("/getRelationUser")
     @TokenCheck
-    public ResultData<FriendAo> getOtherUserInfo(
+    public ResultData<FriendAo> getRelationUser(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "用户账号", required = true) @RequestParam("targetAccount") String targetAccount) {
 
@@ -137,6 +137,6 @@ public class FriendController {
             return ResultData.error("Token解析失败");
         }
 
-        return friendService.getOtherUserInfo(loginAccount, targetAccount);
+        return friendService.getRelationUser(loginAccount, targetAccount);
     }
 }

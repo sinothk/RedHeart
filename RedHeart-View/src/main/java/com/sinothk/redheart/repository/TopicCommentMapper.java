@@ -25,6 +25,7 @@ public interface TopicCommentMapper extends BaseMapper<TopicCommentEntity> {
             "\tusr.`user_name` AS userName," +
             "\tusr.`u_avatar` AS userAvatar," +
             "\tusr.`u_nickname` AS nickname," +
+            "\tusr.`user_borthday` AS userBorthday," +
             "\tusr.`u_sex` AS sex" +
 
             "\tFROM tb_app_topic_comment comm, tb_comm_user usr " +

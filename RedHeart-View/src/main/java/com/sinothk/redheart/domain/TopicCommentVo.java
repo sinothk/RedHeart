@@ -60,6 +60,11 @@ public class TopicCommentVo {
     @ApiModelProperty("评论人昵称")
     private String nickname;
 
-    @ApiModelProperty("评论人昵称")
+    @ApiModelProperty("评论人性别")
     private Integer sex;
+
+    @ApiModelProperty("发布人生日")
+    private Date userBorthday;
+
+
 }

@@ -19,9 +19,9 @@ public interface FriendService extends IService<FriendRelationshipEntity> {
 
     ResultData<PageData<List<FriendEntity>>> getFriendsList(Long account, int currPage, int pageSize);
 
-    ResultData<String> addFriend(FriendRelationshipEntity frEntity);
+    ResultData<FriendAo> addFriend(FriendRelationshipEntity frEntity);
 
     ResultData<FriendEntity> getUserInfo(String loginAccount, String targetAccount);
 
-    ResultData<FriendAo> getOtherUserInfo(String loginAccount, String targetAccount);
+    ResultData<FriendAo> getRelationUser(String loginAccount, String targetAccount);
 }

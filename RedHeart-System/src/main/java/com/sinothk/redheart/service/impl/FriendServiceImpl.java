@@ -16,7 +16,6 @@ import com.sinothk.redheart.service.FriendService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("friendService")
@@ -92,7 +91,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     }
 
     @Override
-    public ResultData<String> addFriend(FriendRelationshipEntity frEntity) {
+    public ResultData<FriendAo> addFriend(FriendRelationshipEntity frEntity) {
         try {
             // 判断是否存在
             QueryWrapper<FriendRelationshipEntity> wrapper = new QueryWrapper<>();
@@ -100,12 +99,13 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
                     .eq(FriendRelationshipEntity::getLikedAccount, frEntity.getLikedAccount());
 
             FriendRelationshipEntity frDbEntity = friendMapper.selectOne(wrapper);
+
             if (frDbEntity == null) {
                 friendMapper.insert(frEntity);
-                return ResultData.success("关注成功");
+                return ResultData.success(new FriendAo(2));
             } else {
                 friendMapper.deleteById(frDbEntity.getId());
-                return ResultData.success("取消关注");
+                return ResultData.success(new FriendAo(0));
             }
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
@@ -124,27 +124,39 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     }
 
     @Override
-    public ResultData<FriendAo> getOtherUserInfo(String loginAccount, String targetAccount) {
+    public ResultData<FriendAo> getRelationUser(String loginAccount, String targetAccount) {
         try {
+            FriendAo friendAo = new FriendAo();
             // 获取用户信息
             QueryWrapper<UserEntity> userWrapper = new QueryWrapper<>();
             userWrapper.lambda().eq(UserEntity::getAccount, targetAccount);
             UserEntity userEntity = userMapper.selectOne(userWrapper);
+            friendAo.setUser(userEntity);
 
-            // 获得喜欢的人数
+            // 获得目标用户喜欢的人数
             QueryWrapper<FriendRelationshipEntity> likeWrapper = new QueryWrapper<>();
             likeWrapper.lambda().eq(FriendRelationshipEntity::getLikingAccount, targetAccount);
             List<FriendRelationshipEntity> likeList = friendMapper.selectList(likeWrapper);
+            friendAo.setLikeUserNum(likeList.size());
 
-            // 获得喜欢我的人数
+            // 获得喜欢目标用户的人数
             QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
             fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, targetAccount);
             List<FriendRelationshipEntity> fansList = friendMapper.selectList(fansWrapper);
-
-            FriendAo friendAo = new FriendAo();
-            friendAo.setSex(userEntity.getSex());
-            friendAo.setLikeUserNum(likeList.size());
             friendAo.setFansUserNum(fansList.size());
+
+            Integer ILikeHer = friendMapper.findUserLike(loginAccount, targetAccount);
+            Integer HerLikeNum = friendMapper.findUserLike(targetAccount, loginAccount);
+
+            if (ILikeHer > 0 && HerLikeNum > 0) {
+                friendAo.setRelation(3);
+            } else if (ILikeHer > 0 && HerLikeNum == 0) {
+                friendAo.setRelation(2);
+            } else if (ILikeHer == 0 && HerLikeNum > 0) {
+                friendAo.setRelation(1);
+            } else {
+                friendAo.setRelation(0);
+            }
 
             return ResultData.success(friendAo);
         } catch (Exception e) {

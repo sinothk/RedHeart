@@ -59,4 +59,7 @@ public class TopicAo {
 
     @ApiModelProperty("发布人性别")
     private String sex;
+
+    @ApiModelProperty("发布人生日")
+    private Date userBorthday;
 }
