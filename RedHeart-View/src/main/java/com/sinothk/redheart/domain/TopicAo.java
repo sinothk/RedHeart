@@ -46,6 +46,9 @@ public class TopicAo {
     @ApiModelProperty("话题封面图片")
     private String topicCover;
 
+    @ApiModelProperty("点赞数")
+    private Integer praiseNum;
+
     // ======================================
 
     @ApiModelProperty("发布人姓名")

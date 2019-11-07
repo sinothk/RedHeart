@@ -26,6 +26,8 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.topic_img as topicImg, " +
             "topic.topic_cover as topicCover, " +
 
+            "(SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = topic.topic_id) as praiseNum, " +
+
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
             " usr.`u_nickname` as nickname," +
@@ -52,6 +54,8 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.topic_img as topicImg, " +
             "topic.topic_cover as topicCover, " +
 
+            "(SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = topic.topic_id) as praiseNum, " +
+
             " usr.`user_name` as userName," +
             " usr.`u_avatar` as userAvatar," +
             " usr.`u_nickname` as nickname," +
@@ -77,7 +81,9 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\ttopic.create_time AS createTime, \n" +
             "\ttopic.update_time AS updateTime, \n" +
             "\ttopic.topic_img as topicImg, \n" +
-            "\ttopic.topic_cover as topicCover, " +
+            "\ttopic.topic_cover as topicCover, \n" +
+
+            "\t(SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = topic.topic_id) as praiseNum,\n" +
 
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
@@ -103,6 +109,8 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\ttopic.update_time AS updateTime, \n" +
             "\ttopic.topic_img AS topicImg, \n" +
             "\ttopic.topic_cover as topicCover, " +
+
+            "\t(SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = topic.topic_id) as praiseNum,\n" +
 
             "\tusr.`user_name` AS userName, \n" +
             "\tusr.`u_avatar` AS userAvatar, \n" +
