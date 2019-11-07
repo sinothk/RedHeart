@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository("topicPraiseMapper")
 public interface TopicPraiseMapper extends BaseMapper<TopicPraiseEntity> {
 
+
 //    @Select("SELECT \n" +
 //            "\tcomm.`id` AS id, " +
 //            "\tcomm.`send_account` AS sendAccount, " +
@@ -31,4 +32,7 @@ public interface TopicPraiseMapper extends BaseMapper<TopicPraiseEntity> {
 //            "\tWHERE comm.`topic_id` = '${topicId}' AND comm.`send_account` = usr.`u_account`" +
 //            "\tORDER BY comm.`create_time` DESC")
 //    IPage<TopicCommentVo> getTopicCommentPageList(Page<TopicCommentVo> pageVo, @Param("topicId") String topicId);
+
+    @Select("SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = '${topicId}'")
+    int selectTopicPraiseNum( @Param("topicId") String topicId);
 }
