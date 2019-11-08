@@ -107,4 +107,25 @@ public class TopicController {
 
         return topicService.getTopicByThemePageList(themeCode, pageNum, pageSize);
     }
+
+    @ApiOperation(value = "话题：查询当前用户喜欢的话题分页列表", notes = "查询当前用户喜欢的话题分页列表")
+    @GetMapping("/getTopicWhereUserPraisePageList")
+    @TokenCheck
+    public ResultData<PageData<List<TopicAo>>> getTopicWhereUserPraisePageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "喜欢人账号") @RequestParam("targetAccount") String targetAccount,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        if (StringUtil.isEmpty(targetAccount)) {
+            targetAccount = account;
+        }
+
+        return topicService.getTopicWhereUserPraisePageList(targetAccount, pageNum, pageSize);
+    }
 }

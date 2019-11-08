@@ -65,7 +65,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
             " WHERE " +
-            " topic.`account` IN (SELECT f.liked_account FROM tb_comm_friends f WHERE f.`liking_account` = ${account}) " +
+            " topic.`account` IN (SELECT f.liked_account FROM tb_comm_friends f WHERE f.`liking_account` = ${account} OR f.`liked_account` = ${account}) " +
             " AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
             " ORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getTopicFromILikePageList(IPage page, @Param("account") Long account);
@@ -125,4 +125,33 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
 
             "ORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getTopicByThemePageList(Page<TopicAo> pageVo, @Param("themeCode") String themeCode);
+
+
+    @Select("SELECT " +
+
+            "topic.id as id, " +
+            "topic.topic_id as topicId, " +
+            "topic.account as account, " +
+            "topic.topic_content as topicContent, " +
+            "topic.loc_lat as locLat, " +
+            "topic.loc_lng as locLng, " +
+            "topic.loc_address as locAddress, " +
+            "topic.create_time as createTime, " +
+            "topic.update_time as updateTime, " +
+            "topic.topic_img as topicImg, " +
+            "topic.topic_cover as topicCover, " +
+
+            "(SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = topic.topic_id) as praiseNum, " +
+
+            " usr.`user_name` as userName," +
+            " usr.`u_avatar` as userAvatar," +
+            " usr.`u_nickname` as nickname," +
+            "\tusr.`user_borthday` AS userBorthday," +
+            " usr.`u_sex` as sex," +
+            "theme.theme_txt AS topicTheme" +
+
+            " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
+            " WHERE topic.`topic_id` IN (SELECT topic_id FROM tb_app_topic_praise WHERE account = '${targetAccount}') AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
+            " ORDER BY topic.`create_time` DESC")
+    IPage<TopicAo> getTopicWhereUserPraisePageList(Page<TopicAo> pageVo, @Param("targetAccount") String targetAccount);
 }
