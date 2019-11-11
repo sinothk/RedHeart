@@ -58,7 +58,7 @@ public class AdvertiseController {
     @TokenCheck
     public ResultData<PageData<List<AdvertiseEntity>>> getAdList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
-            @ApiParam(value = "位置编号", required = true) @RequestParam("seat") int seat,
+            @ApiParam(value = "位置编号", required = true) @RequestParam("where") int where,
             @ApiParam(value = "查询页号", required = true) @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页大小", required = true) @RequestParam("pageSize") int pageSize) {
 
@@ -67,6 +67,6 @@ public class AdvertiseController {
             return ResultData.error("Token解析失败");
         }
 
-        return advertiseService.getAdList(seat, pageNum, pageSize);
+        return advertiseService.getAdList(where, pageNum, pageSize);
     }
 }

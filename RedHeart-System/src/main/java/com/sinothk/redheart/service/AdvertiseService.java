@@ -10,5 +10,5 @@ public interface AdvertiseService {
 
     ResultData<Boolean> add(AdvertiseEntity adEntity);
 
-    ResultData<PageData<List<AdvertiseEntity>>> getAdList(int seat, int pageNum, int pageSize);
+    ResultData<PageData<List<AdvertiseEntity>>> getAdList(int where, int pageNum, int pageSize);
 }

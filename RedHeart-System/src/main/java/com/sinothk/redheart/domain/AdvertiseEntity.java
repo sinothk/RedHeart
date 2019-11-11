@@ -55,8 +55,8 @@ public class AdvertiseEntity {
     private String adUrl;
 
     @ApiModelProperty("显示位置")
-    @TableField(value = "ad_seat")
-    private Integer seat;
+    @TableField(value = "ad_where")
+    private Integer where;
 
     @ApiModelProperty("状态")
     @TableField(value = "ad_status")
