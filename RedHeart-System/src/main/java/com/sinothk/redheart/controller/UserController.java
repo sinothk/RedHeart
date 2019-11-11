@@ -155,4 +155,20 @@ public class UserController {
 
         return userService.getLastLoginUserPageList(pageNum, pageSize);
     }
+
+    @ApiOperation(value = "查询：获取可能喜欢的用户", notes = "查询：获取可能喜欢的用户")
+    @GetMapping("/getMaybeLikePageList")
+    @TokenCheck
+    public ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String likingAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(likingAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return userService.getMaybeLikePageList(pageNum, pageSize);
+    }
 }

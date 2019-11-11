@@ -94,6 +94,10 @@ public class UserEntity {
     @TableField("login_time")
     private Date loginTime;
 
+    @ApiModelProperty(value = "用户类型：-1：系统；0、普通用户，1. 普通会员")
+    @TableField("user_type")
+    private Integer userType;
+
     // ==================================================
     @ApiModelProperty(value = "角色")
     @TableField(exist = false)

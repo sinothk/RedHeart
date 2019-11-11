@@ -202,7 +202,31 @@ public class UserServiceImpl implements UserService {
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
             wrapper.lambda().orderByDesc(UserEntity::getLoginTime);
 
-            IPage<UserEntity> pageInfo = userMapper.selectPage( new Page<>(pageNum, pageSize), wrapper);
+            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+
+            //
+            PageData<List<UserEntity>> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(int pageNum, int pageSize) {
+        try {
+            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+            wrapper.lambda().eq(UserEntity::getUserType, "-1").orderByDesc(UserEntity::getLoginTime);
+
+            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 
             //
             PageData<List<UserEntity>> pageEntity = new PageData<>();

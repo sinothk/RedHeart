@@ -18,4 +18,6 @@ public interface UserService {
     ResultData<Boolean> changePwd(String account, String oldPwd, String newPwd);
 
     ResultData<PageData<List<UserEntity>>> getLastLoginUserPageList(int pageNum, int pageSize);
+
+    ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(int pageNum, int pageSize);
 }
