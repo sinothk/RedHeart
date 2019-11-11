@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value = "新增：用户", notes = "新增：用户")
-    @GetMapping("/add")
+    @PostMapping("/add")
     @ResponseBody
     public ResultData<UserEntity> add(@ApiParam(value = "用户邮箱", required = true) @RequestParam("email") String email,
                                       @ApiParam(value = "用户密码", required = true) @RequestParam("password") String password) {
