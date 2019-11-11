@@ -128,4 +128,19 @@ public class TopicController {
 
         return topicService.getTopicWhereUserPraisePageList(targetAccount, pageNum, pageSize);
     }
+
+    @ApiOperation(value = "查询：模糊搜索话题(标题、内容)", notes = "模糊搜索话题(标题、内容)")
+    @GetMapping("/findTopicByThemeOrContent")
+    @TokenCheck
+    public ResultData<List<TopicAo>> findTopicByThemeOrContent(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "关键字") @RequestParam("keyword") String keyword) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return topicService.findTopicContent(account, keyword);
+    }
 }

@@ -23,6 +23,9 @@ public class TopicAo {
     private String topicTheme;
 
     @ApiModelProperty("话题内容")
+    private String topicTitle;
+
+    @ApiModelProperty("话题内容")
     private String topicContent;
 
     @ApiModelProperty("发布纬度")

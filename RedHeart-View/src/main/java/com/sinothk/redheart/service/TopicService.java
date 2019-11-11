@@ -20,4 +20,6 @@ public interface TopicService {
     ResultData<PageData<List<TopicAo>>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize);
 
     ResultData<PageData<List<TopicAo>>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize);
+
+    ResultData<List<TopicAo>> findTopicContent(String account, String keyword);
 }

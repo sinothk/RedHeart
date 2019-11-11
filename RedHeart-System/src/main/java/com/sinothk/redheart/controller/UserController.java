@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Api(tags = "用户系统")
@@ -156,7 +155,7 @@ public class UserController {
         return userService.getLastLoginUserPageList(pageNum, pageSize);
     }
 
-    @ApiOperation(value = "查询：获取可能喜欢的用户", notes = "查询：获取可能喜欢的用户")
+    @ApiOperation(value = "查询：可能喜欢的用户", notes = "可能喜欢的用户")
     @GetMapping("/getMaybeLikePageList")
     @TokenCheck
     public ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(
@@ -170,5 +169,20 @@ public class UserController {
         }
 
         return userService.getMaybeLikePageList(pageNum, pageSize);
+    }
+
+    @ApiOperation(value = "查询：模糊搜索用户(账号、昵称或名称)", notes = "搜索用户(账号、昵称或名称)")
+    @GetMapping("/findUserByAccountOrUsername")
+    @TokenCheck
+    public ResultData<List<UserEntity>> findUserByAccountOrUsername(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "关键字") @RequestParam("keyword") String keyword) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        return userService.findUserByAccountOrUsername(account, keyword);
     }
 }

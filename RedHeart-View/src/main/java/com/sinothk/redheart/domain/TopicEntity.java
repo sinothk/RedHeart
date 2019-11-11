@@ -33,6 +33,10 @@ public class TopicEntity {
     @TableField("topic_theme")
     private String topicTheme;
 
+    @ApiModelProperty("话题标题")
+    @TableField("topic_title")
+    private String topicTitle;
+
     @ApiModelProperty("话题内容")
     @TableField("topic_content")
     private String topicContent;

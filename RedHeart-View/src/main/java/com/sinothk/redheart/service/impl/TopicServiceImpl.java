@@ -1,5 +1,6 @@
 package com.sinothk.redheart.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
@@ -8,6 +9,7 @@ import com.sinothk.base.utils.IdUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
+import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.repository.TopicMapper;
 import com.sinothk.redheart.service.TopicService;
 import org.springframework.stereotype.Service;
@@ -141,6 +143,16 @@ public class TopicServiceImpl implements TopicService {
             pageEntity.setHasMore(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<List<TopicAo>> findTopicContent(String account, String keyword) {
+        try {
+            List<TopicAo> userList = topicMapper.findTopicContent(keyword);
+            return ResultData.success(userList);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
