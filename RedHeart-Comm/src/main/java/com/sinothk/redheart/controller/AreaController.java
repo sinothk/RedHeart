@@ -25,10 +25,10 @@ public class AreaController {
 
     @ApiOperation(value = "根据编码 adcode 获取其下一级区域列表", notes = "根据编码 adcode 获取其下一级区域列表")
     @GetMapping("/getAreaList")
-    public ResultData<ArrayList<AreaEntity>> getAreaList(@ApiParam(value = "adCode", required = true) @RequestParam("adCode") String adCode) {
+    public ResultData<ArrayList<AreaEntity>> getAreaList(@ApiParam(value = "adCode") @RequestParam("adCode") String adCode) {
 
         if (StringUtil.isEmpty(adCode)) {
-            return ResultData.error("参数不能为空");
+            adCode = "100000";
         }
 
         ArrayList<AreaEntity> areaList = areaService.getAreaList(adCode);

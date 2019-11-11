@@ -1,6 +1,7 @@
 package com.sinothk.redheart.service.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.sinothk.base.utils.StringUtil;
 import com.sinothk.redheart.domain.AreaEntity;
 import com.sinothk.redheart.domain.GaoDeAreaEntity;
 import com.sinothk.redheart.repository.AreaMapper;
