@@ -70,6 +70,14 @@ public class TopicThemeServiceImpl implements TopicThemeService {
     public ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account) {
         try {
             List<TopicThemeAo> list = topicThemeUserMapper.getMyTopicThemeList(account);
+
+            TopicThemeAo topicTheme = new TopicThemeAo();
+            topicTheme.setAccount(account);
+            topicTheme.setThemeCode("");
+            topicTheme.setThemeTxt("全部");
+            topicTheme.setThemeIcon("http://img0.imgtn.bdimg.com/it/u=4191811670,2320391376&fm=214&gp=0.jpg");
+            topicTheme.setRemark("1.5");
+            list.add(0, topicTheme);
             return ResultData.success(list);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());

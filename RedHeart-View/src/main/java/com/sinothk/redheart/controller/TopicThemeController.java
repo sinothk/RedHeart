@@ -84,6 +84,7 @@ public class TopicThemeController {
         ttuEntity.setAccount(Long.valueOf(account));
         ttuEntity.setThemeCode(themeCode);
         ttuEntity.setCreateTime(new Date());
+
         return topicThemeService.likeTheme(ttuEntity);
     }
 
