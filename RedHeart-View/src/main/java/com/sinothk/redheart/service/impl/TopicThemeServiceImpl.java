@@ -71,6 +71,10 @@ public class TopicThemeServiceImpl implements TopicThemeService {
         try {
             List<TopicThemeAo> list = topicThemeUserMapper.getMyTopicThemeList(account);
 
+            if (list == null || list.size() == 0) {
+                list = topicThemeMapper.getAllTopicThemeList(account).subList(0, 5);
+            }
+
             TopicThemeAo topicTheme = new TopicThemeAo();
             topicTheme.setAccount(account);
             topicTheme.setThemeCode("");
@@ -78,6 +82,7 @@ public class TopicThemeServiceImpl implements TopicThemeService {
             topicTheme.setThemeIcon("living/10001/sysem/201911/theme_all2.jpg");
             topicTheme.setRemark("1.5");
             list.add(0, topicTheme);
+
             return ResultData.success(list);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
