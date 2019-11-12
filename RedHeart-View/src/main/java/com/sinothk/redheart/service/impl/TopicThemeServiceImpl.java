@@ -75,7 +75,7 @@ public class TopicThemeServiceImpl implements TopicThemeService {
             topicTheme.setAccount(account);
             topicTheme.setThemeCode("");
             topicTheme.setThemeTxt("全部");
-            topicTheme.setThemeIcon("http://img0.imgtn.bdimg.com/it/u=4191811670,2320391376&fm=214&gp=0.jpg");
+            topicTheme.setThemeIcon("living/10001/sysem/201911/theme_all2.jpg");
             topicTheme.setRemark("1.5");
             list.add(0, topicTheme);
             return ResultData.success(list);
