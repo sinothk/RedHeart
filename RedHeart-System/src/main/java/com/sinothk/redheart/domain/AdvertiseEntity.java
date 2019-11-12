@@ -56,7 +56,7 @@ public class AdvertiseEntity {
 
     @ApiModelProperty("显示位置")
     @TableField(value = "ad_where")
-    private Integer where;
+    private Integer adWhere;
 
     @ApiModelProperty("状态")
     @TableField(value = "ad_status")

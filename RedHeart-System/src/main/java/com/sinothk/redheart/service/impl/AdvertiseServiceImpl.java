@@ -36,15 +36,15 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     }
 
     @Override
-    public ResultData<PageData<List<AdvertiseEntity>>> getAdList(int where, int pageNum, int pageSize) {
+    public ResultData<PageData<List<AdvertiseEntity>>> getAdList(int adWhere, int pageNum, int pageSize) {
         try {
-            Page<AdvertiseEntity> pageVo = new Page<>(pageNum, pageSize);
+
             QueryWrapper<AdvertiseEntity> wrapper = new QueryWrapper<>();
 
-            wrapper.lambda().eq(AdvertiseEntity::getWhere, where) // 显示位置
+            wrapper.lambda().eq(AdvertiseEntity::getAdWhere, adWhere) // 显示位置
                     .eq(AdvertiseEntity::getStatus, 0); // 查询正常状态
 
-            IPage<AdvertiseEntity> pageInfo = advertiseMapper.selectPage(pageVo, wrapper);
+            IPage<AdvertiseEntity> pageInfo = advertiseMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 
             PageData<List<AdvertiseEntity>> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);

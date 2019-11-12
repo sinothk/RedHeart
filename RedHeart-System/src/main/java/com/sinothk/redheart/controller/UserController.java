@@ -156,9 +156,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "查询：可能喜欢的用户", notes = "可能喜欢的用户")
-    @GetMapping("/getMaybeLikePageList")
+    @GetMapping("/getMaybeLikeUserList")
     @TokenCheck
-    public ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(
+    public ResultData<PageData<List<UserEntity>>> getMaybeLikeUserList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
