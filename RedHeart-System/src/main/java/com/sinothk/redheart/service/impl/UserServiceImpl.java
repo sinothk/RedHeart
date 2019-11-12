@@ -245,6 +245,8 @@ public class UserServiceImpl implements UserService {
                     .like(UserEntity::getUserName, keyword)
                     .or()
                     .like(UserEntity::getNickname, keyword)
+                    .or()
+                    .like(UserEntity::getEmail, keyword)
                     .orderByDesc(UserEntity::getLoginTime);
 
             List<UserEntity> userList = userMapper.selectList(wrapper);
