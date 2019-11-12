@@ -36,7 +36,10 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`u_nickname` as nickname," +
             "\tusr.`user_borthday` AS userBorthday," +
             " usr.`u_sex` as sex," +
-            "theme.theme_txt AS topicTheme" +
+
+            " theme.theme_icon AS themeIcon,  " +
+            " theme.theme_code AS themeCode,  " +
+            " theme.theme_txt AS topicTheme" +
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
             " WHERE topic.`account` = ${account} AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
@@ -65,14 +68,17 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`u_nickname` as nickname," +
             "\tusr.`user_borthday` AS userBorthday," +
             " usr.`u_sex` as sex," +
+
+            " theme.theme_icon AS themeIcon,  " +
+            " theme.theme_code AS themeCode,  " +
             "theme.theme_txt AS topicTheme" +
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
             " WHERE " +
-            " topic.`account` IN (SELECT f.liked_account FROM tb_comm_friends f WHERE f.`liking_account` = ${account} OR f.`liked_account` = ${account}) " +
+            " (topic.`account` IN (SELECT f.liked_account FROM tb_comm_friends f WHERE f.`liking_account` = ${account}) OR topic.`account` = ${account}) " +
             " AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
             " ORDER BY topic.`update_time` DESC")
-    IPage<TopicAo> getTopicFromILikePageList(IPage page, @Param("account") Long account);
+    IPage<TopicAo> getTopicFromILikeUserPageList(IPage page, @Param("account") Long account);
 
     @Select("SELECT \n" +
             "\ttopic.id AS id, \n" +
@@ -95,7 +101,11 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\tusr.`u_nickname` AS nickname, \n" +
             "\tusr.`user_borthday` AS userBorthday," +
             "\tusr.`u_sex` AS sex,\n" +
+
+            " theme.theme_icon AS themeIcon,  " +
+            " theme.theme_code AS themeCode,  " +
             "\ttheme.theme_txt AS topicTheme \n" +
+
             "\tFROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
 
             "\tWHERE  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
@@ -124,7 +134,10 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\tusr.`user_borthday` AS userBorthday," +
             "\tusr.`u_sex` AS sex,\n" +
 
+            " theme.theme_icon AS themeIcon,  " +
+            " theme.theme_code AS themeCode,  " +
             "\ttheme.theme_txt AS topicTheme \n" +
+
             "FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
 
             "WHERE topic.`topic_theme` = '${themeCode}' AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
@@ -155,6 +168,9 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`u_nickname` as nickname," +
             "\tusr.`user_borthday` AS userBorthday," +
             " usr.`u_sex` as sex," +
+
+            " theme.theme_icon AS themeIcon,  " +
+            " theme.theme_code AS themeCode,  " +
             "theme.theme_txt AS topicTheme" +
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
@@ -183,6 +199,9 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " usr.`u_nickname` as nickname," +
             "\tusr.`user_borthday` AS userBorthday," +
             " usr.`u_sex` as sex," +
+
+            " theme.theme_icon AS themeIcon,  " +
+            " theme.theme_code AS themeCode,  " +
             "theme.theme_txt AS topicTheme" +
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +

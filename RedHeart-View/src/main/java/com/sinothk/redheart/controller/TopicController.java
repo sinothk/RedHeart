@@ -72,7 +72,7 @@ public class TopicController {
             return ResultData.error("Token解析失败");
         }
 
-        return topicService.getTopicFromILikePageList(Long.valueOf(account), pageNum, pageSize);
+        return topicService.getTopicFromILikeUserPageList(Long.valueOf(account), pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")

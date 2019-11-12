@@ -22,6 +22,12 @@ public class TopicAo {
     @ApiModelProperty("话题主题")
     private String topicTheme;
 
+    @ApiModelProperty("话题主题Code")
+    private String themeCode;
+
+    @ApiModelProperty("话题封面")
+    private String themeIcon;
+
     @ApiModelProperty("话题内容")
     private String topicTitle;
 
