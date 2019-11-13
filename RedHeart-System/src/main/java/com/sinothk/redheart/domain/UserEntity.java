@@ -78,6 +78,16 @@ public class UserEntity {
     @TableField("user_borthday")
     private Date userBorthday;
 
+    @ApiModelProperty(value = "注册时间")
+    @TableField("create_time")
+    private Date createTime;
+
+
+
+    @ApiModelProperty(value = "用户类型：-1：系统；0、普通用户，1. 普通会员")
+    @TableField("user_type")
+    private Integer userType;
+
     @ApiModelProperty(value = "登录纬度")
     @TableField("login_lat")
     private Double loginLat;
@@ -86,17 +96,25 @@ public class UserEntity {
     @TableField("login_lon")
     private Double loginLon;
 
-    @ApiModelProperty(value = "注册时间")
-    @TableField("create_time")
-    private Date createTime;
-
     @ApiModelProperty(value = "登录时间")
     @TableField("login_time")
     private Date loginTime;
 
-    @ApiModelProperty(value = "用户类型：-1：系统；0、普通用户，1. 普通会员")
-    @TableField("user_type")
-    private Integer userType;
+    @ApiModelProperty(value = "登录位置")
+    @TableField("login_address")
+    private String loginAddress;
+
+    @ApiModelProperty(value = "登录省份")
+    @TableField("login_province")
+    private String loginProvince;
+
+    @ApiModelProperty(value = "登录城市")
+    @TableField("login_city")
+    private String loginCity;
+
+    @ApiModelProperty(value = "登录区县")
+    @TableField("login_district")
+    private String loginDistrict;
 
     // ==================================================
     @ApiModelProperty(value = "角色")

@@ -165,8 +165,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultData<LoginRecordEntity> loginRecord(LoginRecordEntity loginRecordVo) {
         try {
-            loginRecordVo.setLoginTime(new Date());
+            Date date = new Date();
+
+            loginRecordVo.setLoginTime(date);
             loginReordMapper.insert(loginRecordVo);
+
+            new Thread(() -> {
+                UpdateWrapper<UserEntity> wrapper = new UpdateWrapper<>();
+                wrapper.lambda().eq(UserEntity::getAccount, loginRecordVo.getAccount());
+
+                UserEntity userEntity = new UserEntity();
+                userEntity.setAccount(loginRecordVo.getAccount());
+                userEntity.setImei(loginRecordVo.getImei());
+                userEntity.setLoginTime(date);
+
+                userEntity.setLoginLat(loginRecordVo.getLoginLat());
+                userEntity.setLoginLon(loginRecordVo.getLoginLon());
+                userEntity.setLoginProvince(loginRecordVo.getLoginProvince());
+                userEntity.setLoginCity(loginRecordVo.getLoginCity());
+                userEntity.setLoginDistrict(loginRecordVo.getLoginDistrict());
+                userEntity.setLoginAddress(loginRecordVo.getLoginAddress());
+
+                userMapper.update(userEntity, wrapper);
+            }).start();
+
             return ResultData.success(loginRecordVo);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
