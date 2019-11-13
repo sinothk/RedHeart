@@ -2,6 +2,7 @@ package com.sinothk.redheart.service;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserVo;
 
@@ -22,4 +23,6 @@ public interface UserService {
     ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(int pageNum, int pageSize);
 
     ResultData<List<UserEntity>> findUserByAccountOrUsername(String account, String keyword);
+
+    ResultData<LoginRecordEntity> loginRecord(LoginRecordEntity loginRecordVo);
 }

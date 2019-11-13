@@ -5,6 +5,7 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserVo;
 import com.sinothk.redheart.service.UserService;
@@ -63,7 +64,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "登录：邮箱及密码", notes = "登录：邮箱及密码")
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public ResultData<UserEntity> login(
             @ApiParam(value = "用户邮箱", required = true) @RequestParam("email") String email,
@@ -82,31 +83,25 @@ public class UserController {
         return userService.login(userVo);
     }
 
-    @ApiOperation(value = "登录：邮箱及密码、位置信息（移动端）", notes = "登录：邮箱及密码、位置信息")
-    @PostMapping("/loginApp")
+    @ApiOperation(value = "登录：用户信息(位置信息,IMEI等)", notes = "位置信息,IMEI等")
+    @PostMapping("/loginRecord")
     @ResponseBody
-    public ResultData<UserEntity> loginApp(
-            @ApiParam(value = "登录信息", required = true) @RequestBody UserVo loginInfoVo) {
+    public ResultData<LoginRecordEntity> loginRecord(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "登录信息", required = true) @RequestBody LoginRecordEntity loginRecordVo) {
 
-        if (loginInfoVo == null) {
+        if (loginRecordVo == null) {
             return ResultData.error("登录信息不能为空");
         }
-        if (StringUtil.isEmpty(loginInfoVo.getEmail())) {
-            return ResultData.error("邮箱不能为空");
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
         }
-        if (StringUtil.isEmpty(loginInfoVo.getUserPwd())) {
-            return ResultData.error("密码不能为空");
-        }
 
-        UserVo userVo = new UserVo();
-        userVo.setEmail(loginInfoVo.getEmail());
-        userVo.setUserPwd(loginInfoVo.getUserPwd());
+        loginRecordVo.setAccount(Long.valueOf(account));
 
-        userVo.setLoginLat(loginInfoVo.getLoginLat());
-        userVo.setLoginLon(loginInfoVo.getLoginLon());
-        userVo.setImei(loginInfoVo.getImei());
-
-        return userService.login(userVo);
+        return userService.loginRecord(loginRecordVo);
     }
 
     @ApiOperation(value = "更新：修改密码", notes = "更新：修改密码")

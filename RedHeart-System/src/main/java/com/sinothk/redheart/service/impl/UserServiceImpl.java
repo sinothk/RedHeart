@@ -134,29 +134,40 @@ public class UserServiceImpl implements UserService {
             dbOldUser.setToken(token);
 
             // 登录信息设置
-            if (userVo.getLoginLat() != null || userVo.getLoginLon() != null) {
-                dbOldUser.setLoginLat(userVo.getLoginLat());
-                dbOldUser.setLoginLon(userVo.getLoginLon());
-                dbOldUser.setImei(userVo.getImei());
-
-                new Thread(() -> {
-                    Date date = new Date();
-                    // 更新数据库用户信息
-                    dbOldUser.setLoginTime(date);
-                    userMapper.updateById(dbOldUser);
-
-                    // 保存登录记录
-                    LoginRecordEntity lRecordEntity = new LoginRecordEntity();
-                    lRecordEntity.setAccount(dbOldUser.getAccount());
-                    lRecordEntity.setLoginTime(date);
-                    lRecordEntity.setLoginLat(userVo.getLoginLat());
-                    lRecordEntity.setLoginLon(userVo.getLoginLon());
-                    lRecordEntity.setImei(userVo.getImei());
-                    loginReordMapper.insert(lRecordEntity);
-                }).start();
-            }
+//            if (userVo.getLoginLat() != null || userVo.getLoginLon() != null) {
+//                dbOldUser.setLoginLat(userVo.getLoginLat());
+//                dbOldUser.setLoginLon(userVo.getLoginLon());
+//                dbOldUser.setImei(userVo.getImei());
+//
+//                new Thread(() -> {
+//                    Date date = new Date();
+//                    // 更新数据库用户信息
+//                    dbOldUser.setLoginTime(date);
+//                    userMapper.updateById(dbOldUser);
+//
+//                    // 保存登录记录
+//                    LoginRecordEntity lRecordEntity = new LoginRecordEntity();
+//                    lRecordEntity.setAccount(dbOldUser.getAccount());
+//                    lRecordEntity.setLoginTime(date);
+//                    lRecordEntity.setLoginLat(userVo.getLoginLat());
+//                    lRecordEntity.setLoginLon(userVo.getLoginLon());
+//                    lRecordEntity.setImei(userVo.getImei());
+//                    loginReordMapper.insert(lRecordEntity);
+//                }).start();
+//            }
 
             return ResultData.success(dbOldUser);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
+
+    @Override
+    public ResultData<LoginRecordEntity> loginRecord(LoginRecordEntity loginRecordVo) {
+        try {
+            loginRecordVo.setLoginTime(new Date());
+            loginReordMapper.insert(loginRecordVo);
+            return ResultData.success(loginRecordVo);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }

@@ -33,6 +33,10 @@ public class LoginRecordEntity {
     @TableField("login_lon")
     private Double loginLon;
 
+    @ApiModelProperty(value = "登录位置")
+    @TableField("login_address")
+    private String loginAddress;
+
     @ApiModelProperty(value = "IMEI")
     @TableField("imei")
     private String imei;
@@ -40,5 +44,4 @@ public class LoginRecordEntity {
     @ApiModelProperty(value = "登录时间")
     @TableField("login_time")
     private Date loginTime;
-
 }
