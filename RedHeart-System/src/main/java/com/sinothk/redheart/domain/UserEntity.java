@@ -82,7 +82,9 @@ public class UserEntity {
     @TableField("create_time")
     private Date createTime;
 
-
+    @ApiModelProperty(value = "用户家乡")
+    @TableField("user_hometown")
+    private String hometown;
 
     @ApiModelProperty(value = "用户类型：-1：系统；0、普通用户，1. 普通会员")
     @TableField("user_type")
