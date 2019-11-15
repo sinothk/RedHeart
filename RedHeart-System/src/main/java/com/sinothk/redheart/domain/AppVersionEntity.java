@@ -53,6 +53,10 @@ public class AppVersionEntity {
     @TableField(value = "app_icon")
     private String appIcon;
 
+    @ApiModelProperty("应用名称")
+    @TableField(value = "file_name")
+    private String fileName;
+
     @ApiModelProperty("应用下载地址")
     @TableField(value = "app_url")
     private String appUrl;
