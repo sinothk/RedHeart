@@ -54,7 +54,7 @@ public class NoticeController {
     @ApiOperation(value = "通知：获取所有分页通知", notes = "通知：获取所有分页通知")
     @GetMapping("/getAllNoticeList")
     @TokenCheck
-    public ResultData<PageData<List<NoticeAo>>> getAllNoticeList(
+    public ResultData<PageData<NoticeAo>> getAllNoticeList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页大小") @RequestParam("pageSize") int pageSize) {
@@ -89,7 +89,7 @@ public class NoticeController {
     @ApiOperation(value = "通知：获取所有阅读人员", notes = "通知：获取所有阅读人员")
     @GetMapping("/getNoticeReaderList")
     @TokenCheck
-    public ResultData<PageData<List<NoticeReaderVo>>> getNoticeReaderList(
+    public ResultData<PageData<NoticeReaderVo>> getNoticeReaderList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "通知Id") @RequestParam("noticeId") String noticeId,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,

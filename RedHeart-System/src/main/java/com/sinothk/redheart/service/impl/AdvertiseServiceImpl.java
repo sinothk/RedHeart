@@ -36,7 +36,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     }
 
     @Override
-    public ResultData<PageData<List<AdvertiseEntity>>> getAdList(int adWhere, int pageNum, int pageSize) {
+    public ResultData<PageData<AdvertiseEntity>> getAdList(int adWhere, int pageNum, int pageSize) {
         try {
 
             QueryWrapper<AdvertiseEntity> wrapper = new QueryWrapper<>();
@@ -46,7 +46,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 
             IPage<AdvertiseEntity> pageInfo = advertiseMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 
-            PageData<List<AdvertiseEntity>> pageEntity = new PageData<>();
+            PageData<AdvertiseEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 

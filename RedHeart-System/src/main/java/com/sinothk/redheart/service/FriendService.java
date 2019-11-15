@@ -13,11 +13,11 @@ import java.util.List;
 
 public interface FriendService extends IService<FriendRelationshipEntity> {
 
-    ResultData<PageData<List<FriendEntity>>> getLikeUserList(Long account, int currPage, int pageSize);
+    ResultData<PageData<FriendEntity>> getLikeUserList(Long account, int currPage, int pageSize);
 
-    ResultData<PageData<List<FriendEntity>>> getFensUserList(Long account, int currPage, int pageSize);
+    ResultData<PageData<FriendEntity>> getFensUserList(Long account, int currPage, int pageSize);
 
-    ResultData<PageData<List<FriendEntity>>> getFriendsList(Long account, int currPage, int pageSize);
+    ResultData<PageData<FriendEntity>> getFriendsList(Long account, int currPage, int pageSize);
 
     ResultData<FriendAo> addFriend(FriendRelationshipEntity frEntity);
 

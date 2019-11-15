@@ -12,5 +12,5 @@ public interface TopicCommentService {
 
     ResultData<Boolean> del(Long account, Long comId);
 
-    ResultData<PageData<List<TopicCommentVo>>> getTopicCommentPageList(String topicId, int pageNum, int pageSize);
+    ResultData<PageData<TopicCommentVo>> getTopicCommentPageList(String topicId, int pageNum, int pageSize);
 }

@@ -25,7 +25,7 @@ public class DataCenterController {
     @ApiOperation(value = "登录统计：今日登录用户列表", notes = "登录统计：今日登录用户列表")
     @GetMapping("/getTodayLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserLoginAO>>> getTodayLoginUserPageList(
+    public ResultData<PageData<UserLoginAO>> getTodayLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -35,7 +35,7 @@ public class DataCenterController {
     @ApiOperation(value = "登录统计：最近一周登录用户列表", notes = "登录统计：最近一周登录用户列表")
     @GetMapping("/getWeekLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserLoginAO>>> getWeekLoginUserPageList(
+    public ResultData<PageData<UserLoginAO>> getWeekLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -45,7 +45,7 @@ public class DataCenterController {
     @ApiOperation(value = "登录统计：本月登录用户列表", notes = "登录统计：本月登录用户列表")
     @GetMapping("/getThisMonthLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserLoginAO>>> getThisMonthLoginUserPageList(
+    public ResultData<PageData<UserLoginAO>> getThisMonthLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {

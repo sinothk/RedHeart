@@ -44,12 +44,12 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicAo>>> getTopicFromUserPageList(Long account, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getTopicFromUserPageList(Long account, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
             IPage<TopicAo> pageInfo = topicMapper.getTopicFromUserPageList(pageVo, account);
 
-            PageData<List<TopicAo>> pageEntity = new PageData<>();
+            PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
@@ -65,12 +65,12 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicAo>>> getTopicFromILikeUserPageList(Long account, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(Long account, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
             IPage<TopicAo> pageInfo = topicMapper.getTopicFromILikeUserPageList(pageVo, account);
 
-            PageData<List<TopicAo>> pageEntity = new PageData<>();
+            PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
@@ -86,12 +86,12 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicAo>>> getNewTopicPageList(int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getNewTopicPageList(int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
             IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo);
 
-            PageData<List<TopicAo>> pageEntity = new PageData<>();
+            PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
@@ -107,12 +107,12 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicAo>>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
             IPage<TopicAo> pageInfo = topicMapper.getTopicByThemePageList(pageVo, themeCode);
 
-            PageData<List<TopicAo>> pageEntity = new PageData<>();
+            PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
@@ -128,12 +128,12 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicAo>>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
             IPage<TopicAo> pageInfo = topicMapper.getTopicWhereUserPraisePageList(pageVo, targetAccount);
 
-            PageData<List<TopicAo>> pageEntity = new PageData<>();
+            PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 

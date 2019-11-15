@@ -21,12 +21,12 @@ public class DataCenterServiceImpl implements DataCenterService {
     private DataCenterMapper dataCenterMapper;
 
     @Override
-    public ResultData<PageData<List<UserLoginAO>>> getTodayLoginUserPageList(int currPage, int pageSize) {
+    public ResultData<PageData<UserLoginAO>> getTodayLoginUserPageList(int currPage, int pageSize) {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<UserLoginAO> pageInfo = dataCenterMapper.getTodayLoginUserPageList(pageVo);
 
-            PageData<List<UserLoginAO>> pageEntity = new PageData<>();
+            PageData<UserLoginAO> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 
@@ -42,12 +42,12 @@ public class DataCenterServiceImpl implements DataCenterService {
     }
 
     @Override
-    public ResultData<PageData<List<UserLoginAO>>> getWeekLoginUserPageList(int currPage, int pageSize) {
+    public ResultData<PageData<UserLoginAO>> getWeekLoginUserPageList(int currPage, int pageSize) {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<UserLoginAO> pageInfo = dataCenterMapper.getWeekLoginUserPageList(pageVo);
 
-            PageData<List<UserLoginAO>> pageEntity = new PageData<>();
+            PageData<UserLoginAO> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 
@@ -63,12 +63,12 @@ public class DataCenterServiceImpl implements DataCenterService {
     }
 
     @Override
-    public ResultData<PageData<List<UserLoginAO>>> getThisMonthLoginUserPageList(int currPage, int pageSize) {
+    public ResultData<PageData<UserLoginAO>> getThisMonthLoginUserPageList(int currPage, int pageSize) {
         try {
             Page<UserEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<UserLoginAO> pageInfo = dataCenterMapper.getThisMonthLoginUserPageList(pageVo);
 
-            PageData<List<UserLoginAO>> pageEntity = new PageData<>();
+            PageData<UserLoginAO> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 

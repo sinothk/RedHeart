@@ -56,7 +56,7 @@ public class AdvertiseController {
     @ApiOperation(value = "广告：获取所有分页广告", notes = "通知：获取所有分页广告")
     @GetMapping("/getAdList")
     @TokenCheck
-    public ResultData<PageData<List<AdvertiseEntity>>> getAdList(
+    public ResultData<PageData<AdvertiseEntity>> getAdList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "位置编号", required = true) @RequestParam("adWhere") int adWhere,
             @ApiParam(value = "查询页号", required = true) @RequestParam("pageNum") int pageNum,

@@ -28,12 +28,12 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     private UserMapper userMapper;
 
     @Override
-    public ResultData<PageData<List<FriendEntity>>> getLikeUserList(Long account, int currPage, int pageSize) {
+    public ResultData<PageData<FriendEntity>> getLikeUserList(Long account, int currPage, int pageSize) {
         try {
             Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<FriendEntity> pageInfo = friendMapper.getLikeUserList(pageVo, account);
 
-            PageData<List<FriendEntity>> pageEntity = new PageData<>();
+            PageData<FriendEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 
@@ -49,12 +49,12 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     }
 
     @Override
-    public ResultData<PageData<List<FriendEntity>>> getFensUserList(Long account, int currPage, int pageSize) {
+    public ResultData<PageData<FriendEntity>> getFensUserList(Long account, int currPage, int pageSize) {
         try {
             Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<FriendEntity> pageInfo = friendMapper.getFensUserList(pageVo, account);
 
-            PageData<List<FriendEntity>> pageEntity = new PageData<>();
+            PageData<FriendEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 
@@ -70,12 +70,12 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
     }
 
     @Override
-    public ResultData<PageData<List<FriendEntity>>> getFriendsList(Long account, int currPage, int pageSize) {
+    public ResultData<PageData<FriendEntity>> getFriendsList(Long account, int currPage, int pageSize) {
         try {
             Page<FriendEntity> pageVo = new Page<>(currPage, pageSize);
             IPage<FriendEntity> pageInfo = friendMapper.getFriendsList(pageVo, account);
 
-            PageData<List<FriendEntity>> pageEntity = new PageData<>();
+            PageData<FriendEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(currPage);
 

@@ -29,7 +29,7 @@ public class FriendController {
     @ApiOperation(value = "获取关注人分页列表信息", notes = "获取关注人分页列表信息")
     @GetMapping("/getLikeUserList")
     @TokenCheck
-    public ResultData<PageData<List<FriendEntity>>> getLikeUserList(
+    public ResultData<PageData<FriendEntity>> getLikeUserList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -45,7 +45,7 @@ public class FriendController {
     @ApiOperation(value = "获取粉丝信息", notes = "获取粉丝信息")
     @GetMapping("/getFensUserList")
     @TokenCheck
-    public ResultData<PageData<List<FriendEntity>>> getFensUserList(
+    public ResultData<PageData<FriendEntity>> getFensUserList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -61,7 +61,7 @@ public class FriendController {
     @ApiOperation(value = "获取互相关注人分页列表信息", notes = "获取互相关注人分页列表信息")
     @GetMapping("/getFriendsList")
     @TokenCheck
-    public ResultData<PageData<List<FriendEntity>>> getFriendsList(
+    public ResultData<PageData<FriendEntity>> getFriendsList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {

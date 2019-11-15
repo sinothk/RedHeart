@@ -11,15 +11,15 @@ public interface TopicService {
 
     ResultData<Boolean> addTopic(TopicEntity topicEntity);
 
-    ResultData<PageData<List<TopicAo>>> getTopicFromUserPageList(Long account, int pageNum, int pageSize);
+    ResultData<PageData<TopicAo>> getTopicFromUserPageList(Long account, int pageNum, int pageSize);
 
-    ResultData<PageData<List<TopicAo>>> getTopicFromILikeUserPageList(Long valueOf, int pageNum, int pageSize);
+    ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(Long valueOf, int pageNum, int pageSize);
 
-    ResultData<PageData<List<TopicAo>>> getNewTopicPageList(int pageNum, int pageSize);
+    ResultData<PageData<TopicAo>> getNewTopicPageList(int pageNum, int pageSize);
 
-    ResultData<PageData<List<TopicAo>>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize);
+    ResultData<PageData<TopicAo>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize);
 
-    ResultData<PageData<List<TopicAo>>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize);
+    ResultData<PageData<TopicAo>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize);
 
     ResultData<List<TopicAo>> findTopicContent(String account, String keyword);
 }

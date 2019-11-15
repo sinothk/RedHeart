@@ -47,7 +47,7 @@ public class TopicController {
     @ApiOperation(value = "话题：查询由用户发布的话题列表", notes = "话题：查询由用户发布的话题列表")
     @GetMapping("/getTopicFromUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<TopicAo>>> getTopicFromMePageList(
+    public ResultData<PageData<TopicAo>> getTopicFromMePageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "account") @RequestParam("account") Long account,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
@@ -62,7 +62,7 @@ public class TopicController {
     @ApiOperation(value = "话题：查询关注人发布的话题列表", notes = "话题：查询关注人发布的话题列表")
     @GetMapping("/getNewTopicPageList")
     @TokenCheck
-    public ResultData<PageData<List<TopicAo>>> getNewTopicPageList(
+    public ResultData<PageData<TopicAo>> getNewTopicPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -78,7 +78,7 @@ public class TopicController {
     @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")
     @GetMapping("/getHotTopicPageList")
     @TokenCheck
-    public ResultData<PageData<List<TopicAo>>> getHotTopicPageList(
+    public ResultData<PageData<TopicAo>> getHotTopicPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -94,7 +94,7 @@ public class TopicController {
     @ApiOperation(value = "话题：查询某种话题分页列表", notes = "话题：查询某种话题分页列表")
     @GetMapping("/getTopicByThemePageList")
     @TokenCheck
-    public ResultData<PageData<List<TopicAo>>> getTopicByThemePageList(
+    public ResultData<PageData<TopicAo>> getTopicByThemePageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "主题编码") @RequestParam("themeCode") String themeCode,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
@@ -111,7 +111,7 @@ public class TopicController {
     @ApiOperation(value = "话题：查询当前用户喜欢的话题分页列表", notes = "查询当前用户喜欢的话题分页列表")
     @GetMapping("/getTopicWhereUserPraisePageList")
     @TokenCheck
-    public ResultData<PageData<List<TopicAo>>> getTopicWhereUserPraisePageList(
+    public ResultData<PageData<TopicAo>> getTopicWhereUserPraisePageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "喜欢人账号") @RequestParam("targetAccount") String targetAccount,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,

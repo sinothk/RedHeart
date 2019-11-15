@@ -221,7 +221,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultData<PageData<List<UserEntity>>> getLastLoginUserPageList(int pageNum, int pageSize) {
+    public ResultData<PageData<UserEntity>> getLastLoginUserPageList(int pageNum, int pageSize) {
         try {
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
             wrapper.lambda().ne(UserEntity::getUserType, "-2").orderByDesc(UserEntity::getLoginTime);
@@ -229,7 +229,7 @@ public class UserServiceImpl implements UserService {
             IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 
             //
-            PageData<List<UserEntity>> pageEntity = new PageData<>();
+            PageData<UserEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
@@ -245,7 +245,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultData<PageData<List<UserEntity>>> getMaybeLikePageList(int pageNum, int pageSize) {
+    public ResultData<PageData<UserEntity>> getMaybeLikePageList(int pageNum, int pageSize) {
         try {
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
             wrapper.lambda().eq(UserEntity::getUserType, "-1").orderByDesc(UserEntity::getLoginTime);
@@ -253,7 +253,7 @@ public class UserServiceImpl implements UserService {
             IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 
             //
-            PageData<List<UserEntity>> pageEntity = new PageData<>();
+            PageData<UserEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 

@@ -14,7 +14,7 @@ public interface NoticeService {
 
     ResultData<Boolean> addRead(Long noticeId, Long account);
 
-    ResultData<PageData<List<NoticeAo>>> getAllNoticeList(Long account, int pageNum, int pageSize);
+    ResultData<PageData<NoticeAo>> getAllNoticeList(Long account, int pageNum, int pageSize);
 
-    ResultData<PageData<List<NoticeReaderVo>>> getNoticeReaderList(Long noticeId, int pageNum, int pageSize);
+    ResultData<PageData<NoticeReaderVo>> getNoticeReaderList(Long noticeId, int pageNum, int pageSize);
 }

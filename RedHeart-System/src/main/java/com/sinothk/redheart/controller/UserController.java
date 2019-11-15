@@ -137,7 +137,7 @@ public class UserController {
     @ApiOperation(value = "查询：获取最近登录的用户", notes = "查询：获取最近登录的用户")
     @GetMapping("/getLastLoginUserPageList")
     @TokenCheck
-    public ResultData<PageData<List<UserEntity>>> getLastLoginUserPageList(
+    public ResultData<PageData<UserEntity>> getLastLoginUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -153,7 +153,7 @@ public class UserController {
     @ApiOperation(value = "查询：可能喜欢的用户", notes = "可能喜欢的用户")
     @GetMapping("/getMaybeLikeUserList")
     @TokenCheck
-    public ResultData<PageData<List<UserEntity>>> getMaybeLikeUserList(
+    public ResultData<PageData<UserEntity>> getMaybeLikeUserList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {

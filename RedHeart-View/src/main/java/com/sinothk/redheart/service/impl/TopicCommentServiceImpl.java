@@ -67,12 +67,12 @@ public class TopicCommentServiceImpl implements TopicCommentService {
     }
 
     @Override
-    public ResultData<PageData<List<TopicCommentVo>>> getTopicCommentPageList(String topicId, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicCommentVo>> getTopicCommentPageList(String topicId, int pageNum, int pageSize) {
         try {
             Page<TopicCommentVo> pageVo = new Page<>(pageNum, pageSize);
             IPage<TopicCommentVo> pageInfo = topicCommentMapper.getTopicCommentPageList(pageVo, topicId);
 
-            PageData<List<TopicCommentVo>> pageEntity = new PageData<>();
+            PageData<TopicCommentVo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 

@@ -81,7 +81,7 @@ public class TopicCommentController {
     @ApiOperation(value = "评论：查询话题的分页评论列表", notes = "评论：查询话题的分页评论列表")
     @GetMapping("/getTopicCommentPageList")
     @TokenCheck
-    public ResultData<PageData<List<TopicCommentVo>>> getTopicFromMePageList(
+    public ResultData<PageData<TopicCommentVo>> getTopicFromMePageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "话题Id", required = true) @RequestParam("topicId") String topicId,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,

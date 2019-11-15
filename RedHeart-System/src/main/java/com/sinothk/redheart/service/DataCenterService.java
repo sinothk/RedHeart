@@ -8,11 +8,11 @@ import com.sinothk.redheart.domain.UserLoginAO;
 import java.util.List;
 
 public interface DataCenterService {
-    ResultData<PageData<List<UserLoginAO>>> getTodayLoginUserPageList(int pageNum, int pageSize);
+    ResultData<PageData<UserLoginAO>> getTodayLoginUserPageList(int pageNum, int pageSize);
 
-    ResultData<PageData<List<UserLoginAO>>> getWeekLoginUserPageList(int pageNum, int pageSize);
+    ResultData<PageData<UserLoginAO>> getWeekLoginUserPageList(int pageNum, int pageSize);
 
-    ResultData<PageData<List<UserLoginAO>>> getThisMonthLoginUserPageList(int pageNum, int pageSize);
+    ResultData<PageData<UserLoginAO>> getThisMonthLoginUserPageList(int pageNum, int pageSize);
 
     ResultData<List<DataCenterEntity>> getYearLoginUserPageList(String yearStr);
 }

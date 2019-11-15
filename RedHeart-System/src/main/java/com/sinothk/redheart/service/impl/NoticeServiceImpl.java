@@ -35,12 +35,12 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public ResultData<PageData<List<NoticeAo>>> getAllNoticeList(Long account, int pageNum, int pageSize) {
+    public ResultData<PageData<NoticeAo>> getAllNoticeList(Long account, int pageNum, int pageSize) {
         try {
             Page<NoticeAo> pageVo = new Page<>(pageNum, pageSize);
             IPage<NoticeAo> pageInfo = noticeMapper.getAllNoticeList(pageVo, account);
 
-            PageData<List<NoticeAo>> pageEntity = new PageData<>();
+            PageData<NoticeAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
@@ -56,12 +56,12 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public ResultData<PageData<List<NoticeReaderVo>>> getNoticeReaderList(Long noticeId, int pageNum, int pageSize) {
+    public ResultData<PageData<NoticeReaderVo>> getNoticeReaderList(Long noticeId, int pageNum, int pageSize) {
         try {
             Page<NoticeReaderVo> pageVo = new Page<>(pageNum, pageSize);
             IPage<NoticeReaderVo> pageInfo = noticeMapper.getNoticeReaderList(pageVo, noticeId);
 
-            PageData<List<NoticeReaderVo>> pageEntity = new PageData<>();
+            PageData<NoticeReaderVo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
             pageEntity.setPageNum(pageNum);
 
