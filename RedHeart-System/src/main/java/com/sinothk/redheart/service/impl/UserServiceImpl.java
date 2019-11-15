@@ -7,11 +7,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
+import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
+import com.sinothk.redheart.domain.FriendRelationshipEntity;
 import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserVo;
+import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
@@ -30,6 +33,9 @@ public class UserServiceImpl implements UserService {
     @Resource(name = "loginReordMapper")
     private LoginReordMapper loginReordMapper;
 
+    @Resource(name = "friendMapper")
+    private FriendMapper friendMapper;
+
     @Override
     public ResultData<UserEntity> addUser(UserEntity userVo) {
         try {
@@ -45,7 +51,7 @@ public class UserServiceImpl implements UserService {
             userVo.setAccount(account);
             // 设置用户昵称
             String email = userVo.getEmail();
-            if (isEmail(email)) {
+            if (StringUtil.isEmail(email)) {
                 userVo.setNickname(email.substring(0, email.indexOf("@")));
             } else {
                 userVo.setNickname(String.valueOf(account));
@@ -56,6 +62,17 @@ public class UserServiceImpl implements UserService {
             userVo.setLoginTime(currTime);
 
             userMapper.insert(userVo);
+
+            // 新增默认关注
+            try {
+                FriendRelationshipEntity frEntity = new FriendRelationshipEntity();
+                frEntity.setLikingAccount(account);
+                frEntity.setLikedAccount(9999L);
+                frEntity.setLikeTime(new Date());
+                friendMapper.insert(frEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             // 返回新数据
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
@@ -70,12 +87,6 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
-    }
-
-    public boolean isEmail(String email) {
-        if (email == null || "".equals(email)) return false;
-        String regex = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-        return email.matches(regex);
     }
 
     @Override
