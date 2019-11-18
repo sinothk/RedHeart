@@ -148,9 +148,6 @@ public class UserController {
         if (StringUtil.isEmpty(likingAccount)) {
             return ResultData.error("Token解析失败");
         }
-
-        JPushHelper.push();
-
         return userService.getLastLoginUserPageList(pageNum, pageSize);
     }
 

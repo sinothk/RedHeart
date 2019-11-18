@@ -14,39 +14,63 @@ import cn.jpush.api.push.model.notification.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JPushHelper {
-    protected static final Logger LOG = LoggerFactory.getLogger(JPushHelper.class);
+
     private static final String MASTER_SECRET = "783b80b7be1590bcff378ff8";
     private static final String APP_KEY = "3e3250f7c049c0d226fcfbba";
 
-    public static void push() {
+    private static final Logger LOG = LoggerFactory.getLogger(JPushHelper.class);
+
+    /**
+     * 推送给所有用户
+     *
+     * @param title
+     * @param subTitle
+     * @param data
+     */
+    public static void pushAll(String title, String subTitle, String data) {
+        pushBase(Audience.all(), title, subTitle, data);
+    }
+
+    /**
+     * 推送给特定用户: 通过注册Id
+     *
+     * @param aliasList
+     * @param title
+     * @param subTitle
+     * @param data
+     */
+    public static void pushByRegId(ArrayList<String> aliasList, String title, String subTitle, String data) {
+        pushBase(Audience.registrationId(aliasList), title, subTitle, data);
+    }
+
+    /**
+     * 推送给特定用户: 通过别名
+     *
+     * @param aliasList
+     * @param title
+     * @param subTitle
+     * @param data
+     */
+    public static void pushByAlias(ArrayList<String> aliasList, String title, String subTitle, String data) {
+        pushBase(Audience.alias(aliasList), title, subTitle, data);
+    }
+
+    private static void pushBase(Audience audience, String title, String subTitle, String data) {
         ClientConfig clientConfig = ClientConfig.getInstance();
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
-//        String authCode = ServiceHelper.getBasicAuthorization(APP_KEY, MASTER_SECRET);
-        // Here you can use NativeHttpClient or NettyHttpClient or ApacheHttpClient.
-        // Call setHttpClient to set httpClient,
-        // If you don't invoke this method, default httpClient will use NativeHttpClient.
-
-//        ApacheHttpClient httpClient = new ApacheHttpClient(authCode, null, clientConfig);
-//        NettyHttpClient httpClient =new NettyHttpClient(authCode, null, clientConfig);
-//        jpushClient.getPushClient().setHttpClient(httpClient);
-        final PushPayload payload = buildPushObject_android_and_ios();
-//        // For push, all you need do is to build PushPayload object.
-//        PushPayload payload = buildPushObject_all_alias_alert();
+        final PushPayload payload = buildPushObject_android_and_ios(audience, title, subTitle, data);
         try {
             PushResult result = jpushClient.sendPush(payload);
             LOG.info("Got result - " + result);
-            System.out.println(result);
-            // 如果使用 NettyHttpClient，需要手动调用 close 方法退出进程
-            // If uses NettyHttpClient, call close when finished sending request, otherwise process will not exit.
-            // jpushClient.close();
+
         } catch (APIConnectionException e) {
             LOG.error("Connection error. Should retry later. ", e);
             LOG.error("Sendno: " + payload.getSendno());
-
         } catch (APIRequestException e) {
             LOG.error("Error response from JPush server. Should review and fix it. ", e);
             LOG.info("HTTP Status: " + e.getStatus());
@@ -57,16 +81,25 @@ public class JPushHelper {
         }
     }
 
-    public static PushPayload buildPushObject_android_and_ios() {
+    private static PushPayload buildPushObject_android_and_ios(Audience audience, String title, String subTitle, String data) {
+
         Map<String, String> extras = new HashMap<>();
         extras.put("test", "https://community.jiguang.cn/push");
+        extras.put("data", data);
+
         return PushPayload.newBuilder()
                 .setPlatform(Platform.android_ios())
-                .setAudience(Audience.all())
+
+//                .setAudience(Audience.all())
+//                .setAudience(Audience.alias(new ArrayList<>()))
+//                .setAudience(Audience.registrationId(new ArrayList<>()))
+
+                .setAudience(audience)
+
                 .setNotification(Notification.newBuilder()
-                        .setAlert("alert content")
+                        .setAlert(subTitle)
                         .addPlatformNotification(AndroidNotification.newBuilder()
-                                .setTitle("Android Title")
+                                .setTitle(title)
                                 .addExtras(extras).build())
                         .addPlatformNotification(IosNotification.newBuilder()
                                 .incrBadge(1)
@@ -74,5 +107,4 @@ public class JPushHelper {
                         .build())
                 .build();
     }
-
 }
