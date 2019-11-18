@@ -18,7 +18,7 @@ public class TestPushMain {
     @Test
     public void pushByAlias() {
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("10001");
+        arrayList.add("10000");
         arrayList.add("10015");
         JPushHelper.pushByAlias(arrayList, "111", "222", "333");
     }
@@ -39,7 +39,7 @@ public class TestPushMain {
     public void pushMsgByAlias() {
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("10001");
+        arrayList.add("10000");
         arrayList.add("10015");
         JPushHelper.pushMsgByAlias(arrayList, "发给10015用户");
     }
