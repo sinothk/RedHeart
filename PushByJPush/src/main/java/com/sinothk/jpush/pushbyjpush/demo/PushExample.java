@@ -31,10 +31,13 @@ public class PushExample {
     protected static final Logger LOG = LoggerFactory.getLogger(PushExample.class);
 
     // demo App defined in resources/jpush-api.conf 
-    protected static final String APP_KEY = "e4ceeaf7a53ad745dd4728f2";
-    protected static final String MASTER_SECRET = "1582b986adeaf48ceec1e354";
+//    protected static final String APP_KEY = "e4ceeaf7a53ad745dd4728f2";
+//    protected static final String MASTER_SECRET = "1582b986adeaf48ceec1e354";
     protected static final String GROUP_PUSH_KEY = "2c88a01e073a0fe4fc7b167c";
     protected static final String GROUP_MASTER_SECRET = "b11314807507e2bcfdeebe2e";
+
+    private static final String MASTER_SECRET = "783b80b7be1590bcff378ff8";
+    private static final String APP_KEY = "3e3250f7c049c0d226fcfbba";
 
     public static final String TITLE = "Test from API example";
     public static final String ALERT = "Test from API Example - alert";
@@ -46,16 +49,18 @@ public class PushExample {
 
     public static void main(String[] args) {
 
-        testSendPushWithCustomField();
+//        testSendPushWithCustomField();
 //        testBatchSend();
-        testSendPushWithCustomConfig();
+//        testSendPushWithCustomConfig();
 //        testSendIosAlert();
-//		testSendPush();
+//        testSendPush();
 //        testGetCidList();
 //        testSendPushes();
-        testSendPush_fromJSON();
+//        testSendPush_fromJSON();
 //        testSendPushWithCallback();
-//		testSendPushWithCid();
+//        testSendPushWithCid();
+
+        testSendPush();
     }
 
     // 使用 NettyHttpClient 异步接口发送请求
@@ -300,7 +305,7 @@ public class PushExample {
 
         PushPayload payload = PushPayload.newBuilder()
                 .setPlatform(Platform.android_ios())
-                .setAudience(Audience.tag("tag1"))
+                .setAudience(Audience.all())
                 .setNotification(Notification.newBuilder()
                         .setAlert("alert content")
                         .addPlatformNotification(AndroidNotification.newBuilder()
@@ -386,7 +391,7 @@ public class PushExample {
                 .setPlatform(Platform.android_ios())
                 .setAudience(Audience.newBuilder()
                         .addAudienceTarget(AudienceTarget.tag("tag1", "tag2"))
-                        .addAudienceTarget(AudienceTarget.alias("alias1", "alias2"))
+                        .addAudienceTarget(AudienceTarget.alias("10015", "alias2"))
                         .build())
                 .setMessage(Message.newBuilder()
                         .setMsgContent(MSG_CONTENT)
