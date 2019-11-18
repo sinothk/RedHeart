@@ -53,7 +53,7 @@ public class TopicPraiseServiceImpl extends ServiceImpl<TopicPraiseMapper, Topic
                 new Thread(() -> {
                     String alias = String.valueOf(topicEntity.getAccount());
                     String data = JPushEntity.createData(JPushEntity.MSG_TYPE_PRAISE, topicEntity);
-                    JPushHelper.pushByAlias(alias, "话题点赞提醒", "有人点赞了你的话题，快去看看吧 ... ", data);
+                    JPushHelper.pushByAlias(alias, "话题新点赞", "有人点赞了你的话题，快去看看吧 ... ", data);
                 }).start();
             }
 

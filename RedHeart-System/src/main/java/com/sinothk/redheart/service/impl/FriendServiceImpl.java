@@ -110,7 +110,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
                     // 通知被关注人
                     String alias = String.valueOf(frEntity.getLikedAccount());
                     String data = JPushEntity.createData(JPushEntity.MSG_TYPE_RELATION, frEntity);
-                    JPushHelper.pushByAlias(alias, "心跳关注提醒", "你新增加了一位爱慕人 ... ", data);
+                    JPushHelper.pushByAlias(alias, "新增粉丝", "你新增加了一位爱慕人 ... ", data);
                 }).start();
 
                 return ResultData.success(new FriendAo(2));

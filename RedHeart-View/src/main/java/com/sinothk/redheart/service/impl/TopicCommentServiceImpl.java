@@ -53,7 +53,7 @@ public class TopicCommentServiceImpl implements TopicCommentService {
                 new Thread(() -> {
                     String alias = String.valueOf(topicDbEntity.getAccount());
                     String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicDbEntity);
-                    JPushHelper.pushByAlias(alias, "话题评论提醒", "有人评论了你的话题，快去看看吧 ... ", data);
+                    JPushHelper.pushByAlias(alias, "话题新评论", "有人评论了你的话题，快去看看吧 ... ", data);
                 }).start();
             }
 

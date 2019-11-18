@@ -7,14 +7,16 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.IdUtil;
 import com.sinothk.base.utils.StringUtil;
-import com.sinothk.redheart.domain.TopicAo;
-import com.sinothk.redheart.domain.TopicEntity;
-import com.sinothk.redheart.domain.UserEntity;
+import com.sinothk.jpush.pushbyjpush.JPushEntity;
+import com.sinothk.jpush.pushbyjpush.JPushHelper;
+import com.sinothk.redheart.domain.*;
+import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.TopicMapper;
 import com.sinothk.redheart.service.TopicService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class TopicServiceImpl implements TopicService {
 
     @Resource(name = "topicMapper")
     private TopicMapper topicMapper;
+    @Resource(name = "friendMapper")
+    private FriendMapper friendMapper;
 
     @Override
     public ResultData<Boolean> addTopic(TopicEntity topicEntity) {
@@ -36,6 +40,20 @@ public class TopicServiceImpl implements TopicService {
             topicEntity.setCreateTime(pubTime);
             topicEntity.setUpdateTime(pubTime);
             topicMapper.insert(topicEntity);
+
+            // 通知关注人
+            new Thread(() -> {
+                QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
+                fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, topicEntity.getAccount());
+
+                List<FriendRelationshipEntity> fansList = friendMapper.selectList(fansWrapper);
+                ArrayList<String> aliasList = new ArrayList<>();
+                for (FriendRelationshipEntity fans : fansList) {
+                    aliasList.add(String.valueOf(fans.getLikingAccount()));
+                }
+                String data = JPushEntity.createData(JPushEntity.MSG_TYPE_TOPIC_NEW, topicEntity);
+                JPushHelper.pushByAlias(aliasList, "新话题", "你关注的人发布了新话题，快去看看吧 ... ", data);
+            }).start();
 
             return ResultData.success(true);
         } catch (Exception e) {
