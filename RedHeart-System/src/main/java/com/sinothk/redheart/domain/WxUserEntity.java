@@ -3,8 +3,10 @@ package com.sinothk.redheart.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
 public class WxUserEntity extends UserEntity{

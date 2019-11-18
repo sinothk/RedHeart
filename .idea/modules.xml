@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/PushByJPush/PushByJPush.iml" filepath="$PROJECT_DIR$/PushByJPush/PushByJPush.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedHeartLib.iml" filepath="$PROJECT_DIR$/RedHeartLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedHeart-Comm/redheart-comm.iml" filepath="$PROJECT_DIR$/RedHeart-Comm/redheart-comm.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedHeart-System/redheart-system.iml" filepath="$PROJECT_DIR$/RedHeart-System/redheart-system.iml" />

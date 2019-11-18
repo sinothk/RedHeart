@@ -4,6 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
+import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
@@ -42,6 +43,7 @@ public class UserController {
         UserEntity user = new UserEntity();
         user.setEmail(email);
         user.setUserPwd(password);
+
         return userService.addUser(user);
     }
 
@@ -146,6 +148,8 @@ public class UserController {
         if (StringUtil.isEmpty(likingAccount)) {
             return ResultData.error("Token解析失败");
         }
+
+        JPushHelper.push();
 
         return userService.getLastLoginUserPageList(pageNum, pageSize);
     }

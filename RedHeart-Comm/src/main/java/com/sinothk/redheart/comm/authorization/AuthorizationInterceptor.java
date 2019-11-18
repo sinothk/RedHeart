@@ -55,7 +55,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         if (TokenUtil.checkToken(token) != null) {
             //设置userId到request里，后续根据userId，获取用户信息
-            request.setAttribute("userName", TokenUtil.getUserName(token));
+            request.setAttribute("userName", TokenUtil.getTokenValue(token, "userName"));
             return true;
         } else {
             throw new NormalException(ErrorCode.TOKEN_ERROR);//
