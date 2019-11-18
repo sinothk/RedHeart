@@ -69,6 +69,12 @@ public class JPushHelper {
         pushBase(Audience.alias(aliasList), title, subTitle, data);
     }
 
+    public static void pushByAlias(String alias, String title, String subTitle, String data) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(alias);
+        pushByAlias(list, title, subTitle, data);
+    }
+
     private static void pushBase(Audience audience, String title, String subTitle, String data) {
         ClientConfig clientConfig = ClientConfig.getInstance();
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
@@ -126,6 +132,12 @@ public class JPushHelper {
      */
     public static void pushMsgForAll(String data) {
         pushMsgBase(Audience.all(), data);
+    }
+
+    public static void pushMsgByAlias(String alias, String data) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(alias);
+        pushMsgByAlias(list, data);
     }
 
     /**

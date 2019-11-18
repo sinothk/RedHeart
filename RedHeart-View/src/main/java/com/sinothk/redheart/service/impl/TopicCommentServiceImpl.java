@@ -1,10 +1,13 @@
 package com.sinothk.redheart.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.jpush.pushbyjpush.JPushEntity;
+import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicCommentEntity;
 import com.sinothk.redheart.domain.TopicCommentVo;
@@ -40,6 +43,17 @@ public class TopicCommentServiceImpl implements TopicCommentService {
             topicEntity.setTopicId(topicCommentEntity.getTopicId());
             topicEntity.setUpdateTime(new Date());
             topicMapper.update(topicEntity, updateWrapper);
+
+            new Thread(() -> {
+                // 通知话题发布人
+                QueryWrapper<TopicEntity> topicWrapper = new QueryWrapper<>();
+                topicWrapper.lambda().eq(TopicEntity::getTopicId, topicCommentEntity.getTopicId());
+                TopicEntity topicDbEntity = topicMapper.selectOne(topicWrapper);
+
+                String alias = String.valueOf(topicDbEntity.getAccount());
+                String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicDbEntity);
+                JPushHelper.pushByAlias(alias, "心跳关注提醒", "你新增加了一位爱慕人 ... ", data);
+            }).start();
 
             return ResultData.success(true);
         } catch (Exception e) {

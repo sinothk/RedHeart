@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.jpush.pushbyjpush.JPushEntity;
+import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.domain.AppVersionEntity;
 import com.sinothk.redheart.repository.AppVersionMapper;
 import com.sinothk.redheart.service.AppVersionService;
@@ -59,7 +61,17 @@ public class AppVersionServiceImpl implements AppVersionService {
             QueryWrapper<AppVersionEntity> wrapper = new QueryWrapper<>();
             wrapper.lambda().eq(AppVersionEntity::getAppCode, newAppVersion.getAppCode());
 
-            return ResultData.success(appVersionMapper.selectOne(wrapper));
+            AppVersionEntity lastAppVersion = appVersionMapper.selectOne(wrapper);
+
+            if (lastAppVersion != null && newAppVersion.getAppStatus() == 1) {
+//                版本状态：-1:删除；0:提交；1：发布！
+                new Thread(() -> {
+                    // 通知被关注人
+                    JPushHelper.pushMsgForAll(JPushEntity.createData(JPushEntity.MSG_TYPE_VERSION, lastAppVersion));
+                }).start();
+            }
+
+            return ResultData.success(lastAppVersion);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }

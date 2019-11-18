@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.jpush.pushbyjpush.JPushEntity;
+import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.domain.FriendAo;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;
@@ -16,6 +18,7 @@ import com.sinothk.redheart.service.FriendService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("friendService")
@@ -102,8 +105,21 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
 
             if (frDbEntity == null) {
                 friendMapper.insert(frEntity);
+
+                new Thread(() -> {
+                    // 通知被关注人
+                    String alias = String.valueOf(frEntity.getLikedAccount());
+                    String data = JPushEntity.createData(JPushEntity.MSG_TYPE_RELATION, frEntity);
+                    JPushHelper.pushByAlias(alias, "心跳关注提醒", "你新增加了一位爱慕人 ... ", data);
+                }).start();
+
                 return ResultData.success(new FriendAo(2));
             } else {
+
+                if (frEntity.getLikedAccount() == 9999) {
+                    return ResultData.error("不能取消关注");
+                }
+
                 friendMapper.deleteById(frDbEntity.getId());
                 return ResultData.success(new FriendAo(0));
             }
