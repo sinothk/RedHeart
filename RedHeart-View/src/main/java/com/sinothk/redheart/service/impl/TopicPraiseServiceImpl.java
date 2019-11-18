@@ -43,16 +43,19 @@ public class TopicPraiseServiceImpl extends ServiceImpl<TopicPraiseMapper, Topic
             int pNum = topicPraiseMapper.selectTopicPraiseNum(entity.getTopicId());
             entity.setPraiseNum(pNum);
 
-            new Thread(() -> {
-                // 通知话题发布人
-                QueryWrapper<TopicEntity> topicWrapper = new QueryWrapper<>();
-                topicWrapper.lambda().eq(TopicEntity::getTopicId, entity.getTopicId());
-                TopicEntity topicEntity = topicMapper.selectOne(topicWrapper);
+            // 通知话题发布人
+            QueryWrapper<TopicEntity> topicWrapper = new QueryWrapper<>();
+            topicWrapper.lambda().eq(TopicEntity::getTopicId, entity.getTopicId());
+            TopicEntity topicEntity = topicMapper.selectOne(topicWrapper);
 
-                String alias = String.valueOf(topicEntity.getAccount());
-                String data = JPushEntity.createData(JPushEntity.MSG_TYPE_PRAISE, topicEntity);
-                JPushHelper.pushByAlias(alias, "心跳关注提醒", "你新增加了一位爱慕人 ... ", data);
-            }).start();
+            if (!entity.getAccount().equals(topicEntity.getAccount())) {
+                // 点赞人不是发布人则推送提醒
+                new Thread(() -> {
+                    String alias = String.valueOf(topicEntity.getAccount());
+                    String data = JPushEntity.createData(JPushEntity.MSG_TYPE_PRAISE, topicEntity);
+                    JPushHelper.pushByAlias(alias, "话题点赞提醒", "有人点赞了你的话题，快去看看吧 ... ", data);
+                }).start();
+            }
 
             return ResultData.success(entity);
         } catch (Exception e) {

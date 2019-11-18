@@ -44,16 +44,18 @@ public class TopicCommentServiceImpl implements TopicCommentService {
             topicEntity.setUpdateTime(new Date());
             topicMapper.update(topicEntity, updateWrapper);
 
-            new Thread(() -> {
-                // 通知话题发布人
-                QueryWrapper<TopicEntity> topicWrapper = new QueryWrapper<>();
-                topicWrapper.lambda().eq(TopicEntity::getTopicId, topicCommentEntity.getTopicId());
-                TopicEntity topicDbEntity = topicMapper.selectOne(topicWrapper);
-
-                String alias = String.valueOf(topicDbEntity.getAccount());
-                String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicDbEntity);
-                JPushHelper.pushByAlias(alias, "心跳关注提醒", "你新增加了一位爱慕人 ... ", data);
-            }).start();
+            // 通知话题发布人
+            QueryWrapper<TopicEntity> topicWrapper = new QueryWrapper<>();
+            topicWrapper.lambda().eq(TopicEntity::getTopicId, topicCommentEntity.getTopicId());
+            TopicEntity topicDbEntity = topicMapper.selectOne(topicWrapper);
+            if (!topicCommentEntity.getSendAccount().equals(topicDbEntity.getAccount())) {
+                // 评论人不是发布人则推送提醒
+                new Thread(() -> {
+                    String alias = String.valueOf(topicDbEntity.getAccount());
+                    String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicDbEntity);
+                    JPushHelper.pushByAlias(alias, "话题评论提醒", "有人评论了你的话题，快去看看吧 ... ", data);
+                }).start();
+            }
 
             return ResultData.success(true);
         } catch (Exception e) {
