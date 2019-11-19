@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.ToString;
 
@@ -68,4 +69,8 @@ public class TopicEntity {
     @ApiModelProperty("话题封面图片")
     @TableField("topic_cover")
     private String topicCover;
+
+    @ApiModelProperty("话题性别分类")
+    @TableField("sex_type")
+    private Integer sexType;
 }

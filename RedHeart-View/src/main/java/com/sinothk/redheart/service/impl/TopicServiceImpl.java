@@ -39,17 +39,41 @@ public class TopicServiceImpl implements TopicService {
             Date pubTime = new Date();
             topicEntity.setCreateTime(pubTime);
             topicEntity.setUpdateTime(pubTime);
+
+            int sexType;
+            if ("TOPIC_THEME_SEX_WOMAN".equals(topicEntity.getTopicTheme())) {
+                sexType = 0; // 女性可见
+            } else if ("TOPIC_THEME_SEX_MAN".equals(topicEntity.getTopicTheme())) {
+                sexType = 1; // 男性可见
+            } else {
+                sexType = -1; // 所有性别
+            }
+            topicEntity.setSexType(sexType);
+            // 保存
             topicMapper.insert(topicEntity);
 
-            // 通知关注人
+            // 通知所有粉丝
             new Thread(() -> {
                 try {
                     TopicAo topicAo = topicMapper.getTopicInfo(topicEntity.getTopicId());
 
                     // 获取我的粉丝用户
-                    QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
-                    fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, topicEntity.getAccount());
-                    List<FriendRelationshipEntity> fansList = friendMapper.selectList(fansWrapper);
+                    List<FriendRelationshipEntity> fansList;
+
+                    if (sexType == 0 || sexType == 1) {
+                        // 区分性别
+                        fansList = friendMapper.selectSexTypeUserList(topicEntity.getAccount(), sexType);
+                    } else {
+                        // 不区分性别，则通知所有粉丝
+                        QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
+                        fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, topicEntity.getAccount());
+                        fansList = friendMapper.selectList(fansWrapper);
+                    }
+
+                    if (fansList == null || fansList.size() == 0) {
+                        return;
+                    }
+
                     ArrayList<String> aliasList = new ArrayList<>();
                     for (FriendRelationshipEntity fans : fansList) {
                         aliasList.add(String.valueOf(fans.getLikingAccount()));

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("friendMapper")
 public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
 
@@ -97,4 +99,14 @@ public interface FriendMapper extends BaseMapper<FriendRelationshipEntity> {
 
     @Select("SELECT COUNT(id) FROM `tb_comm_friends` WHERE liking_account = ${account} AND liked_account = ${targetAccount} ")
     Integer findUserLike(@Param("account") String account, @Param("targetAccount") String targetAccount);
+
+    @Select("SELECT " +
+
+            "tcu.u_account as account, " +
+            "tcu.u_sex as sex, " +
+            "tcf.like_time as likeTime " +
+
+            " FROM tb_comm_user tcu, (SELECT f.* FROM tb_comm_friends f WHERE f.`liked_account` = ${likedAccount}) tcf \n" +
+            " WHERE tcu.u_sex = ${sexType} AND tcu.`u_account` = tcf.`liking_account` ORDER BY tcf.like_time DESC")
+    List<FriendRelationshipEntity> selectSexTypeUserList(@Param("likedAccount") Long account, @Param("sexType") int sexType);
 }
