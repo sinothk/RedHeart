@@ -14,6 +14,7 @@ import cn.jpush.api.push.model.audience.AudienceTarget;
 import cn.jpush.api.push.model.notification.AndroidNotification;
 import cn.jpush.api.push.model.notification.IosNotification;
 import cn.jpush.api.push.model.notification.Notification;
+import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import org.slf4j.Logger;
@@ -108,18 +109,19 @@ public class JPushHelper {
 //                .setAudience(Audience.all())
 //                .setAudience(Audience.alias(new ArrayList<>()))
 //                .setAudience(Audience.registrationId(new ArrayList<>()))
-
                 .setAudience(audience)
 
                 .setNotification(Notification.newBuilder()
                         .setAlert(subTitle)
                         .addPlatformNotification(AndroidNotification.newBuilder()
                                 .setTitle(title)
-                                .addExtras(extras).build())
+                                .addExtras(extras)
+                                .build())
                         .addPlatformNotification(IosNotification.newBuilder()
                                 .incrBadge(1)
                                 .addExtra("extra_key", "extra_value").build())
                         .build())
+                .setMessage(Message.newBuilder().setMsgContent("1111111111111111111111").build())
                 .build();
     }
 

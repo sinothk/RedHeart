@@ -51,9 +51,15 @@ public class TopicCommentServiceImpl implements TopicCommentService {
             if (!topicCommentEntity.getSendAccount().equals(topicDbEntity.getAccount())) {
                 // 评论人不是发布人则推送提醒
                 new Thread(() -> {
-                    String alias = String.valueOf(topicDbEntity.getAccount());
-                    String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicDbEntity);
-                    JPushHelper.pushByAlias(alias, "话题新评论", "有人评论了你的话题，快去看看吧 ... ", data);
+                    try {
+                        TopicAo topicAo = topicMapper.getTopicInfo(topicEntity.getTopicId());
+
+                        String alias = String.valueOf(topicDbEntity.getAccount());
+                        String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicAo);
+                        JPushHelper.pushByAlias(alias, "话题新评论", "有人评论了你的话题，快去看看吧 ... ", data);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }).start();
             }
 

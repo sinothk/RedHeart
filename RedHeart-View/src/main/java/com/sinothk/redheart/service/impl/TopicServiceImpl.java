@@ -43,16 +43,23 @@ public class TopicServiceImpl implements TopicService {
 
             // 通知关注人
             new Thread(() -> {
-                QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
-                fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, topicEntity.getAccount());
+                try {
+                    TopicAo topicAo = topicMapper.getTopicInfo(topicEntity.getTopicId());
 
-                List<FriendRelationshipEntity> fansList = friendMapper.selectList(fansWrapper);
-                ArrayList<String> aliasList = new ArrayList<>();
-                for (FriendRelationshipEntity fans : fansList) {
-                    aliasList.add(String.valueOf(fans.getLikingAccount()));
+                    // 获取我的粉丝用户
+                    QueryWrapper<FriendRelationshipEntity> fansWrapper = new QueryWrapper<>();
+                    fansWrapper.lambda().eq(FriendRelationshipEntity::getLikedAccount, topicEntity.getAccount());
+                    List<FriendRelationshipEntity> fansList = friendMapper.selectList(fansWrapper);
+                    ArrayList<String> aliasList = new ArrayList<>();
+                    for (FriendRelationshipEntity fans : fansList) {
+                        aliasList.add(String.valueOf(fans.getLikingAccount()));
+                    }
+                    String data = JPushEntity.createData(JPushEntity.MSG_TYPE_TOPIC_NEW, topicAo);
+                    JPushHelper.pushByAlias(aliasList, "新话题", "你关注的人发布了新话题，快去看看吧 ... ", data);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                String data = JPushEntity.createData(JPushEntity.MSG_TYPE_TOPIC_NEW, topicEntity);
-                JPushHelper.pushByAlias(aliasList, "新话题", "你关注的人发布了新话题，快去看看吧 ... ", data);
             }).start();
 
             return ResultData.success(true);

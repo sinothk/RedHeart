@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.jpush.pushbyjpush.JPushEntity;
 import com.sinothk.jpush.pushbyjpush.JPushHelper;
+import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicEntity;
 import com.sinothk.redheart.domain.TopicPraiseEntity;
 import com.sinothk.redheart.repository.TopicMapper;
@@ -51,9 +52,15 @@ public class TopicPraiseServiceImpl extends ServiceImpl<TopicPraiseMapper, Topic
             if (!entity.getAccount().equals(topicEntity.getAccount())) {
                 // 点赞人不是发布人则推送提醒
                 new Thread(() -> {
-                    String alias = String.valueOf(topicEntity.getAccount());
-                    String data = JPushEntity.createData(JPushEntity.MSG_TYPE_PRAISE, topicEntity);
-                    JPushHelper.pushByAlias(alias, "话题新点赞", "有人点赞了你的话题，快去看看吧 ... ", data);
+                    try {
+                        TopicAo topicAo = topicMapper.getTopicInfo(topicEntity.getTopicId());
+                        //
+                        String alias = String.valueOf(topicEntity.getAccount());
+                        String data = JPushEntity.createData(JPushEntity.MSG_TYPE_PRAISE, topicAo);
+                        JPushHelper.pushByAlias(alias, "话题新点赞", "有人点赞了你的话题，快去看看吧 ... ", data);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }).start();
             }
 
