@@ -140,32 +140,11 @@ public class UserServiceImpl implements UserService {
             HashMap<String, Object> tokenParam = new HashMap<>();
             tokenParam.put("account", "" + dbOldUser.getAccount());
             tokenParam.put("userName", dbOldUser.getUserName());
-            tokenParam.put("role", dbOldUser.getRole());
+            tokenParam.put("sex", "" + dbOldUser.getSex());
+
+//            tokenParam.put("role", dbOldUser.getRole());
             String token = TokenUtil.createToken(TokenUtil.EXPIRE_TIME_15D, tokenParam);
             dbOldUser.setToken(token);
-
-            // 登录信息设置
-//            if (userVo.getLoginLat() != null || userVo.getLoginLon() != null) {
-//                dbOldUser.setLoginLat(userVo.getLoginLat());
-//                dbOldUser.setLoginLon(userVo.getLoginLon());
-//                dbOldUser.setImei(userVo.getImei());
-//
-//                new Thread(() -> {
-//                    Date date = new Date();
-//                    // 更新数据库用户信息
-//                    dbOldUser.setLoginTime(date);
-//                    userMapper.updateById(dbOldUser);
-//
-//                    // 保存登录记录
-//                    LoginRecordEntity lRecordEntity = new LoginRecordEntity();
-//                    lRecordEntity.setAccount(dbOldUser.getAccount());
-//                    lRecordEntity.setLoginTime(date);
-//                    lRecordEntity.setLoginLat(userVo.getLoginLat());
-//                    lRecordEntity.setLoginLon(userVo.getLoginLon());
-//                    lRecordEntity.setImei(userVo.getImei());
-//                    loginReordMapper.insert(lRecordEntity);
-//                }).start();
-//            }
 
             return ResultData.success(dbOldUser);
         } catch (Exception e) {

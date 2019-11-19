@@ -12,12 +12,12 @@ public interface TopicThemeService {
 
     ResultData<Boolean> add(TopicThemeEntity topicThemeEntity);
 
-    ResultData<List<TopicThemeAo>> getAllTopicThemeList(Long account);
+    ResultData<List<TopicThemeAo>> getAllTopicThemeList(Long account, int sex);
 
 
     ResultData<String> likeTheme(TopicThemeUserEntity ttuEntity);
 
-    ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account);
+    ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account, int sex);
 
     ResultData<ThemeOtherInfoAo> getUserWhitThemeRelation(Long account, String themeCode);
 }

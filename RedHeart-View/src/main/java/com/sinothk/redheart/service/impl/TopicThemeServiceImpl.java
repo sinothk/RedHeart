@@ -35,9 +35,9 @@ public class TopicThemeServiceImpl implements TopicThemeService {
     }
 
     @Override
-    public ResultData<List<TopicThemeAo>> getAllTopicThemeList(Long account) {
+    public ResultData<List<TopicThemeAo>> getAllTopicThemeList(Long account, int sex) {
         try {
-            List<TopicThemeAo> list = topicThemeMapper.getAllTopicThemeList(account);
+            List<TopicThemeAo> list = topicThemeMapper.getAllTopicThemeList(account, sex);
             return ResultData.success(list);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
@@ -67,12 +67,12 @@ public class TopicThemeServiceImpl implements TopicThemeService {
     }
 
     @Override
-    public ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account) {
+    public ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account, int sex) {
         try {
             List<TopicThemeAo> list = topicThemeUserMapper.getMyTopicThemeList(account);
 
             if (list == null || list.size() == 0) {
-                list = topicThemeMapper.getAllTopicThemeList(account).subList(0, 5);
+                list = topicThemeMapper.getAllTopicThemeList(account, sex).subList(0, 5);
             }
 
             TopicThemeAo topicTheme = new TopicThemeAo();

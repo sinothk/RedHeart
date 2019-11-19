@@ -61,7 +61,11 @@ public class TopicThemeController {
             return ResultData.error("Token解析失败");
         }
 
-        return topicThemeService.getAllTopicThemeList(Long.valueOf(account));
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+        return topicThemeService.getAllTopicThemeList(Long.valueOf(account), Integer.valueOf(sex));
     }
 
     @ApiOperation(value = "主题: 关注或取消关注主题", notes = "主题: 关注或取消关注主题")
@@ -98,7 +102,13 @@ public class TopicThemeController {
         if (StringUtil.isEmpty(account)) {
             return ResultData.error("Token解析失败");
         }
-        return topicThemeService.getMyTopicThemeList(Long.valueOf(account));
+
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return topicThemeService.getMyTopicThemeList(Long.valueOf(account), Integer.valueOf(sex));
     }
 
     @ApiOperation(value = "主题：查询主题下关注人数、话题数及当前人和当前主题的关系", notes = "主题：查询主题下关注人数、话题数及当前人和当前主题的关系")
