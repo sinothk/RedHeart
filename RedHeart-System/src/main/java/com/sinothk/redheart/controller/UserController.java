@@ -8,6 +8,7 @@ import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
+import com.sinothk.redheart.domain.UserRegisterVo;
 import com.sinothk.redheart.domain.UserVo;
 import com.sinothk.redheart.service.UserService;
 import io.swagger.annotations.Api;
@@ -26,7 +27,7 @@ public class UserController {
     @Resource(name = "userService")
     private UserService userService;
 
-    @ApiOperation(value = "新增：用户", notes = "新增：用户")
+    @ApiOperation(value = "新增：用户邮箱密码注册", notes = "用户邮箱密码注册")
     @PostMapping("/add")
     @ResponseBody
     public ResultData<UserEntity> add(@ApiParam(value = "用户邮箱", required = true) @RequestParam("email") String email,
@@ -43,6 +44,33 @@ public class UserController {
         UserEntity user = new UserEntity();
         user.setEmail(email);
         user.setUserPwd(password);
+
+        return userService.addUser(user);
+    }
+
+    @ApiOperation(value = "新增：用户实体注册", notes = "用户实体注册")
+    @PostMapping("/addEntity")
+    @ResponseBody
+    public ResultData<UserEntity> add(@ApiParam(value = "用户注册信息", required = true) @RequestBody UserRegisterVo userVo) {
+
+        if (StringUtil.isEmpty(userVo.getEmail())) {
+            // 验证邮箱
+            return ResultData.error("邮箱不能为空");
+        }
+        if (StringUtil.isEmpty(userVo.getUserPwd())) {
+            // 验证密码
+            return ResultData.error("密码不能为空");
+        }
+
+        if (userVo.getSex() == null) {
+            // 用户性别
+            return ResultData.error("性别不能为空");
+        }
+
+        UserEntity user = new UserEntity();
+        user.setEmail(userVo.getEmail());
+        user.setUserPwd(userVo.getUserPwd());
+        user.setSex(userVo.getSex());
 
         return userService.addUser(user);
     }
@@ -85,7 +113,7 @@ public class UserController {
         return userService.login(userVo);
     }
 
-    @ApiOperation(value = "登录：用户信息(位置信息,IMEI等)", notes = "位置信息,IMEI等")
+    @ApiOperation(value = "更新：用户信息(位置信息,IMEI等)", notes = "位置信息,IMEI等")
     @PostMapping("/loginRecord")
     @ResponseBody
     public ResultData<LoginRecordEntity> loginRecord(
