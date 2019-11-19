@@ -51,6 +51,7 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "topic.id as id, " +
             "topic.topic_id as topicId, " +
             "topic.account as account, " +
+            "topic.sex_type as sexType, " +
             "topic.topic_title as topicTitle, " +
             "topic.topic_content as topicContent, " +
             "topic.loc_lat as locLat, " +
@@ -74,16 +75,17 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "theme.theme_txt AS topicTheme" +
 
             " FROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme" +
-            " WHERE " +
+            " WHERE (topic.sex_type = ${sexType} OR topic.sex_type = -1) AND " +
             " (topic.`account` IN (SELECT f.liked_account FROM tb_comm_friends f WHERE f.`liking_account` = ${account}) OR topic.`account` = ${account}) " +
             " AND usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code`" +
             " ORDER BY topic.`update_time` DESC")
-    IPage<TopicAo> getTopicFromILikeUserPageList(IPage page, @Param("account") Long account);
+    IPage<TopicAo> getTopicFromILikeUserPageList(IPage page, @Param("account") Long account, @Param("sexType") int sex);
 
     @Select("SELECT \n" +
             "\ttopic.id AS id, \n" +
             "\ttopic.topic_id AS topicId, \n" +
             "\ttopic.account AS account, \n" +
+            "\ttopic.sex_type as sexType, " +
             "\ttopic.topic_title as topicTitle, " +
             "\ttopic.topic_content AS topicContent, \n" +
             "\ttopic.loc_lat AS locLat, \n" +
@@ -108,10 +110,10 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
 
             "\tFROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
 
-            "\tWHERE  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
+            "\tWHERE (topic.sex_type = ${sexType} OR topic.sex_type = -1) AND  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
 
             "\tORDER BY topic.`update_time` DESC")
-    IPage<TopicAo> getNewTopicPageList(IPage page);
+    IPage<TopicAo> getNewTopicPageList( IPage page, @Param("sexType") int sex);
 
     @Select("SELECT topic.id AS id, \n" +
             "\ttopic.topic_id AS topicId, \n" +

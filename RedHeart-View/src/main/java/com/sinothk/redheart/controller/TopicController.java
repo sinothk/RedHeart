@@ -72,7 +72,12 @@ public class TopicController {
             return ResultData.error("Token解析失败");
         }
 
-        return topicService.getTopicFromILikeUserPageList(Long.valueOf(account), pageNum, pageSize);
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return topicService.getTopicFromILikeUserPageList(Long.valueOf(account), Integer.valueOf(sex), pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")
@@ -88,7 +93,12 @@ public class TopicController {
             return ResultData.error("Token解析失败");
         }
 
-        return topicService.getNewTopicPageList(pageNum, pageSize);
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return topicService.getNewTopicPageList( Integer.valueOf(sex), pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询某种话题分页列表", notes = "话题：查询某种话题分页列表")

@@ -9,7 +9,9 @@ import com.sinothk.base.utils.IdUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.jpush.pushbyjpush.JPushEntity;
 import com.sinothk.jpush.pushbyjpush.JPushHelper;
-import com.sinothk.redheart.domain.*;
+import com.sinothk.redheart.domain.FriendRelationshipEntity;
+import com.sinothk.redheart.domain.TopicAo;
+import com.sinothk.redheart.domain.TopicEntity;
 import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.TopicMapper;
 import com.sinothk.redheart.service.TopicService;
@@ -114,10 +116,10 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(Long account, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(Long account, int sex, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
-            IPage<TopicAo> pageInfo = topicMapper.getTopicFromILikeUserPageList(pageVo, account);
+            IPage<TopicAo> pageInfo = topicMapper.getTopicFromILikeUserPageList(pageVo, account, sex);
 
             PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
@@ -135,10 +137,10 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<TopicAo>> getNewTopicPageList(int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getNewTopicPageList(int sex, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
-            IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo);
+            IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo, sex);
 
             PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
