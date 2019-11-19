@@ -55,7 +55,7 @@ public class TopicServiceImpl implements TopicService {
                         aliasList.add(String.valueOf(fans.getLikingAccount()));
                     }
                     String data = JPushEntity.createData(JPushEntity.MSG_TYPE_TOPIC_NEW, topicAo);
-                    JPushHelper.pushByAlias(aliasList, "新话题", "你关注的人发布了新话题，快去看看吧 ... ", data);
+                    JPushHelper.pushByAlias(aliasList, "心跳新话题", "你关注的人发布了新话题，快去看看吧 ... ", data);
 
                 } catch (Exception e) {
                     e.printStackTrace();
