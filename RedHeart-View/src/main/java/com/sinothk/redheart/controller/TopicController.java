@@ -47,16 +47,25 @@ public class TopicController {
     @ApiOperation(value = "话题：查询由用户发布的话题列表", notes = "话题：查询由用户发布的话题列表")
     @GetMapping("/getTopicFromUserPageList")
     @TokenCheck
-    public ResultData<PageData<TopicAo>> getTopicFromMePageList(
+    public ResultData<PageData<TopicAo>> getTopicFromUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "account") @RequestParam("account") Long account,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
-//        String account = TokenUtil.getTokenValue(token, "account");
-//        if (StringUtil.isEmpty(account)) {
-//            return ResultData.error("Token解析失败");
-//        }
-        return topicService.getTopicFromUserPageList(account, pageNum, pageSize);
+
+        String loginAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(loginAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        boolean isLoginUser = Long.valueOf(loginAccount).equals(account);
+
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return topicService.getTopicFromUserPageList(account, isLoginUser, Integer.valueOf(sex), pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询关注人发布的话题列表", notes = "话题：查询关注人发布的话题列表")
@@ -98,7 +107,7 @@ public class TopicController {
             sex = "-1";
         }
 
-        return topicService.getNewTopicPageList( Integer.valueOf(sex), pageNum, pageSize);
+        return topicService.getNewTopicPageList(Integer.valueOf(sex), pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询某种话题分页列表", notes = "话题：查询某种话题分页列表")
