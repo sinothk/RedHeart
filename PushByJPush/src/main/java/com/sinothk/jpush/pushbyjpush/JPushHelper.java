@@ -121,7 +121,7 @@ public class JPushHelper {
                                 .incrBadge(1)
                                 .addExtra("extra_key", "extra_value").build())
                         .build())
-                .setMessage(Message.newBuilder().setMsgContent("1111111111111111111111").build())
+//                .setMessage(Message.newBuilder().setMsgContent("1111111111111111111111").build())
                 .build();
     }
 
