@@ -22,4 +22,6 @@ public interface TopicService {
     ResultData<PageData<TopicAo>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize);
 
     ResultData<List<TopicAo>> findTopicContent(String account, String keyword);
+
+    ResultData<PageData<TopicAo>> getHotTopicPageList(int sex, int pageNum, int pageSize);
 }

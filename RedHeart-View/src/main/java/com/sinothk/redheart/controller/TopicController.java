@@ -68,10 +68,31 @@ public class TopicController {
         return topicService.getTopicFromUserPageList(account, isLoginUser, Integer.valueOf(sex), pageNum, pageSize);
     }
 
-    @ApiOperation(value = "话题：查询关注人发布的话题列表", notes = "话题：查询关注人发布的话题列表")
-    @GetMapping("/getNewTopicPageList")
+    @ApiOperation(value = "话题：查询热门话题分页列表", notes = "查询热门话题分页列表")
+    @GetMapping("/getHotTopicPageList")
     @TokenCheck
-    public ResultData<PageData<TopicAo>> getNewTopicPageList(
+    public ResultData<PageData<TopicAo>> getHotTopicPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String loginAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(loginAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return topicService.getHotTopicPageList(Integer.valueOf(sex), pageNum, pageSize);
+    }
+
+    @ApiOperation(value = "话题：查询关注人发布的话题列表", notes = "话题：查询关注人发布的话题列表")
+    @GetMapping("/getTopicFromILikeUserPageList")
+    @TokenCheck
+    public ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
@@ -90,9 +111,9 @@ public class TopicController {
     }
 
     @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")
-    @GetMapping("/getHotTopicPageList")
+    @GetMapping("/getNewTopicPageList")
     @TokenCheck
-    public ResultData<PageData<TopicAo>> getHotTopicPageList(
+    public ResultData<PageData<TopicAo>> getNewTopicPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
