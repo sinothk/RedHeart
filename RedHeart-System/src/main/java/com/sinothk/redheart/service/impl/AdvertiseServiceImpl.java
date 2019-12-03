@@ -66,6 +66,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     @Override
     public ResultData<AdvertiseEntity> getWelcomeAdvList(String cityName) {
         try {
+
             if (StringUtil.isEmpty(cityName)) {
                 cityName = "全国";
             }
@@ -74,7 +75,6 @@ public class AdvertiseServiceImpl implements AdvertiseService {
             wrapper.lambda().eq(AdvertiseEntity::getCityName, cityName) // 显示城市名称
                     .eq(AdvertiseEntity::getAdWhere, 0)
                     .eq(AdvertiseEntity::getStatus, 1); // 查询正常状态
-
             List<AdvertiseEntity> advList = advertiseMapper.selectList(wrapper);
 
             if (advList == null || advList.size() == 0) {
