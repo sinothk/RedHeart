@@ -76,6 +76,15 @@ public class AdvertiseServiceImpl implements AdvertiseService {
                     .eq(AdvertiseEntity::getStatus, 1); // 查询正常状态
 
             List<AdvertiseEntity> advList = advertiseMapper.selectList(wrapper);
+
+            if (advList == null || advList.size() == 0) {
+                QueryWrapper<AdvertiseEntity> wrapperAll = new QueryWrapper<>();
+                wrapperAll.lambda().eq(AdvertiseEntity::getCityName, "全国") // 显示城市名称
+                        .eq(AdvertiseEntity::getAdWhere, 0)
+                        .eq(AdvertiseEntity::getStatus, 1); // 查询正常状态
+                advList = advertiseMapper.selectList(wrapperAll);
+            }
+
             if (advList == null || advList.size() == 0) {
                 advList = new ArrayList<>();
                 advList.add(new AdvertiseEntity(DefValue.getWelcomeAdvURL()));
