@@ -67,7 +67,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     public ResultData<AdvertiseEntity> getWelcomeAdvList(String cityName) {
         try {
             if (StringUtil.isEmpty(cityName)) {
-                return ResultData.success(new AdvertiseEntity(DefValue.getWelcomeAdvURL()));
+                cityName = "全国";
             }
 
             QueryWrapper<AdvertiseEntity> wrapper = new QueryWrapper<>();
