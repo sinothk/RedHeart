@@ -61,4 +61,11 @@ public class AdvertiseController {
             @ApiParam(value = "页大小", required = true) @RequestParam("pageSize") int pageSize) {
         return advertiseService.getAdList(adWhere, pageNum, pageSize);
     }
+
+    @ApiOperation(value = "广告：获取开屏广告，根据城市名称", notes = "获取开屏广告，根据城市名称")
+    @GetMapping("/getWelcomeAdvList")
+    public ResultData<AdvertiseEntity> getWelcomeAdvList(
+            @ApiParam(value = "城市名称：XX市", required = true) @RequestParam("cityName") String cityName) {
+        return advertiseService.getWelcomeAdvList(cityName);
+    }
 }

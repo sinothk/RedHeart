@@ -30,6 +30,14 @@ public class AdvertiseEntity {
 //    PRIMARY KEY (`id`)
 //) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+
+    public AdvertiseEntity() {
+    }
+
+    public AdvertiseEntity(String adImg) {
+        this.adImg = adImg;
+    }
+
     @ApiModelProperty("ID")
     @TableId(value = "id", type = IdType.INPUT)
     private Long id;
@@ -73,4 +81,9 @@ public class AdvertiseEntity {
     @ApiModelProperty("到期时间")
     @TableField(value = "end_time")
     private Date endTime;
+
+    @ApiModelProperty("显示城市")
+    @TableField(value = "ad_city")
+    private String cityName;
+
 }
