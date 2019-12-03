@@ -58,6 +58,9 @@ public class TopicAo {
     @ApiModelProperty("点赞数")
     private Integer praiseNum;
 
+    @ApiModelProperty("点赞数")
+    private Integer commentNum;
+
     // ======================================
 
     @ApiModelProperty("发布人姓名")
