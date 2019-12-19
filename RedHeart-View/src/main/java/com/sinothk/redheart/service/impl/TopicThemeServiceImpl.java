@@ -13,6 +13,7 @@ import com.sinothk.redheart.service.TopicThemeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,21 +70,27 @@ public class TopicThemeServiceImpl implements TopicThemeService {
     @Override
     public ResultData<List<TopicThemeAo>> getMyTopicThemeList(Long account, int sex) {
         try {
-            List<TopicThemeAo> list = topicThemeUserMapper.getMyTopicThemeList(account);
 
-            if (list == null || list.size() == 0) {
-                list = topicThemeMapper.getAllTopicThemeList(account, sex).subList(0, 5);
-            }
-
+            List<TopicThemeAo> listAll = new ArrayList<>();
             TopicThemeAo topicTheme = new TopicThemeAo();
             topicTheme.setAccount(account);
             topicTheme.setThemeCode("");
             topicTheme.setThemeTxt("全部");
             topicTheme.setThemeIcon("living/9999/sysem/201911/theme_all2.jpg");
             topicTheme.setRemark("1.5");
-            list.add(0, topicTheme);
+            listAll.add(0, topicTheme);
 
-            return ResultData.success(list);
+            // 获取数据库数据
+            List<TopicThemeAo> list = topicThemeUserMapper.getMyTopicThemeList(account);
+            if (list == null || list.size() == 0) {
+                list = topicThemeMapper.getAllTopicThemeList(account, sex).subList(0, 5);
+            }
+
+            if (list.size() > 0) {
+                listAll.addAll(list);
+            }
+
+            return ResultData.success(listAll);
         } catch (Exception e) {
             return ResultData.error(e.getCause().getMessage());
         }
