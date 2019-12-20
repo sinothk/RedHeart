@@ -56,10 +56,11 @@ public class AdvertiseController {
     @ApiOperation(value = "广告：获取所有分页广告", notes = "通知：获取所有分页广告")
     @GetMapping("/getAdList")
     public ResultData<PageData<AdvertiseEntity>> getAdList(
+            @ApiParam(value = "城市名称：XX市", required = true) @RequestParam("cityName") String cityName,
             @ApiParam(value = "位置编号", required = true) @RequestParam("adWhere") int adWhere,
             @ApiParam(value = "查询页号", required = true) @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页大小", required = true) @RequestParam("pageSize") int pageSize) {
-        return advertiseService.getAdList(adWhere, pageNum, pageSize);
+        return advertiseService.getAdList(cityName, adWhere, pageNum, pageSize);
     }
 
     @ApiOperation(value = "广告：获取开屏广告，根据城市名称", notes = "获取开屏广告，根据城市名称")

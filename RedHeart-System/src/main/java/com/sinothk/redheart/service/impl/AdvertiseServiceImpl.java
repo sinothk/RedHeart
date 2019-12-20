@@ -38,15 +38,29 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     }
 
     @Override
-    public ResultData<PageData<AdvertiseEntity>> getAdList(int adWhere, int pageNum, int pageSize) {
+    public ResultData<PageData<AdvertiseEntity>> getAdList(String cityName, int adWhere, int pageNum, int pageSize) {
         try {
 
-            QueryWrapper<AdvertiseEntity> wrapper = new QueryWrapper<>();
+            IPage<AdvertiseEntity> pageInfo = null;
 
-            wrapper.lambda().eq(AdvertiseEntity::getAdWhere, adWhere) // 显示位置
-                    .eq(AdvertiseEntity::getStatus, 1); // 查询正常状态
+            // 特定城市
+            if (StringUtil.isNotEmpty(cityName)) {
+                QueryWrapper<AdvertiseEntity> wrapper = new QueryWrapper<>();
+                wrapper.lambda().eq(AdvertiseEntity::getCityName, cityName) // 显示城市名称
+                        .eq(AdvertiseEntity::getAdWhere, adWhere) // 显示位置
+                        .eq(AdvertiseEntity::getStatus, 1); // 查询正常状态
+                pageInfo = advertiseMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+            }
 
-            IPage<AdvertiseEntity> pageInfo = advertiseMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+            if (pageInfo == null || pageInfo.getTotal() == 0) {
+                // 特定城市没有数据，则加载全国数据填充
+                QueryWrapper<AdvertiseEntity> wrapperAll = new QueryWrapper<>();
+                wrapperAll.lambda().eq(AdvertiseEntity::getCityName, "全国") // 显示城市名称
+                        .eq(AdvertiseEntity::getAdWhere, adWhere) // 显示位置
+                        .eq(AdvertiseEntity::getStatus, 1); // 查询正常状态
+
+                pageInfo = advertiseMapper.selectPage(new Page<>(pageNum, pageSize), wrapperAll);
+            }
 
             PageData<AdvertiseEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
@@ -54,6 +68,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
+
             int currSize = pageNum * pageSize;
             pageEntity.setHasMore(currSize < pageInfo.getTotal());
 

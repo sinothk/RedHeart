@@ -10,7 +10,7 @@ public interface AdvertiseService {
 
     ResultData<Boolean> add(AdvertiseEntity adEntity);
 
-    ResultData<PageData<AdvertiseEntity>> getAdList(int adWhere, int pageNum, int pageSize);
+    ResultData<PageData<AdvertiseEntity>> getAdList(String cityName, int adWhere, int pageNum, int pageSize);
 
     ResultData<AdvertiseEntity> getWelcomeAdvList(String cityName);
 }
