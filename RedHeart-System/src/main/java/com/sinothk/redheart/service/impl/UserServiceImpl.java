@@ -235,10 +235,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultData<PageData<UserEntity>> getMaybeLikePageList(int pageNum, int pageSize) {
+    public ResultData<PageData<UserEntity>> getMaybeLikePageList(String likingAccount, int pageNum, int pageSize) {
         try {
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
-            wrapper.lambda().eq(UserEntity::getUserType, "-1").orderByDesc(UserEntity::getLoginTime);
+            wrapper.lambda().eq(UserEntity::getUserType, "-1")
+                    .ne(UserEntity::getAccount, likingAccount)
+                    .orderByDesc(UserEntity::getLoginTime);
 
             IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 

@@ -202,7 +202,7 @@ public class UserController {
             return ResultData.error("Token解析失败");
         }
 
-        return userService.getMaybeLikePageList(pageNum, pageSize);
+        return userService.getMaybeLikePageList(likingAccount, pageNum, pageSize);
     }
 
     @ApiOperation(value = "查询：模糊搜索用户(账号、昵称或名称)", notes = "搜索用户(账号、昵称或名称)")

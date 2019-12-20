@@ -20,7 +20,7 @@ public interface UserService {
 
     ResultData<PageData<UserEntity>> getLastLoginUserPageList(int pageNum, int pageSize);
 
-    ResultData<PageData<UserEntity>> getMaybeLikePageList(int pageNum, int pageSize);
+    ResultData<PageData<UserEntity>> getMaybeLikePageList(String likingAccount, int pageNum, int pageSize);
 
     ResultData<List<UserEntity>> findUserByAccountOrUsername(String account, String keyword);
 
