@@ -72,6 +72,14 @@ public class UserController {
         user.setUserPwd(userVo.getUserPwd());
         user.setSex(userVo.getSex());
 
+        Integer userType;
+        if (userVo.getUserType() == null) {
+            userType = 0;
+        } else {
+            userType = userVo.getUserType();
+        }
+        user.setUserType(userType);
+
         user.setAvatar("living/9999/default/user_default_add.png");
 
         return userService.addUser(user);
