@@ -25,4 +25,6 @@ public interface UserService {
     ResultData<List<UserEntity>> findUserByAccountOrUsername(String account, String keyword);
 
     ResultData<LoginRecordEntity> loginRecord(LoginRecordEntity loginRecordVo);
+
+    ResultData<PageData<UserEntity>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize);
 }

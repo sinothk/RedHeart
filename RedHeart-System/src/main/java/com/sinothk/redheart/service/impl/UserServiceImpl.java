@@ -281,4 +281,37 @@ public class UserServiceImpl implements UserService {
             return ResultData.error(e.getCause().getMessage());
         }
     }
+
+    @Override
+    public ResultData<PageData<UserEntity>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize) {
+        try {
+            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+
+            String sexSql = "";
+            if (sex == 0 || sex == 1) {
+                sexSql = "u_sex = " + sex + " AND";
+            }
+
+            String allSql = "SELECT *, GETDISTANCE( login_lat, login_lon, " + centerLat + ", " + centerLng + ") AS distance " +
+                    "FROM  tb_comm_user  " +
+                    "WHERE " + sexSql + " 1 HAVING distance < 100000 ORDER BY distance";
+
+            wrapper.exists(allSql);
+
+            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+
+            PageData<UserEntity> pageEntity = new PageData<>();
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+
+            pageEntity.setData(pageInfo.getRecords());
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
 }

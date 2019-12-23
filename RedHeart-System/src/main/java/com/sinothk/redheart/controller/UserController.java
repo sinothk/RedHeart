@@ -219,4 +219,22 @@ public class UserController {
 
         return userService.findUserByAccountOrUsername(account, keyword);
     }
+
+    @ApiOperation(value = "查询：获取附近用户分页数据", notes = "获取附近用户分页数据")
+    @GetMapping("/getNearbyUserPageList")
+    @TokenCheck
+    public ResultData<PageData<UserEntity>> getNearbyUserPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "男1/女0, -1全部") @RequestParam("sex") int sex,
+            @ApiParam(value = "中心纬度") @RequestParam("centerLat") Double centerLat,
+            @ApiParam(value = "中心经度") @RequestParam("centerLng") Double centerLng,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String likingAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(likingAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+        return userService.getNearbyUserPageList(sex, centerLat, centerLng, pageNum, pageSize);
+    }
 }
