@@ -6,7 +6,6 @@ import com.sinothk.redheart.domain.LoginRecordEntity;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserVo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface UserService {

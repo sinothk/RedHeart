@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Resource(name = "loginReordMapper")
     private LoginReordMapper loginReordMapper;
-
     @Resource(name = "friendMapper")
     private FriendMapper friendMapper;
 
@@ -292,13 +291,17 @@ public class UserServiceImpl implements UserService {
                 sexSql = "u_sex = " + sex + " AND";
             }
 
-            String allSql = "SELECT *, GETDISTANCE( login_lat, login_lon, " + centerLat + ", " + centerLng + ") AS distance " +
+            String allSql = "SELECT login_lat as loginLat, login_lon as loginLon, GETDISTANCE( login_lat, login_lon, " + centerLat + ", " + centerLng + ") as distance " +
                     "FROM  tb_comm_user  " +
                     "WHERE " + sexSql + " 1 HAVING distance < 100000 ORDER BY distance";
 
             wrapper.exists(allSql);
 
             IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+
+//            IPage<UserEntity> pageInfo = userMapper.getNearbyUserPageList(new Page<>(pageNum, pageSize), centerLat, centerLng);
+
+//            List<UserAO> pageInfo = userMapper.getNearbyUserPageList(); //centerLat, centerLng
 
             PageData<UserEntity> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
