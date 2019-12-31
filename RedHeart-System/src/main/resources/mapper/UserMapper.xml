@@ -12,6 +12,6 @@
             id,
             GETDISTANCE(login_lat, login_lon, #{userVo.lat}, #{userVo.lng}) as distance
          FROM tb_comm_user
-         where 1 HAVING distance <![CDATA[ <= ]]> 100000 ORDER BY distance ASC Limit 0, 20
+         where 1 HAVING distance <![CDATA[ <= ]]> 100000 ORDER BY distance ASC
     </select>
 </mapper>

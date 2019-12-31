@@ -27,9 +27,6 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name = "userMapper")
     private UserMapper userMapper;
-//    @Resource(name = "userMoreMapper")
-//    private UserMoreMapper userMoreMapper;
-
     @Resource(name = "loginReordMapper")
     private LoginReordMapper loginReordMapper;
     @Resource(name = "friendMapper")
@@ -284,40 +281,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultData<PageData<UserAO>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize) {
         try {
-//            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
-//
-//            String sexSql = "";
-//            if (sex == 0 || sex == 1) {
-//                sexSql = "u_sex = " + sex + " AND";
-//            }
-//
-//            String allSql = "SELECT login_lat as loginLat, login_lon as loginLon, GETDISTANCE( login_lat, login_lon, " + centerLat + ", " + centerLng + ") as distance " +
-//                    "FROM  tb_comm_user  " +
-//                    "WHERE " + sexSql + " 1 HAVING distance < 100000 ORDER BY distance";
-//
-//            wrapper.exists(allSql);
-
-//            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
-
-//            userMapper.getNearbyUserPageList(centerLat, centerLng);
-
             UserVo userVo = new UserVo();
             userVo.setLat(centerLat);
             userVo.setLng(centerLng);
-            List<UserAO> ul = userMapper.getNearbyUserPageList(userVo);
-
-//            IPage<UserEntity> pageInfo = null;// userMapper.getNearbyUserPageList( centerLat, centerLng);
-
-//            List<UserAO> pageInfo = userMapper.getNearbyUserPageList(); //centerLat, centerLng
+            IPage<UserAO> pageInfo = userMapper.getNearbyUserPageList(new Page<>(pageNum, pageSize), userVo);
 
             PageData<UserAO> pageEntity = new PageData<>();
-//            pageEntity.setPageSize(pageSize);
-//            pageEntity.setPageNum(pageNum);
-//
-            pageEntity.setData(ul);
-//            pageEntity.setTotal((int) pageInfo.getTotal());
-//            int currSize = pageNum * pageSize;
-//            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+
+            pageEntity.setData(pageInfo.getRecords());
+
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
