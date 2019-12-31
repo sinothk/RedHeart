@@ -3,6 +3,7 @@ package com.sinothk.redheart.service;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.redheart.domain.LoginRecordEntity;
+import com.sinothk.redheart.domain.UserAO;
 import com.sinothk.redheart.domain.UserEntity;
 import com.sinothk.redheart.domain.UserVo;
 
@@ -25,5 +26,5 @@ public interface UserService {
 
     ResultData<LoginRecordEntity> loginRecord(LoginRecordEntity loginRecordVo);
 
-    ResultData<PageData<UserEntity>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize);
+    ResultData<PageData<UserAO>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize);
 }

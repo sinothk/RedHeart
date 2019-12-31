@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinothk.redheart.repository.UserMapper">
+
+    <resultMap id="nearbyUserResult" type="com.sinothk.redheart.domain.UserAO">
+        <id column="id" property="id" />
+        <result column="distance" property="distance" />
+    </resultMap>
+
+    <select id="getNearbyUserPageList" resultMap="nearbyUserResult" parameterType="com.sinothk.redheart.domain.UserVo">
+         SELECT
+            id,
+            GETDISTANCE(login_lat, login_lon, #{userVo.lat}, #{userVo.lng}) as distance
+         FROM tb_comm_user
+         where 1 HAVING distance <![CDATA[ <= ]]> 100000 ORDER BY distance ASC Limit 0, 20
+    </select>
+</mapper>

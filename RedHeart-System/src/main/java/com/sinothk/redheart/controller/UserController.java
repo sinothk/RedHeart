@@ -220,7 +220,7 @@ public class UserController {
     @ApiOperation(value = "查询：获取附近用户分页数据", notes = "获取附近用户分页数据")
     @GetMapping("/getNearbyUserPageList")
     @TokenCheck
-    public ResultData<PageData<UserEntity>> getNearbyUserPageList(
+    public ResultData<PageData<UserAO>> getNearbyUserPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "男1/女0, -1全部") @RequestParam("sex") int sex,
             @ApiParam(value = "中心纬度") @RequestParam("centerLat") Double centerLat,

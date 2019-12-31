@@ -74,7 +74,12 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.1.0</version>
         </dependency>
-
+        <!-- 这是mybatis-plus的代码自动生成器 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.1.1</version>
+        </dependency>
         <!--API：swagger-bootstrap-ui-->
         <dependency>
             <groupId>io.springfox</groupId>

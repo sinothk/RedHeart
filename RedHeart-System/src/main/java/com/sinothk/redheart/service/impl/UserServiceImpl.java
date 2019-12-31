@@ -10,10 +10,7 @@ import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
-import com.sinothk.redheart.domain.FriendRelationshipEntity;
-import com.sinothk.redheart.domain.LoginRecordEntity;
-import com.sinothk.redheart.domain.UserEntity;
-import com.sinothk.redheart.domain.UserVo;
+import com.sinothk.redheart.domain.*;
 import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
@@ -30,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource(name = "userMapper")
     private UserMapper userMapper;
+//    @Resource(name = "userMoreMapper")
+//    private UserMoreMapper userMoreMapper;
+
     @Resource(name = "loginReordMapper")
     private LoginReordMapper loginReordMapper;
     @Resource(name = "friendMapper")
@@ -282,35 +282,42 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultData<PageData<UserEntity>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize) {
+    public ResultData<PageData<UserAO>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize) {
         try {
-            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+//            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+//
+//            String sexSql = "";
+//            if (sex == 0 || sex == 1) {
+//                sexSql = "u_sex = " + sex + " AND";
+//            }
+//
+//            String allSql = "SELECT login_lat as loginLat, login_lon as loginLon, GETDISTANCE( login_lat, login_lon, " + centerLat + ", " + centerLng + ") as distance " +
+//                    "FROM  tb_comm_user  " +
+//                    "WHERE " + sexSql + " 1 HAVING distance < 100000 ORDER BY distance";
+//
+//            wrapper.exists(allSql);
 
-            String sexSql = "";
-            if (sex == 0 || sex == 1) {
-                sexSql = "u_sex = " + sex + " AND";
-            }
+//            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 
-            String allSql = "SELECT login_lat as loginLat, login_lon as loginLon, GETDISTANCE( login_lat, login_lon, " + centerLat + ", " + centerLng + ") as distance " +
-                    "FROM  tb_comm_user  " +
-                    "WHERE " + sexSql + " 1 HAVING distance < 100000 ORDER BY distance";
+//            userMapper.getNearbyUserPageList(centerLat, centerLng);
 
-            wrapper.exists(allSql);
+            UserVo userVo = new UserVo();
+            userVo.setLat(centerLat);
+            userVo.setLng(centerLng);
+            List<UserAO> ul = userMapper.getNearbyUserPageList(userVo);
 
-            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
-
-//            IPage<UserEntity> pageInfo = userMapper.getNearbyUserPageList(new Page<>(pageNum, pageSize), centerLat, centerLng);
+//            IPage<UserEntity> pageInfo = null;// userMapper.getNearbyUserPageList( centerLat, centerLng);
 
 //            List<UserAO> pageInfo = userMapper.getNearbyUserPageList(); //centerLat, centerLng
 
-            PageData<UserEntity> pageEntity = new PageData<>();
-            pageEntity.setPageSize(pageSize);
-            pageEntity.setPageNum(pageNum);
-
-            pageEntity.setData(pageInfo.getRecords());
-            pageEntity.setTotal((int) pageInfo.getTotal());
-            int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            PageData<UserAO> pageEntity = new PageData<>();
+//            pageEntity.setPageSize(pageSize);
+//            pageEntity.setPageNum(pageNum);
+//
+            pageEntity.setData(ul);
+//            pageEntity.setTotal((int) pageInfo.getTotal());
+//            int currSize = pageNum * pageSize;
+//            pageEntity.setHasMore(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {

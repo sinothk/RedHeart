@@ -13,6 +13,9 @@ public class UserVo {
     //
     private Double loginLat;
     private Double loginLon;
+
+    private double lat;
+    private double lng;
     //
     private String imei;
 }
