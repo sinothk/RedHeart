@@ -38,7 +38,6 @@ public class FriendController {
         if (StringUtil.isEmpty(likingAccount)) {
             return ResultData.error("Token解析失败");
         }
-
         return friendService.getLikeUserList(Long.valueOf(likingAccount), pageNum, pageSize);
     }
 
@@ -54,7 +53,6 @@ public class FriendController {
         if (StringUtil.isEmpty(likingAccount)) {
             return ResultData.error("Token解析失败");
         }
-
         return friendService.getFensUserList(Long.valueOf(likingAccount), pageNum, pageSize);
     }
 
