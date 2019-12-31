@@ -3,13 +3,34 @@
 <mapper namespace="com.sinothk.redheart.repository.UserMapper">
 
     <resultMap id="nearbyUserResult" type="com.sinothk.redheart.domain.UserAO">
-        <id column="id" property="id" />
-        <result column="distance" property="distance" />
+        <id column="id" property="id"/>
+
+        <result column="u_account" property="account"/>
+        <result column="user_name" property="userName"/>
+        <result column="u_nickname" property="nickname"/>
+        <result column="u_avatar" property="avatar"/>
+        <result column="u_email" property="email"/>
+        <result column="u_sex" property="sex"/>
+        <result column="u_idcard" property="idCard"/>
+        <result column="u_phone_num" property="phoneNum"/>
+        <result column="user_status" property="userStatus"/>
+        <result column="user_borthday" property="userBorthday"/>
+        <result column="create_time" property="createTime"/>
+        <result column="user_hometown" property="hometown"/>
+        <result column="user_type" property="userType"/>
+        <result column="login_lat" property="loginLat"/>
+        <result column="login_lon" property="loginLon"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="login_address" property="loginAddress"/>
+        <result column="login_province" property="loginProvince"/>
+        <result column="login_city" property="loginCity"/>
+        <result column="login_district" property="loginDistrict"/>
+        <result column="distance" property="distance"/>
     </resultMap>
 
     <select id="getNearbyUserPageList" resultMap="nearbyUserResult" parameterType="com.sinothk.redheart.domain.UserVo">
          SELECT
-            id,
+            *,
             GETDISTANCE(login_lat, login_lon, #{userVo.lat}, #{userVo.lng}) as distance
          FROM tb_comm_user
          where 1 HAVING distance <![CDATA[ <= ]]> 100000 ORDER BY distance ASC

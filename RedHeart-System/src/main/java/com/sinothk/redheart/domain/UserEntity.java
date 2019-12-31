@@ -131,8 +131,4 @@ public class UserEntity {
     @ApiModelProperty(value = "IMEI")
     @TableField(exist = false)
     private String imei;
-
-    @ApiModelProperty(value = "距离")
-    @TableField(exist = false)
-    private Double distance;
 }
