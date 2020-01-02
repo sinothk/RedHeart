@@ -76,6 +76,13 @@ public class UserServiceImpl implements UserService {
             UserEntity dbUser = userMapper.selectOne(wrapper);
 
             if (dbUser != null) {
+                // Token部分
+                HashMap<String, Object> tokenParam = new HashMap<>();
+                tokenParam.put("account", "" + dbUser.getAccount());
+                tokenParam.put("userName", dbUser.getUserName());
+                tokenParam.put("sex", "" + dbUser.getSex());
+                dbUser.setToken(TokenUtil.createToken(TokenUtil.EXPIRE_TIME_15D, tokenParam));
+
                 return ResultData.success(dbUser);
             } else {
                 return ResultData.error("暂无数据");
