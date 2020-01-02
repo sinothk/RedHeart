@@ -27,7 +27,7 @@ public class JMessageHelper {
         }).start();
     }
 
-    public static void main(String[] args) {
-        sendTxtMsg("10033", "9999", "欢迎加入异趣，很高心在这里遇见您！");
-    }
+//    public static void main(String[] args) {
+//        sendTxtMsg("10033", "9999", "欢迎加入异趣，很高心在这里遇见您！");
+//    }
 }
