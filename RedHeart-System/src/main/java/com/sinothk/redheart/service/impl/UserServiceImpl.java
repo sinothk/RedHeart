@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
                 tokenParam.put("sex", "" + dbUser.getSex());
                 dbUser.setToken(TokenUtil.createToken(TokenUtil.EXPIRE_TIME_15D, tokenParam));
 
-                JMessageHelper.sendTxtMsg(dbUser.getAccount().toString(), JMessageHelper.USER_ADMIN, "欢迎加入异趣，很高心在这里遇见您！");
+                new Thread(() -> JMessageHelper.sendTxtMsg(dbUser.getAccount().toString(), JMessageHelper.USER_ADMIN, "欢迎加入异趣，很高心在这里遇见您！")).start();
 
                 return ResultData.success(dbUser);
             } else {
