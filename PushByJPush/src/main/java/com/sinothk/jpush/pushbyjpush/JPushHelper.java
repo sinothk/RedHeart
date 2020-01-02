@@ -26,9 +26,6 @@ import java.util.Map;
 
 public class JPushHelper {
 
-    private static final String MASTER_SECRET = "783b80b7be1590bcff378ff8";
-    private static final String APP_KEY = "3e3250f7c049c0d226fcfbba";
-
     private static final Logger LOG = LoggerFactory.getLogger(JPushHelper.class);
 
 //    public static void main(String[] args) {
@@ -78,7 +75,7 @@ public class JPushHelper {
 
     private static void pushBase(Audience audience, String title, String subTitle, String data) {
         ClientConfig clientConfig = ClientConfig.getInstance();
-        final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
+        final JPushClient jpushClient = new JPushClient(KeyValue.MASTER_SECRET, KeyValue.APP_KEY, null, clientConfig);
         final PushPayload payload = buildPushObject_android_and_ios(audience, title, subTitle, data);
         try {
             PushResult result = jpushClient.sendPush(payload);
@@ -164,7 +161,7 @@ public class JPushHelper {
 
     private static void pushMsgBase(Audience audience, String data) {
         ClientConfig clientConfig = ClientConfig.getInstance();
-        final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
+        final JPushClient jpushClient = new JPushClient(KeyValue.MASTER_SECRET, KeyValue.APP_KEY, null, clientConfig);
         final PushPayload payload = buildPushMsgObject(audience, data);
 
         try {

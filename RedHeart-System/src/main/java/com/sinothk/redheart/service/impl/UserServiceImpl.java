@@ -9,6 +9,7 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
+import com.sinothk.jpush.pushbyjpush.im.JMessageHelper;
 import com.sinothk.redheart.config.AccountInitLoader;
 import com.sinothk.redheart.domain.*;
 import com.sinothk.redheart.repository.FriendMapper;
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
             if (dbOldUser != null) {
                 return ResultData.error("此邮箱已被暂用");
             }
+
             // 保存数据
             Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet);
             userVo.setAccount(account);
@@ -82,6 +84,8 @@ public class UserServiceImpl implements UserService {
                 tokenParam.put("userName", dbUser.getUserName());
                 tokenParam.put("sex", "" + dbUser.getSex());
                 dbUser.setToken(TokenUtil.createToken(TokenUtil.EXPIRE_TIME_15D, tokenParam));
+
+                JMessageHelper.sendTxtMsg(dbUser.getAccount().toString(), JMessageHelper.USER_ADMIN, "欢迎加入异趣，很高心在这里遇见您！");
 
                 return ResultData.success(dbUser);
             } else {
