@@ -30,4 +30,6 @@ public interface UserService {
     ResultData<PageData<UserAO>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize);
 
     ResultData<PageData<UserEntity>> getNewUserPageList(String currAccount, int pageNum, int pageSize);
+
+    ResultData<PageData<UserEntity>> getUsersByTopsTopicPageList(String sex, int pageNum, int pageSize);
 }

@@ -334,4 +334,24 @@ public class UserServiceImpl implements UserService {
             return ResultData.error(e.getCause().getMessage());
         }
     }
+
+    @Override
+    public ResultData<PageData<UserEntity>> getUsersByTopsTopicPageList(String sex, int pageNum, int pageSize) {
+        try {
+            IPage<UserEntity> pageInfo = userMapper.getUsersByTopsTopicPageList(new Page<>(pageNum, pageSize));
+
+            PageData<UserEntity> pageEntity = new PageData<>();
+            pageEntity.setData(pageInfo.getRecords());
+
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
 }

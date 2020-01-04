@@ -249,4 +249,25 @@ public class UserController {
         }
         return userService.getNewUserPageList(currAccount, pageNum, pageSize);
     }
+
+    @ApiOperation(value = "查询：获取动态最多的用户分页数据", notes = "获取动态最多的用户分页数据")
+    @GetMapping("/getUsersByTopsTopicPageList")
+    @TokenCheck
+    public ResultData<PageData<UserEntity>> getUsersByTopsTopicPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String currAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(currAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return userService.getUsersByTopsTopicPageList(sex, pageNum, pageSize);
+    }
 }
