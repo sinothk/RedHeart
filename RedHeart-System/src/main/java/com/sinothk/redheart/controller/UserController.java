@@ -179,11 +179,11 @@ public class UserController {
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
 
-        String likingAccount = TokenUtil.getTokenValue(token, "account");
-        if (StringUtil.isEmpty(likingAccount)) {
+        String currAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(currAccount)) {
             return ResultData.error("Token解析失败");
         }
-        return userService.getLastLoginUserPageList(pageNum, pageSize);
+        return userService.getLastLoginUserPageList(currAccount, pageNum, pageSize);
     }
 
     @ApiOperation(value = "查询：可能喜欢的用户", notes = "可能喜欢的用户")

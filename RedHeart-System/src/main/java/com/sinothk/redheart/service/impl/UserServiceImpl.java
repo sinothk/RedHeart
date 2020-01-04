@@ -215,10 +215,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultData<PageData<UserEntity>> getLastLoginUserPageList(int pageNum, int pageSize) {
+    public ResultData<PageData<UserEntity>> getLastLoginUserPageList(String currAccount, int pageNum, int pageSize) {
         try {
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
-            wrapper.lambda().ne(UserEntity::getUserType, "-2").orderByDesc(UserEntity::getLoginTime);
+            wrapper.lambda()
+                    .ne(UserEntity::getAccount, currAccount)
+                    .ne(UserEntity::getUserType, "-2")
+                    .orderByDesc(UserEntity::getLoginTime);
 
             IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
 

@@ -19,7 +19,7 @@ public interface UserService {
 
     ResultData<Boolean> changePwd(String account, String oldPwd, String newPwd);
 
-    ResultData<PageData<UserEntity>> getLastLoginUserPageList(int pageNum, int pageSize);
+    ResultData<PageData<UserEntity>> getLastLoginUserPageList(String currAccount, int pageNum, int pageSize);
 
     ResultData<PageData<UserEntity>> getMaybeLikePageList(String likingAccount, int pageNum, int pageSize);
 
