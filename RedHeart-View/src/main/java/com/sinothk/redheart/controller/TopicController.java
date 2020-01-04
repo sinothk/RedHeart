@@ -111,6 +111,29 @@ public class TopicController {
     }
 
     @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")
+    @GetMapping("/getTopicPageListByType")
+    @TokenCheck
+    public ResultData<PageData<TopicAo>> getTopicPageListByType(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询类型") @RequestParam("type") int type,
+            @ApiParam(value = "关键字") @RequestParam("type") String keyword,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+
+        String sex = TokenUtil.getTokenValue(token, "sex");
+        if (sex == null) {
+            sex = "-1";
+        }
+
+        return topicService.getNewTopicPageList(Integer.valueOf(sex), pageNum, pageSize);
+    }
+
+    @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")
     @GetMapping("/getNewTopicPageList")
     @TokenCheck
     public ResultData<PageData<TopicAo>> getNewTopicPageList(
