@@ -10,6 +10,7 @@ import com.sinothk.redheart.domain.UserVo;
 import java.util.List;
 
 public interface UserService {
+
     ResultData<UserEntity> addUser(UserEntity user);
 
     ResultData<UserEntity> updateUser(UserEntity user);
@@ -27,4 +28,6 @@ public interface UserService {
     ResultData<LoginRecordEntity> loginRecord(LoginRecordEntity loginRecordVo);
 
     ResultData<PageData<UserAO>> getNearbyUserPageList(int sex, Double centerLat, Double centerLng, int pageNum, int pageSize);
+
+    ResultData<PageData<UserEntity>> getNewUserPageList(String currAccount, int pageNum, int pageSize);
 }

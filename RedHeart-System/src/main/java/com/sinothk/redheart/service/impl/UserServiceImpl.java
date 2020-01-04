@@ -309,4 +309,29 @@ public class UserServiceImpl implements UserService {
             return ResultData.error(e.getCause().getMessage());
         }
     }
+
+    @Override
+    public ResultData<PageData<UserEntity>> getNewUserPageList(String currAccount, int pageNum, int pageSize) {
+        try {
+            QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
+            wrapper.lambda()
+                    .ne(UserEntity::getAccount, currAccount)
+                    .orderByDesc(UserEntity::getCreateTime);
+
+            IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+
+            PageData<UserEntity> pageEntity = new PageData<>();
+            pageEntity.setData(pageInfo.getRecords());
+
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setPageNum(pageNum);
+            pageEntity.setTotal((int) pageInfo.getTotal());
+            int currSize = pageNum * pageSize;
+            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+
+            return ResultData.success(pageEntity);
+        } catch (Exception e) {
+            return ResultData.error(e.getCause().getMessage());
+        }
+    }
 }

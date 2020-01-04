@@ -234,4 +234,19 @@ public class UserController {
         }
         return userService.getNearbyUserPageList(sex, centerLat, centerLng, pageNum, pageSize);
     }
+
+    @ApiOperation(value = "查询：获取最新注册用户分页数据", notes = "获取最新注册用户分页数据")
+    @GetMapping("/getNewUserPageList")
+    @TokenCheck
+    public ResultData<PageData<UserEntity>> getNewUserPageList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String currAccount = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(currAccount)) {
+            return ResultData.error("Token解析失败");
+        }
+        return userService.getNewUserPageList(currAccount, pageNum, pageSize);
+    }
 }
