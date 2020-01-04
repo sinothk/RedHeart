@@ -315,7 +315,7 @@ public class UserServiceImpl implements UserService {
         try {
             QueryWrapper<UserEntity> wrapper = new QueryWrapper<>();
             wrapper.lambda()
-                    .ne(UserEntity::getAccount, currAccount)
+//                    .ne(UserEntity::getAccount, currAccount)
                     .orderByDesc(UserEntity::getCreateTime);
 
             IPage<UserEntity> pageInfo = userMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
