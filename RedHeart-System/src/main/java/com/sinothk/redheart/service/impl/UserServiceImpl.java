@@ -15,6 +15,7 @@ import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
+import com.sinothk.redheart.utils.UserNameUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,11 +48,15 @@ public class UserServiceImpl implements UserService {
             Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet);
             userVo.setAccount(account);
             // 设置用户昵称
-            String email = userVo.getEmail();
-            if (StringUtil.isEmail(email)) {
-                userVo.setNickname(email.substring(0, email.indexOf("@")));
+            if (userVo.getUserType() == -1) {
+                userVo.setNickname(UserNameUtil.getNicknameStr("", String.valueOf(account)));
             } else {
-                userVo.setNickname(String.valueOf(account));
+                String email = userVo.getEmail();
+                if (StringUtil.isEmail(email)) {
+                    userVo.setNickname(email.substring(0, email.indexOf("@")));
+                } else {
+                    userVo.setNickname(String.valueOf(account));
+                }
             }
 
             Date currTime = new Date();
