@@ -18,8 +18,6 @@ public class UserNameUtil {
         }
 
         int num = random.nextInt(5) + 1;
-        System.out.println("num = " + num);
-
         switch (num) {
             case 1:
                 String name = get3Word();
@@ -62,8 +60,6 @@ public class UserNameUtil {
             oneWordMap.put(10, "楚");
         }
         int key = random.nextInt(oneWordMap.size());
-        System.out.println("key = " + key);
-
         return oneWordMap.get(random.nextInt(oneWordMap.size()));
     }
 
@@ -79,7 +75,6 @@ public class UserNameUtil {
         }
 
         int key = random.nextInt(twoWordMap.size());
-        System.out.println("key = " + key);
         return twoWordMap.get(key);
     }
 
@@ -121,7 +116,6 @@ public class UserNameUtil {
         }
 
         int key = random.nextInt(threeWordMap.size());
-        System.out.println("key = " + key);
         return threeWordMap.get(key);
     }
 
