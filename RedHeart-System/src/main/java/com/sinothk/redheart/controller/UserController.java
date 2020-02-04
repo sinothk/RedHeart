@@ -77,7 +77,11 @@ public class UserController {
         }
         user.setUserType(userType);
 
-        user.setAvatar("living/9999/default/user_default_add.png");
+        if (userVo.getSex() == 1) {
+            user.setAvatar("living/9999/default/user_default_avatar_m.png");
+        }else{
+            user.setAvatar("living/9999/default/user_default_avatar_f.png");
+        }
 
         return userService.addUser(user);
     }
