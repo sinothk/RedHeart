@@ -2,14 +2,12 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
-import com.sinothk.base.utils.DateUtils;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.*;
 import com.sinothk.redheart.service.UserService;
-import com.sinothk.redheart.utils.DateUtil2;
+import com.sinothk.redheart.utils.SystemDefaultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -82,17 +80,17 @@ public class UserController {
         }
         user.setUserType(userType);
 
-        if (userVo.getSex() == 1) {
+        if (userVo.getSex() == 1) {// 设置默认头像
             user.setAvatar("living/9999/default/user_default_avatar_m.png");
         } else {
             user.setAvatar("living/9999/default/user_default_avatar_f.png");
         }
 
         if (userType == -1) {
-            // 系统用户
+            // 系统用户初始化
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                Date age = sdf.parse(DateUtil2.getOneYear());
+                Date age = sdf.parse(SystemDefaultData.getOneYear());
                 user.setUserBorthday(age);
             } catch (ParseException e) {
                 user.setUserBorthday(new Date());

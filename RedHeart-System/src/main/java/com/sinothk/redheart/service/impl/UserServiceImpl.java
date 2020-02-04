@@ -15,7 +15,7 @@ import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
-import com.sinothk.redheart.utils.UserNameUtil;
+import com.sinothk.redheart.utils.SystemDefaultData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
             userVo.setAccount(account);
             // 设置用户昵称
             if (userVo.getUserType() == -1) {
-                userVo.setNickname(UserNameUtil.getNicknameStr("", String.valueOf(account)));
+                userVo.setNickname(SystemDefaultData.getNicknameStr("", String.valueOf(account)));
             } else {
                 String email = userVo.getEmail();
                 if (StringUtil.isEmail(email)) {
