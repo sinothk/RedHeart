@@ -2,6 +2,7 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.utils.DateUtils;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.jpush.pushbyjpush.JPushHelper;
@@ -14,6 +15,9 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Api(tags = "用户系统")
@@ -79,8 +83,20 @@ public class UserController {
 
         if (userVo.getSex() == 1) {
             user.setAvatar("living/9999/default/user_default_avatar_m.png");
-        }else{
+        } else {
             user.setAvatar("living/9999/default/user_default_avatar_f.png");
+        }
+
+        if (userType == -1) {
+            // 系统用户
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date age = sdf.parse("1988-12-18");
+                user.setUserBorthday(age);
+            } catch (ParseException e) {
+                user.setUserBorthday(new Date());
+                e.printStackTrace();
+            }
         }
 
         return userService.addUser(user);
