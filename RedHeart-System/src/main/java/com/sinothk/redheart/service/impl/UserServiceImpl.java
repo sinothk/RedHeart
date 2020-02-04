@@ -19,6 +19,8 @@ import com.sinothk.redheart.utils.SystemDefaultData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,10 +49,22 @@ public class UserServiceImpl implements UserService {
             // 保存数据
             Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet);
             userVo.setAccount(account);
-            // 设置用户昵称
+
             if (userVo.getUserType() == -1) {
-                userVo.setNickname(SystemDefaultData.getNicknameStr("", String.valueOf(account)));
+                // 设置用户昵称
+                userVo.setNickname(SystemDefaultData.getNickname(userVo.getSex(), String.valueOf(account)));
+
+                // 系统用户初始化: 出生日期
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date age = sdf.parse(SystemDefaultData.getOneYear());
+                    userVo.setUserBorthday(age);
+                } catch (ParseException e) {
+                    userVo.setUserBorthday(new Date());
+                    e.printStackTrace();
+                }
             } else {
+                // 设置用户昵称
                 String email = userVo.getEmail();
                 if (StringUtil.isEmail(email)) {
                     userVo.setNickname(email.substring(0, email.indexOf("@")));

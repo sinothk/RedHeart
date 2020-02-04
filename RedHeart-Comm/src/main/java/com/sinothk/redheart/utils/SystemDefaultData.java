@@ -31,7 +31,7 @@ public class SystemDefaultData {
 
     private static Random random = null;
     private static HashMap<Integer, String> oneWordMap, twoWordMap, threeWordMap, fourWordMap, fiveWordMap;
-
+    private static HashMap<Integer, String> nicknameMale2Map, nicknameMale3Map;
 
     public static String getNicknameStr(String param, String defaultVal) {
 
@@ -83,7 +83,7 @@ public class SystemDefaultData {
             oneWordMap.put(9, "唐");
             oneWordMap.put(10, "楚");
         }
-        int key = random.nextInt(oneWordMap.size());
+//        int key = random.nextInt(oneWordMap.size());
         return oneWordMap.get(random.nextInt(oneWordMap.size()));
     }
 
@@ -142,4 +142,125 @@ public class SystemDefaultData {
         int key = random.nextInt(threeWordMap.size());
         return threeWordMap.get(key);
     }
+
+    /**
+     * 获取默认用户名
+     *
+     * @param sex
+     * @param defaultVal
+     * @return
+     */
+    public static String getNickname(Integer sex, String defaultVal) {
+        String nickname;
+
+        if (random == null) {
+            random = new Random();
+        }
+
+        int num = random.nextInt(5) + 1;
+        switch (num) {
+            case 1:
+
+                if (sex == 0) {
+                    String name = get3Word();
+                    nickname = name + name;
+                }else{
+                    String name = getMale3Word();
+                    nickname = name + name;
+                }
+
+                break;
+            case 2:
+                if (sex == 0) {
+                    nickname = get2Word() + get3Word();
+                }else{
+                    nickname = getMale2Word() + getMale3Word();
+                }
+                break;
+            case 3:
+                if (sex == 0) {
+                    nickname = get1Word() + get2Word() + get3Word();
+                }else{
+                    nickname = get1Word() + getMale2Word() + getMale3Word();
+                }
+                break;
+            case 4:
+                if (sex == 0) {
+                    nickname = get1Word() + get3Word();
+                }else{
+                    nickname = get1Word() + getMale3Word();
+                }
+
+                break;
+            case 5:
+                if (sex == 0) {
+                    nickname = get1Word() + get3Word();
+                }else{
+                    nickname = get1Word() + getMale3Word();
+                }
+                break;
+            default:
+                nickname = defaultVal;
+                break;
+        }
+
+        return nickname;
+    }
+
+    private static String getMale2Word() {
+        if (nicknameMale2Map == null) {
+            nicknameMale2Map = new HashMap<>();
+            nicknameMale2Map.put(0, "小");
+            nicknameMale2Map.put(1, "阿");
+            nicknameMale2Map.put(2, "大");
+            nicknameMale2Map.put(3, "豪");
+            nicknameMale2Map.put(4, "杰");
+            nicknameMale2Map.put(5, "军");
+        }
+
+        int key = random.nextInt(nicknameMale2Map.size());
+        return nicknameMale2Map.get(key);
+    }
+
+    private static String getMale3Word() {
+        if (nicknameMale3Map == null) {
+            nicknameMale3Map = new HashMap<>();
+
+            nicknameMale3Map.put(0, "浩");
+            nicknameMale3Map.put(1, "军");
+            nicknameMale3Map.put(2, "国");
+            nicknameMale3Map.put(3, "能");
+            nicknameMale3Map.put(4, "杰");
+            nicknameMale3Map.put(5, "飞");
+            nicknameMale3Map.put(6, "贵");
+            nicknameMale3Map.put(7, "昆");
+            nicknameMale3Map.put(8, "涛");
+            nicknameMale3Map.put(9, "军");
+            nicknameMale3Map.put(10, "兵");
+            nicknameMale3Map.put(11, "强");
+            nicknameMale3Map.put(12, "八");
+            nicknameMale3Map.put(13, "德");
+            nicknameMale3Map.put(14, "宇");
+            nicknameMale3Map.put(15, "明");
+            nicknameMale3Map.put(16, "晖");
+            nicknameMale3Map.put(17, "平");
+            nicknameMale3Map.put(18, "雄");
+            nicknameMale3Map.put(19, "鹏");
+            nicknameMale3Map.put(20, "瑞");
+            nicknameMale3Map.put(21, "行");
+            nicknameMale3Map.put(22, "菱");
+            nicknameMale3Map.put(23, "彰");
+            nicknameMale3Map.put(24, "茂");
+            nicknameMale3Map.put(25, "胤");
+            nicknameMale3Map.put(26, "熙");
+            nicknameMale3Map.put(27, "灿");
+            nicknameMale3Map.put(28, "禧");
+            nicknameMale3Map.put(29, "羲");
+            nicknameMale3Map.put(30, "锐");
+        }
+
+        int key = random.nextInt(nicknameMale3Map.size());
+        return nicknameMale3Map.get(key);
+    }
+
 }

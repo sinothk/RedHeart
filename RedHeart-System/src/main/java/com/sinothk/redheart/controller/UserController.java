@@ -86,18 +86,6 @@ public class UserController {
             user.setAvatar("living/9999/default/user_default_avatar_f.png");
         }
 
-        if (userType == -1) {
-            // 系统用户初始化
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                Date age = sdf.parse(SystemDefaultData.getOneYear());
-                user.setUserBorthday(age);
-            } catch (ParseException e) {
-                user.setUserBorthday(new Date());
-                e.printStackTrace();
-            }
-        }
-
         return userService.addUser(user);
     }
 
