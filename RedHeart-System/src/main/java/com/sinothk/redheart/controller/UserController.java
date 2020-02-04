@@ -9,6 +9,7 @@ import com.sinothk.jpush.pushbyjpush.JPushHelper;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.*;
 import com.sinothk.redheart.service.UserService;
+import com.sinothk.redheart.utils.DateUtil2;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -91,7 +92,7 @@ public class UserController {
             // 系统用户
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                Date age = sdf.parse("1988-12-18");
+                Date age = sdf.parse(DateUtil2.getOneYear());
                 user.setUserBorthday(age);
             } catch (ParseException e) {
                 user.setUserBorthday(new Date());
