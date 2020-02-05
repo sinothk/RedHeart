@@ -80,11 +80,8 @@ public class UserController {
         }
         user.setUserType(userType);
 
-        if (userVo.getSex() == 1) {// 设置默认头像
-            user.setAvatar("living/9999/default/user_default_avatar_m.png");
-        } else {
-            user.setAvatar("living/9999/default/user_default_avatar_f.png");
-        }
+        // 设置默认头像
+        user.setAvatar(SystemDefaultData.getDefaultAvatar(userVo.getSex()));
 
         return userService.addUser(user);
     }

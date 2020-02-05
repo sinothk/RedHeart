@@ -172,7 +172,7 @@ public class SystemDefaultData {
                 if (sex == 0) {
                     String name = get3Word();
                     nickname = name + name;
-                }else{
+                } else {
                     String name = getMale3Word();
                     nickname = name + name;
                 }
@@ -181,21 +181,21 @@ public class SystemDefaultData {
             case 2:
                 if (sex == 0) {
                     nickname = get2Word() + get3Word();
-                }else{
+                } else {
                     nickname = getMale2Word() + getMale3Word();
                 }
                 break;
             case 3:
                 if (sex == 0) {
                     nickname = get1Word() + get2Word() + get3Word();
-                }else{
+                } else {
                     nickname = get1Word() + getMale2Word() + getMale3Word();
                 }
                 break;
             case 4:
                 if (sex == 0) {
                     nickname = get1Word() + get3Word();
-                }else{
+                } else {
                     nickname = get1Word() + getMale3Word();
                 }
 
@@ -203,7 +203,7 @@ public class SystemDefaultData {
             case 5:
                 if (sex == 0) {
                     nickname = get1Word() + get3Word();
-                }else{
+                } else {
                     nickname = get1Word() + getMale3Word();
                 }
                 break;
@@ -271,4 +271,38 @@ public class SystemDefaultData {
         return nicknameMale3Map.get(key);
     }
 
+    //
+    private static HashMap<Integer, String> defaultAvatarMap, defaultMaleAvatarMap;
+
+    public static String getDefaultAvatar(Integer sex) {
+
+        if (random == null) {
+            random = new Random();
+        }
+
+        if (sex != null && sex == 1) {
+
+            if (defaultMaleAvatarMap == null) {
+                defaultMaleAvatarMap = new HashMap<>();
+                defaultMaleAvatarMap.put(0, "living/9999/default/user_default_avatar_m.png");
+                defaultMaleAvatarMap.put(1, "living/9999/default/user_default_avatar_m1.png");
+                defaultMaleAvatarMap.put(2, "living/9999/default/user_default_avatar_m2.png");
+                defaultMaleAvatarMap.put(3, "living/9999/default/user_default_avatar_m3.png");
+            }
+
+            int key = random.nextInt(defaultMaleAvatarMap.size());
+            return defaultMaleAvatarMap.get(key);
+        } else {
+
+            if (defaultAvatarMap == null) {
+                defaultAvatarMap = new HashMap<>();
+                defaultAvatarMap.put(0, "living/9999/default/user_default_avatar_f.png");
+                defaultAvatarMap.put(1, "living/9999/default/user_default_avatar_f1.png");
+                defaultAvatarMap.put(2, "living/9999/default/user_default_avatar_f2.png");
+                defaultAvatarMap.put(3, "living/9999/default/user_default_avatar_f3.png");
+            }
+            int key = random.nextInt(defaultAvatarMap.size());
+            return defaultAvatarMap.get(key);
+        }
+    }
 }
