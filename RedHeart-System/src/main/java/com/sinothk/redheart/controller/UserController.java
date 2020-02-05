@@ -14,9 +14,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Api(tags = "用户系统")
@@ -79,9 +76,6 @@ public class UserController {
             userType = userVo.getUserType();
         }
         user.setUserType(userType);
-
-        // 设置默认头像
-        user.setAvatar(SystemDefaultData.getDefaultAvatar(userVo.getSex()));
 
         return userService.addUser(user);
     }
