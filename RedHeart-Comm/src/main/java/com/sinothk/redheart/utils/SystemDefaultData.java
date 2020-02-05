@@ -13,16 +13,23 @@ public class SystemDefaultData {
         if (yearStrMap == null) {
             yearStrMap = new HashMap<>();
 
-            yearStrMap.put(0, "1980-01-05");
-            yearStrMap.put(1, "1983-02-06");
-            yearStrMap.put(2, "1985-03-08");
+            yearStrMap.put(0, "1985-01-05");
+            yearStrMap.put(1, "1986-02-06");
+            yearStrMap.put(2, "1987-03-08");
             yearStrMap.put(3, "1987-04-05");
             yearStrMap.put(4, "1988-05-25");
             yearStrMap.put(5, "1989-06-15");
             yearStrMap.put(6, "1990-07-20");
             yearStrMap.put(7, "1990-08-05");
-            yearStrMap.put(8, "1992-09-15");
-            yearStrMap.put(9, "1993-10-25");
+            yearStrMap.put(8, "1991-09-15");
+            yearStrMap.put(9, "1992-11-15");
+            yearStrMap.put(10, "1993-01-25");
+            yearStrMap.put(11, "1993-10-25");
+            yearStrMap.put(12, "1994-11-25");
+            yearStrMap.put(13, "1994-08-25");
+            yearStrMap.put(14, "1995-10-25");
+            yearStrMap.put(15, "1995-11-25");
+            yearStrMap.put(16, "1996-12-25");
         }
 
         int num = new Random().nextInt(yearStrMap.size());
@@ -33,6 +40,7 @@ public class SystemDefaultData {
     private static HashMap<Integer, String> oneWordMap, twoWordMap, threeWordMap, fourWordMap, fiveWordMap;
     private static HashMap<Integer, String> nicknameMale2Map, nicknameMale3Map;
 
+    @Deprecated
     public static String getNicknameStr(String param, String defaultVal) {
 
         String nickname;
