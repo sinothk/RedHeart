@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             Long account = AccountUtil.create(AccountInitLoader.sysKeepAccountSet);
             userVo.setAccount(account);
 
-            if (userVo.getUserType() == -1) {
+            if (userVo.getUserType() == -1) {// 系统用户
                 // 设置用户昵称
                 userVo.setNickname(SystemDefaultData.getNickname(userVo.getSex(), String.valueOf(account)));
                 // 设置默认头像
