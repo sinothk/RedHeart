@@ -164,10 +164,16 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public ResultData<PageData<TopicAo>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize) {
+    public ResultData<PageData<TopicAo>> getTopicByThemePageList(String account, String themeCode, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
-            IPage<TopicAo> pageInfo = topicMapper.getTopicByThemePageList(pageVo, themeCode);
+
+            IPage<TopicAo> pageInfo;
+            if ("TOPIC_THEME_PHOTO".equals(themeCode)) {
+                pageInfo = topicMapper.getTopicByThemeAccountPageList(pageVo, themeCode, account);
+            } else {
+                pageInfo = topicMapper.getTopicByThemePageList(pageVo, themeCode);
+            }
 
             PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);

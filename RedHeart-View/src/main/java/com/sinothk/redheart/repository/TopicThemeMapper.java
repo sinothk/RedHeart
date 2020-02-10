@@ -53,7 +53,7 @@ public interface TopicThemeMapper extends BaseMapper<TopicThemeEntity> {
 
             "\tFROM tb_app_topic_theme topicTheme " +
 
-            "\tWHERE topicTheme.sex_type = ${sexType} OR topicTheme.sex_type = -1" +
+            "\tWHERE topicTheme.theme_status = 0 AND (topicTheme.sex_type = ${sexType} OR topicTheme.sex_type = -1)" +
 
             "\tORDER BY sortNum ASC")
         //relNum DESC,

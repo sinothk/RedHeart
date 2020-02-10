@@ -154,7 +154,7 @@ public class TopicController {
         return topicService.getNewTopicPageList(Integer.valueOf(sex), pageNum, pageSize);
     }
 
-    @ApiOperation(value = "话题：查询某种话题分页列表", notes = "话题：查询某种话题分页列表")
+    @ApiOperation(value = "话题：查询话题分页列表", notes = "查询话题分页列表")
     @GetMapping("/getTopicByThemePageList")
     @TokenCheck
     public ResultData<PageData<TopicAo>> getTopicByThemePageList(
@@ -168,7 +168,7 @@ public class TopicController {
             return ResultData.error("Token解析失败");
         }
 
-        return topicService.getTopicByThemePageList(themeCode, pageNum, pageSize);
+        return topicService.getTopicByThemePageList(account, themeCode, pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询当前用户喜欢的话题分页列表", notes = "查询当前用户喜欢的话题分页列表")

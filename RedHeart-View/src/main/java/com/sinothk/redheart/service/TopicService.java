@@ -17,11 +17,11 @@ public interface TopicService {
 
     ResultData<PageData<TopicAo>> getNewTopicPageList(int sex, int pageNum, int pageSize);
 
-    ResultData<PageData<TopicAo>> getTopicByThemePageList(String themeCode, int pageNum, int pageSize);
-
     ResultData<PageData<TopicAo>> getTopicWhereUserPraisePageList(String targetAccount, int pageNum, int pageSize);
 
     ResultData<List<TopicAo>> findTopicContent(String account, String keyword);
 
     ResultData<PageData<TopicAo>> getHotTopicPageList(int sex, int pageNum, int pageSize);
+
+    ResultData<PageData<TopicAo>> getTopicByThemePageList(String account, String themeCode, int pageNum, int pageSize);
 }
