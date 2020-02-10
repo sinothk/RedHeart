@@ -146,6 +146,7 @@ public class TopicServiceImpl implements TopicService {
     public ResultData<PageData<TopicAo>> getNewTopicPageList(int sex, int pageNum, int pageSize) {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
+
             IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo, sex);
 
             PageData<TopicAo> pageEntity = new PageData<>();
