@@ -118,6 +118,41 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             " ORDER BY topic.`update_time` DESC")
     IPage<TopicAo> getTopicFromILikeUserPageList(IPage page, @Param("account") Long account, @Param("sexType") int sex);
 
+//    @Select("SELECT \n" +
+//            "\ttopic.id AS id, \n" +
+//            "\ttopic.topic_id AS topicId, \n" +
+//            "\ttopic.account AS account, \n" +
+//            "\ttopic.sex_type as sexType, " +
+//            "\ttopic.topic_title as topicTitle, " +
+//            "\ttopic.topic_content AS topicContent, \n" +
+//            "\ttopic.loc_lat AS locLat, \n" +
+//            "\ttopic.loc_lng AS locLng, \n" +
+//            "\ttopic.loc_address AS locAddress, \n" +
+//            "\ttopic.create_time AS createTime, \n" +
+//            "\ttopic.update_time AS updateTime, \n" +
+//            "\ttopic.topic_img as topicImg, \n" +
+//            "\ttopic.topic_cover as topicCover, \n" +
+//
+//            "\t(SELECT SUM(praise_num) FROM tb_app_topic_praise WHERE topic_id = topic.topic_id) as praiseNum,\n" +
+//            "(SELECT COUNT(id) FROM tb_app_topic_comment WHERE topic_id = topic.topic_id) AS commentNum, " +
+//
+//            "\tusr.`user_name` AS userName, \n" +
+//            "\tusr.`u_avatar` AS userAvatar, \n" +
+//            "\tusr.`u_nickname` AS nickname, \n" +
+//            "\tusr.`user_borthday` AS userBorthday," +
+//            "\tusr.`u_sex` AS sex,\n" +
+//
+//            " theme.theme_icon AS themeIcon,  " +
+//            " theme.theme_code AS themeCode,  " +
+//            "\ttheme.theme_txt AS topicTheme \n" +
+//
+//            "\tFROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
+//
+//            "\tWHERE (topic.sex_type = ${sexType} OR topic.sex_type = -1) AND  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
+//
+//            "\tORDER BY topic.`update_time` DESC")
+//    IPage<TopicAo> getNewTopicPageList(IPage page, @Param("sexType") int sex);
+
     @Select("SELECT \n" +
             "\ttopic.id AS id, \n" +
             "\ttopic.topic_id AS topicId, \n" +
@@ -140,18 +175,18 @@ public interface TopicMapper extends BaseMapper<TopicEntity> {
             "\tusr.`u_avatar` AS userAvatar, \n" +
             "\tusr.`u_nickname` AS nickname, \n" +
             "\tusr.`user_borthday` AS userBorthday," +
-            "\tusr.`u_sex` AS sex,\n" +
+            "\tusr.`u_sex` AS sex " +
+//
+//            " theme.theme_icon AS themeIcon,  " +
+//            " theme.theme_code AS themeCode,  " +
+//            "\ttheme.theme_txt AS topicTheme \n" +
 
-            " theme.theme_icon AS themeIcon,  " +
-            " theme.theme_code AS themeCode,  " +
-            "\ttheme.theme_txt AS topicTheme \n" +
+            "\tFROM tb_app_topic topic, tb_comm_user usr" +
 
-            "\tFROM tb_app_topic topic, tb_comm_user usr, tb_app_topic_theme theme \n" +
-
-            "\tWHERE (topic.sex_type = ${sexType} OR topic.sex_type = -1) AND  usr.`u_account` = topic.`account` AND topic.`topic_theme` = theme.`theme_code` \n" +
+            "\tWHERE  usr.`u_account` = topic.`account` AND topic.`topic_theme` = 'TOPIC_THEME_PHOTO' \n" +
 
             "\tORDER BY topic.`update_time` DESC")
-    IPage<TopicAo> getNewTopicPageList(IPage page, @Param("sexType") int sex);
+    IPage<TopicAo> getNewTopicPageList(IPage page);
 
     @Select("SELECT topic.id AS id, \n" +
             "\ttopic.topic_id AS topicId, \n" +

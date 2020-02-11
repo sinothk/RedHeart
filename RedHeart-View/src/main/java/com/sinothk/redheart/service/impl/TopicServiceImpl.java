@@ -147,7 +147,7 @@ public class TopicServiceImpl implements TopicService {
         try {
             Page<TopicAo> pageVo = new Page<>(pageNum, pageSize);
 
-            IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo, sex);
+            IPage<TopicAo> pageInfo = topicMapper.getNewTopicPageList(pageVo);
 
             PageData<TopicAo> pageEntity = new PageData<>();
             pageEntity.setPageSize(pageSize);
