@@ -33,9 +33,11 @@ public class TopicController {
     public ResultData<Boolean> addTopic(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "话题实体信息", required = true) @RequestBody TopicEntity topicEntity) {
-        if (StringUtil.isEmpty(topicEntity.getTopicContent())) {
-            return ResultData.error("话题内容不能为空");
+
+        if (StringUtil.isEmpty(topicEntity.getTopicContent()) && StringUtil.isEmpty(topicEntity.getTopicImg())) {
+            return ResultData.error("内容和文件不能全为空");
         }
+
         String account = TokenUtil.getTokenValue(token, "account");
         if (StringUtil.isEmpty(account)) {
             return ResultData.error("Token解析失败");
@@ -101,13 +103,13 @@ public class TopicController {
         if (StringUtil.isEmpty(account)) {
             return ResultData.error("Token解析失败");
         }
+//
+//        String sex = TokenUtil.getTokenValue(token, "sex");
+//        if (sex == null) {
+//            sex = "-1";
+//        }
 
-        String sex = TokenUtil.getTokenValue(token, "sex");
-        if (sex == null) {
-            sex = "-1";
-        }
-
-        return topicService.getTopicFromILikeUserPageList(Long.valueOf(account), Integer.valueOf(sex), pageNum, pageSize);
+        return topicService.getTopicFromILikeUserPageList(Long.valueOf(account), pageNum, pageSize);
     }
 
     @ApiOperation(value = "话题：查询最新发布的话题分页列表", notes = "话题：查询最新发布的话题分页列表")

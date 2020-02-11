@@ -13,7 +13,7 @@ public interface TopicService {
 
     ResultData<PageData<TopicAo>> getTopicFromUserPageList(Long account, boolean isLoginUser, int sex, int pageNum, int pageSize);
 
-    ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(Long valueOf, int sex, int pageNum, int pageSize);
+    ResultData<PageData<TopicAo>> getTopicFromILikeUserPageList(Long account, int pageNum, int pageSize);
 
     ResultData<PageData<TopicAo>> getNewTopicPageList(int sex, int pageNum, int pageSize);
 
