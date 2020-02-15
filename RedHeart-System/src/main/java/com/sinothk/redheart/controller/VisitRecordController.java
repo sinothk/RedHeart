@@ -47,9 +47,9 @@ public class VisitRecordController {
     }
 
     @ApiOperation(value = "访问记录：获取当前用户的所有访问者", notes = "获取当前用户的所有访问者")
-    @GetMapping("/getVisitRecordList")
+    @GetMapping("/getVisitRecordPageList")
     @TokenCheck
-    public ResultData<PageData<VisitorRecordAO>> getVisitRecordList(
+    public ResultData<PageData<VisitorRecordAO>> getVisitRecordPageList(
             @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
             @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
             @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
