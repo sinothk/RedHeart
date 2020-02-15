@@ -1,9 +1,11 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.domain.VisitorRecordAO;
 import com.sinothk.redheart.domain.VisitorRecordEntity;
 import com.sinothk.redheart.service.VisitRecordService;
 import io.swagger.annotations.Api;
@@ -44,6 +46,21 @@ public class VisitRecordController {
         return visitRecordService.add(visitorRecord);
     }
 
+    @ApiOperation(value = "访问记录：获取当前用户的所有访问者", notes = "获取当前用户的所有访问者")
+    @GetMapping("/getVisitRecordList")
+    @TokenCheck
+    public ResultData<PageData<VisitorRecordAO>> getVisitRecordList(
+            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
+            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
+            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
+
+        String account = TokenUtil.getTokenValue(token, "account");
+        if (StringUtil.isEmpty(account)) {
+            return ResultData.error("Token解析失败");
+        }
+        return visitRecordService.getVisitRecordList(account, pageNum, pageSize);
+    }
+
 //    @ApiOperation(value = "通知：获取所有分页通知", notes = "通知：获取所有分页通知")
 //    @GetMapping("/getAllNoticeList")
 //    @TokenCheck
@@ -79,19 +96,5 @@ public class VisitRecordController {
 //        return noticeService.addRead(Long.valueOf(noticeId), Long.valueOf(account));
 //    }
 //
-//    @ApiOperation(value = "通知：获取所有阅读人员", notes = "通知：获取所有阅读人员")
-//    @GetMapping("/getNoticeReaderList")
-//    @TokenCheck
-//    public ResultData<PageData<NoticeReaderVo>> getNoticeReaderList(
-//            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token,
-//            @ApiParam(value = "通知Id") @RequestParam("noticeId") String noticeId,
-//            @ApiParam(value = "查询页号") @RequestParam("pageNum") int pageNum,
-//            @ApiParam(value = "页号大小") @RequestParam("pageSize") int pageSize) {
-//
-//        if (StringUtil.isEmpty(noticeId)) {
-//            return ResultData.error("通知Id不能为空");
-//        }
-//
-//        return noticeService.getNoticeReaderList(Long.valueOf(noticeId), pageNum, pageSize);
-//    }
+
 }

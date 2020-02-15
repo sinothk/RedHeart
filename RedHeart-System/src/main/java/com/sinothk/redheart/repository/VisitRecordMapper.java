@@ -3,16 +3,35 @@ package com.sinothk.redheart.repository;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sinothk.redheart.domain.NoticeAo;
-import com.sinothk.redheart.domain.NoticeEntity;
-import com.sinothk.redheart.domain.NoticeReaderVo;
-import com.sinothk.redheart.domain.VisitorRecordEntity;
+import com.sinothk.redheart.domain.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository("visitRecordMapper")
 public interface VisitRecordMapper extends BaseMapper<VisitorRecordEntity> {
+
+    @Select("SELECT \n" +
+            "\ttcv.id id, \n" +
+            "\ttcv.account account, \n" +
+            "\ttcv.visitor visitor, \n" +
+            "\ttcv.visit_time visitTime,\n" +
+            "\ttcv.visit_type visitType,  \n" +
+            "\ttcv.visit_num visitNum,\n" +
+            "\t \n" +
+            "\ttcu.`u_nickname` nickname,\n" +
+            "\ttcu.`user_name` userName,\n" +
+            "\ttcu.`u_avatar` userAvatar\n" +
+
+            "FROM \n" +
+            "\ttb_comm_visitor tcv,\n" +
+            "\ttb_comm_user tcu\n" +
+            "\t\n" +
+
+            "WHERE \n" +
+            "\t tcv.`account` = ${account} AND tcv.visitor = tcu.`u_account` " +
+            "\t ORDER BY tcv.visit_time DESC")
+    IPage<VisitorRecordAO> getVisitRecordList(Page<VisitorRecordAO> pageVo, @Param("account") String account);
 
 
 //    @Select("SELECT " +
