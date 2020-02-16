@@ -36,12 +36,14 @@ public class VisitRecordController {
         if (StringUtil.isEmpty(account)) {
             return ResultData.error("Token解析失败");
         }
+        visitorRecord.setVisitor(account);
+
         if (StringUtil.isEmpty(visitorRecord.getAccount())) {
             return ResultData.error("被访问者账号为空");
         }
-        if (StringUtil.isEmpty(visitorRecord.getVisitor())) {
-            return ResultData.error("访问者账号为空");
-        }
+//        if (StringUtil.isEmpty(visitorRecord.getVisitor())) {
+//            return ResultData.error("访问者账号为空");
+//        }
 
         return visitRecordService.add(visitorRecord);
     }
