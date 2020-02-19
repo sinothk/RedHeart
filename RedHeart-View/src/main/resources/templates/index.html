@@ -2,10 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>异趣</title>
-
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/comm/css/bootstrap.css}" />-->
-    <!--<script type="text/javascript"   th:src="@{/js/jquery.min.js}"></script>-->
+    <title>异趣 - 用户登录</title>
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
@@ -15,7 +12,9 @@
 
 <body>
     <div class="container">
-        <h2 class="text-center">简单的卡片</h2>
+
+        <h2 class="text-center">异趣后台管理系统</h2>
+
         <div class="card">
             <div class="card-body">
 
@@ -33,12 +32,17 @@
                             <span class="input-group-text">@runoob.com</span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-warning">警告</button>
-                    <button type="button" class="btn btn-primary">主要按钮</button>
+
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary">提交登录</button>
+                    </div>
+
                 </form>
 
             </div>
         </div>
+        
+        <!--<img th:src="@{/image/welcome_all.png}">-->
     </div>
 </body>
 </html>
