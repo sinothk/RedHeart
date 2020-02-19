@@ -1,5 +1,14 @@
 .login-title{
-    font-size: 30px;
-    color: #fff811;
+    font-size: 36px;
+    color: #ff3574;
+}
 
+.login-form{
+    text-align: center;
+    width: 500px;
+    color: #ff3574;
+}
+
+body {
+    background: #d2f3d2;
 }
