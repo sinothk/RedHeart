@@ -5,10 +5,13 @@
 
 .login-form{
     text-align: center;
-    width: 500px;
+    width: 50%;
     color: #ff3574;
 }
 
 body {
-    background: #d2f3d2;
+    /*background: #48ff77;*/
+    height: 100%;width: 100%;
+    background: url(/static/image/welcome_all.png);
+    background-size:cover;
 }
