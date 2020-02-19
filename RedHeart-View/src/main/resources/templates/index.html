@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>异趣 - 用户登录</title>
@@ -8,12 +8,15 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link th:href="@{/static/sinothk/css/style.css}" rel="stylesheet">
+    <script src="/static/sinothk/js/home.js"></script>
 </head>
 
 <body>
     <div class="container">
 
-        <h2 class="text-center">异趣后台管理系统</h2>
+        <h2 class="text-center text-success">异趣后台管理系统</h2>
 
         <div class="card">
             <div class="card-body">
@@ -41,7 +44,9 @@
 
             </div>
         </div>
-        
+
+        <p class="login-title">哈哈 NBA</p>
+        <p class="text-warning">柔和的文本。</p>
         <!--<img th:src="@{/image/welcome_all.png}">-->
     </div>
 </body>

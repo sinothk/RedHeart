@@ -27,6 +27,9 @@ public class RedHeartApplication extends AsyncConfigurerSupport implements WebMv
         // 为了使打包后仍可以使用API: swagger-bootstrap-ui
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        // Web中静态文件访问
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     @Override
