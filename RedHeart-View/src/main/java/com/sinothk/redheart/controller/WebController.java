@@ -1,8 +1,11 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.entity.ResultData;
+import com.sinothk.redheart.domain.WebUserEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
@@ -16,13 +19,13 @@ public class WebController {
     }
 
     @GetMapping("/web/login")
-    private String login(Map<String, Object> paramMap) {
-        // http://localhost:80/redHeart/main
-
-        paramMap.put("name", "张三11");
-        paramMap.put("age", 31);
-
-        return "main";
+    @ResponseBody
+    private ResultData<WebUserEntity> login(WebUserEntity userVo) {
+//
+        WebUserEntity webUserEntity = new WebUserEntity();
+        webUserEntity.setName("梁宇涛");
+        webUserEntity.setAge(26);
+        return ResultData.success(webUserEntity);
     }
 
     @GetMapping("/main")

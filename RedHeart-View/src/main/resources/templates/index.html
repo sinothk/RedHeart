@@ -88,21 +88,27 @@
         $.ajax({
             url: "/redHeart/web/login",
             type: "GET",
-            // data: {
-            //     email: a,
-            //     password: b
-            // },
+            data: {
+                email: "381518188",
+                password: "123456"
+            },
             // cache: !1,
             timeout: 3e4,
             // dataType: "json",
             success(data) {
-                    // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    //     // document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-                    //     window.location.href = 'main';
-                    //
-                    //
-                    // }
-                window.location.href = 'main';
+                // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                //     // document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+                //     window.location.href = 'main';
+                //
+                //
+                // }
+
+                if (data != null && data.code === 200) {
+                    window.location.href = 'main';
+                } else {
+                    // window.location.href = 'main';
+                }
+
 
                 // if (data.resultInfo == "invalid user") {
                 //     $("#login-btn").removeAttr("disabled"), warnings.eq(0).text("该用户不存在").addClass("warning-password-show")
