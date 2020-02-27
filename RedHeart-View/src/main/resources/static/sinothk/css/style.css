@@ -1,6 +1,6 @@
 .login-title{
     font-size: 36px;
-    color: #ff3574;
+    color: #888888;
 }
 
 .login-form{
@@ -10,10 +10,10 @@
 }
 
 body {
-    /*background: #48ff77;*/
+    background: #e8fcff;
     /*height: 100%; width: 100%;*/
     /*background: url("http://localhost/redHeart/static/image/welcome_all.png");*/
-    background:url(../../app/bg/login_001.gif);
+    /*background:url(../../app/bg/login_001.gif);*/
     /*background-repeat:no-repeat;*/
     background-size:cover;
 }

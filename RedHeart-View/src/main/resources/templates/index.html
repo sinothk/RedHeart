@@ -16,49 +16,119 @@
 </head>
 
 <body>
-    <div class="container">
-        <br>
-        <br>
-        <br>
-        <h2 class="text-center login-title">异趣后台管理系统</h2>
-        <br>
-        <br>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <h2 class="text-center login-title">异趣后台管理系统</h2>
+    <br>
+    <br>
 
-        <div class="container text-center login-form">
+    <div class="container text-center login-form">
 
-            <div class="card">
+        <div class="card">
 
-                <div class="card-body">
+            <div class="card-body">
+                <br>
+                <form>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">用户账号</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="请输入用户账号/邮箱">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">用户密码</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="请输入用户密码">
+                    </div>
                     <br>
-                    <form >
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">用户账号</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="请输入用户账号/邮箱">
-                        </div>
+                    <div class="text-center">
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">用户密码</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="请输入用户密码">
-                        </div>
-                        <br>
-                        <div class="text-center">
+                        <!--<a class="btn btn-danger" href="main" title="提交登录" onclick="loadXMLDoc()">提交登录</a>-->
+                        <button type="button" onclick="loadXMLDoc()" class="btn btn-danger">提交登录</button>
+                    </div>
+                    <br>
+                </form>
 
-                            <a class="btn btn-danger" href="main" title="提交登录" >提交登录</a>
-                            <!--<button type="button" th:onclick="/redHeart/main" class="btn btn-danger">提交登录</button>-->
-                        </div>
-                        <br>
-                    </form>
-
-                </div>
             </div>
         </div>
-
-        <!--<img th:src="@{/image/welcome_all.png}">-->
     </div>
 
+    <!--<img th:src="@{/image/welcome_all.png}">-->
+</div>
+
+
 </body>
+
+<script>
+    function loadXMLDoc() {
+        // var xmlhttp;
+        // if (window.XMLHttpRequest) {
+        //     // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        //     xmlhttp = new XMLHttpRequest();
+        // }
+        // else {
+        //     // IE6, IE5 浏览器执行代码
+        //     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        // }
+        // xmlhttp.onreadystatechange = function () {
+        //     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        //         // document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+        //         window.location.href = 'main';
+        //
+        //
+        //     }
+        // }
+        // xmlhttp.open("GET", "/redHeart/web/login", true);
+        // xmlhttp.send();
+
+        $.ajax({
+            url: "/redHeart/web/login",
+            type: "GET",
+            // data: {
+            //     email: a,
+            //     password: b
+            // },
+            // cache: !1,
+            timeout: 3e4,
+            // dataType: "json",
+            success(data) {
+                    // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //     // document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+                    //     window.location.href = 'main';
+                    //
+                    //
+                    // }
+                window.location.href = 'main';
+
+                // if (data.resultInfo == "invalid user") {
+                //     $("#login-btn").removeAttr("disabled"), warnings.eq(0).text("该用户不存在").addClass("warning-password-show")
+                // }
+                // else if (data.resultInfo == "invalid password") {
+                //     $("#login-btn").removeAttr("disabled"), warnings.eq(1).text("密码错误").addClass("warning-password-show")
+                // } else
+                // // ，登录验证通过，自动跳转到主页面
+                //     window.location.href = "/student/dashboard";
+                // // window.location.href("/student/dashboard");
+                //
+                // var f = b.code;
+                // 0 == f ? ("undefined" != typeof mixpanel && (mixpanel.identify(a), mixpanel.people.set({$email: a})), setTimeout(function () {
+                //     window.location.href = d
+                // }, 500)) : 1 == f && ($("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show"))
+            }, error() {
+                alert("fail\n");
+            }
+        });
+
+
+        // , error:function () {
+        //         alert("fail\n");
+        //         // $("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show")
+        //     }
+        // }
+    }
+</script>
 </html>
