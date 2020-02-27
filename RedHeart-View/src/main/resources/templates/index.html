@@ -96,13 +96,6 @@
             timeout: 3e4,
             // dataType: "json",
             success(data) {
-                // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                //     // document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-                //     window.location.href = 'main';
-                //
-                //
-                // }
-
                 if (data != null && data.code === 200) {
                     window.location.href = 'main';
                 } else {
