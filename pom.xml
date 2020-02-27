@@ -104,7 +104,7 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>1.4.0</version>
         </dependency>
-        <!--JWT依赖-->
+        <!-- ============= JWT依赖 ============= -->
         <!--JWT-->
         <dependency>
             <groupId>com.auth0</groupId>
