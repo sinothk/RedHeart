@@ -86,5 +86,5 @@ public class UserAO {
     private String imei;
 
     @ApiModelProperty(value = "距离")
-    private Double distance;
+    private Long distance;
 }
