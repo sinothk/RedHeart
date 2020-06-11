@@ -77,13 +77,7 @@ public class AppVersionController {
 
     @ApiOperation(value = "应用：获取最新版本APP", notes = "获取最新版本APP")
     @GetMapping("/getLastApp")
-    @TokenCheck
-    public ResultData<AppVersionEntity> getLastApp(
-            @ApiParam(value = "验证Token", type = "header", required = true) @RequestHeader(value = "token") String token) {
-        String account = TokenUtil.getTokenValue(token, "account");
-        if (StringUtil.isEmpty(account)) {
-            return ResultData.error("Token解析失败");
-        }
+    public ResultData<AppVersionEntity> getLastApp() {
         return appVersionService.getLastApp();
     }
 
