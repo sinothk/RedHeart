@@ -43,7 +43,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = currPage * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = currPage * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
@@ -85,7 +85,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendRelations
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = currPage * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {

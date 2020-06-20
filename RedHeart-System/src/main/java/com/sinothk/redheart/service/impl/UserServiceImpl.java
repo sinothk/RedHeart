@@ -254,7 +254,7 @@ public class UserServiceImpl implements UserService {
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
@@ -280,7 +280,7 @@ public class UserServiceImpl implements UserService {
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
@@ -316,21 +316,13 @@ public class UserServiceImpl implements UserService {
             UserVo userVo = new UserVo();
             userVo.setLat(centerLat);
             userVo.setLng(centerLng);
-            IPage<UserAO> pageInfo = userMapper.getNearbyUserPageList(new Page<>(pageNum, pageSize), userVo);
 
-            PageData<UserAO> pageEntity = new PageData<>();
-            pageEntity.setPageSize(pageSize);
-            pageEntity.setPageNum(pageNum);
+            Page page = new Page<>(pageNum, pageSize);
+            IPage<UserAO> pageInfo = userMapper.getNearbyUserPageList(page, userVo);
 
-            pageEntity.setData(pageInfo.getRecords());
-
-            pageEntity.setTotal((int) pageInfo.getTotal());
-            int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
-
-            return ResultData.success(pageEntity);
+            return new ResultData<PageData<UserAO>>().getSuccess(new PageData<>(pageInfo.getRecords(), page.hasNext()));
         } catch (Exception e) {
-            return ResultData.error(e.getCause().getMessage());
+            return new ResultData<PageData<UserAO>>().getError(e.getMessage());
         }
     }
 
@@ -351,7 +343,7 @@ public class UserServiceImpl implements UserService {
             pageEntity.setPageNum(pageNum);
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
@@ -371,7 +363,7 @@ public class UserServiceImpl implements UserService {
             pageEntity.setPageNum(pageNum);
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {

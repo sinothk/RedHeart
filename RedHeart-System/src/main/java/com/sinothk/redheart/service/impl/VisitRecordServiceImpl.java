@@ -62,7 +62,7 @@ public class VisitRecordServiceImpl implements VisitRecordService {
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = pageNum * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {

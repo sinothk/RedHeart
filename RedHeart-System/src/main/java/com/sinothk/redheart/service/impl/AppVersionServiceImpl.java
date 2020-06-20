@@ -95,7 +95,7 @@ public class AppVersionServiceImpl implements AppVersionService {
             pageEntity.setData(pageInfo.getRecords());
             pageEntity.setTotal((int) pageInfo.getTotal());
             int currSize = currPage * pageSize;
-            pageEntity.setHasMore(currSize < pageInfo.getTotal());
+            pageEntity.setHasNext(currSize < pageInfo.getTotal());
 
             return ResultData.success(pageEntity);
         } catch (Exception e) {
