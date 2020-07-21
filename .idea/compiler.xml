@@ -20,4 +20,12 @@
       <module name="RedHeartLib" target="1.8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="PushByJPush" options="-parameters" />
+      <module name="redheart-comm" options="-parameters" />
+      <module name="redheart-system" options="-parameters" />
+      <module name="redheart-view" options="-parameters" />
+    </option>
+  </component>
 </project>

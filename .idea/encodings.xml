@@ -3,8 +3,12 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/PushByJPush" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PushByJPush/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RedHeart-Comm" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RedHeart-Comm/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RedHeart-System" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RedHeart-System/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RedHeart-View" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RedHeart-View/src/main/java" charset="UTF-8" />
   </component>
 </project>
