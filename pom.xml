@@ -151,8 +151,26 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.sinothk.redheart.RedHeartApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
+<!--    <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <version>1.5.3.RELEASE</version>-->
+<!--        <configuration>-->
+<!--            <mainClass>com.xx.webapps.api.main.WebappsApiBidMain</mainClass>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--            <execution>-->
+<!--                <goals>-->
+<!--                    <goal>repackage</goal>-->
+<!--                </goals>-->
+<!--            </execution>-->
+<!--        </executions>-->
+<!--    </plugin>-->
 </project>
