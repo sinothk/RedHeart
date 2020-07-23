@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @Api(value = "通知阅读实体")
-@Data
-@ToString
+
+
 @TableName("tb_comm_notice_reader")
 public class NoticeReaderEntity {
 
@@ -40,4 +40,36 @@ public class NoticeReaderEntity {
     @ApiModelProperty("发布时间")
     @TableField(value = "read_time")
     private Date readTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getNoticeId() {
+        return noticeId;
+    }
+
+    public void setNoticeId(Long noticeId) {
+        this.noticeId = noticeId;
+    }
+
+    public Long getReaderAccount() {
+        return readerAccount;
+    }
+
+    public void setReaderAccount(Long readerAccount) {
+        this.readerAccount = readerAccount;
+    }
+
+    public Date getReadTime() {
+        return readTime;
+    }
+
+    public void setReadTime(Date readTime) {
+        this.readTime = readTime;
+    }
 }

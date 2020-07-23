@@ -1,11 +1,11 @@
 package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
 
-@Data
-@ToString
+
+
+
+
 public class DataCenterEntity implements Comparable<DataCenterEntity> {
 
     public DataCenterEntity() {
@@ -25,5 +25,21 @@ public class DataCenterEntity implements Comparable<DataCenterEntity> {
     @Override
     public int compareTo(DataCenterEntity obj) {
         return Integer.valueOf(this.getMouthNum()) - Integer.valueOf(obj.getMouthNum());
+    }
+
+    public String getMouthNum() {
+        return mouthNum;
+    }
+
+    public void setMouthNum(String mouthNum) {
+        this.mouthNum = mouthNum;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

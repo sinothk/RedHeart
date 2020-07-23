@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel(description = "登录日志信息")
-@Data
-@ToString
+
+
 @TableName(value = "tb_comm_login_record")
 public class LoginRecordEntity {
 
@@ -73,4 +73,84 @@ public class LoginRecordEntity {
     @ApiModelProperty(value = "登录区县")
     @TableField("login_district")
     private String loginDistrict;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getAccount() {
+        return account;
+    }
+
+    public void setAccount(Long account) {
+        this.account = account;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public Double getLoginLat() {
+        return loginLat;
+    }
+
+    public void setLoginLat(Double loginLat) {
+        this.loginLat = loginLat;
+    }
+
+    public Double getLoginLon() {
+        return loginLon;
+    }
+
+    public void setLoginLon(Double loginLon) {
+        this.loginLon = loginLon;
+    }
+
+    public String getLoginAddress() {
+        return loginAddress;
+    }
+
+    public void setLoginAddress(String loginAddress) {
+        this.loginAddress = loginAddress;
+    }
+
+    public String getLoginProvince() {
+        return loginProvince;
+    }
+
+    public void setLoginProvince(String loginProvince) {
+        this.loginProvince = loginProvince;
+    }
+
+    public String getLoginCity() {
+        return loginCity;
+    }
+
+    public void setLoginCity(String loginCity) {
+        this.loginCity = loginCity;
+    }
+
+    public String getLoginDistrict() {
+        return loginDistrict;
+    }
+
+    public void setLoginDistrict(String loginDistrict) {
+        this.loginDistrict = loginDistrict;
+    }
 }

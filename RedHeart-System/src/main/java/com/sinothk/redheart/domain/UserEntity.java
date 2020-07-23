@@ -3,14 +3,14 @@ package com.sinothk.redheart.domain;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel(description = "用户信息")
-@Data
-@ToString
+
+
 @TableName(value = "tb_comm_user")
 public class UserEntity {
 
@@ -131,4 +131,212 @@ public class UserEntity {
     @ApiModelProperty(value = "IMEI")
     @TableField(exist = false)
     private String imei;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getAccount() {
+        return account;
+    }
+
+    public void setAccount(Long account) {
+        this.account = account;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public Date getUserBorthday() {
+        return userBorthday;
+    }
+
+    public void setUserBorthday(Date userBorthday) {
+        this.userBorthday = userBorthday;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getHometown() {
+        return hometown;
+    }
+
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public Double getLoginLat() {
+        return loginLat;
+    }
+
+    public void setLoginLat(Double loginLat) {
+        this.loginLat = loginLat;
+    }
+
+    public Double getLoginLon() {
+        return loginLon;
+    }
+
+    public void setLoginLon(Double loginLon) {
+        this.loginLon = loginLon;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public String getLoginAddress() {
+        return loginAddress;
+    }
+
+    public void setLoginAddress(String loginAddress) {
+        this.loginAddress = loginAddress;
+    }
+
+    public String getLoginProvince() {
+        return loginProvince;
+    }
+
+    public void setLoginProvince(String loginProvince) {
+        this.loginProvince = loginProvince;
+    }
+
+    public String getLoginCity() {
+        return loginCity;
+    }
+
+    public void setLoginCity(String loginCity) {
+        this.loginCity = loginCity;
+    }
+
+    public String getLoginDistrict() {
+        return loginDistrict;
+    }
+
+    public void setLoginDistrict(String loginDistrict) {
+        this.loginDistrict = loginDistrict;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
 }

@@ -57,11 +57,11 @@
         </dependency>
 
         <!--实体-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
         <!--数据库部分-->
         <dependency>
@@ -133,16 +133,17 @@
         </dependency>
 
         <!--sinothk-base-->
-<!--        <dependency>-->
-<!--            <groupId>com.sinothk.base</groupId>-->
-<!--            <artifactId>sinothk-base</artifactId>-->
-<!--            <version>20.1.0715</version>-->
-<!--        </dependency>-->
         <dependency>
-            <groupId>com.github.sinothk</groupId>
+            <groupId>com.sinothk.base</groupId>
             <artifactId>sinothk-base</artifactId>
-            <version>20.1.0721</version>
+            <version>20.1.0723</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.github.sinothk</groupId>-->
+<!--            <artifactId>sinothk-base</artifactId>-->
+<!--            <version>20.1.0721</version>-->
+<!--        </dependency>-->
         <!--sinothk-base-->
     </dependencies>
 

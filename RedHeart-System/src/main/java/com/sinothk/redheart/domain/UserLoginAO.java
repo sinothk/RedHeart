@@ -2,14 +2,14 @@ package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel(description = "用户AO信息")
-@Data
-@ToString
+
+
 public class UserLoginAO {
 
     @ApiModelProperty(value = "ID")
@@ -56,4 +56,124 @@ public class UserLoginAO {
 
     @ApiModelProperty(value = "注册时间")
     private Date createTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getAccount() {
+        return account;
+    }
+
+    public void setAccount(Long account) {
+        this.account = account;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public Date getUserBorthday() {
+        return userBorthday;
+    }
+
+    public void setUserBorthday(Date userBorthday) {
+        this.userBorthday = userBorthday;
+    }
+
+    public Double getLoginLat() {
+        return loginLat;
+    }
+
+    public void setLoginLat(Double loginLat) {
+        this.loginLat = loginLat;
+    }
+
+    public Double getLoginLon() {
+        return loginLon;
+    }
+
+    public void setLoginLon(Double loginLon) {
+        this.loginLon = loginLon;
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

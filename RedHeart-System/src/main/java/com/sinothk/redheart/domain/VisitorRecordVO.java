@@ -1,13 +1,13 @@
 package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
-@Data
-@ToString
+
+
 public class VisitorRecordVO {
 
     @ApiModelProperty(value = "被访问者账号")
@@ -18,4 +18,28 @@ public class VisitorRecordVO {
 
     @ApiModelProperty(value = "访问类型：0：主页；1.动态")
     private Integer visitType;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(String visitor) {
+        this.visitor = visitor;
+    }
+
+    public Integer getVisitType() {
+        return visitType;
+    }
+
+    public void setVisitType(Integer visitType) {
+        this.visitType = visitType;
+    }
 }

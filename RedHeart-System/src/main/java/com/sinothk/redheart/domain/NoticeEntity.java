@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @Api(value = "通知实体")
-@Data
-@ToString
+
+
 @TableName("tb_comm_notice")
 public class NoticeEntity {
 
@@ -55,4 +55,60 @@ public class NoticeEntity {
     @ApiModelProperty("发布人账号")
     @TableField(value = "create_account")
     private Long createAccount;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getPublicTime() {
+        return publicTime;
+    }
+
+    public void setPublicTime(Date publicTime) {
+        this.publicTime = publicTime;
+    }
+
+    public Long getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Long createAccount) {
+        this.createAccount = createAccount;
+    }
 }

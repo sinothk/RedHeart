@@ -2,14 +2,14 @@ package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @Api(value = "好友关系实体")
-@Data
-@ToString
+
+
 public class FriendAo {
 
     @ApiModelProperty("关注的人数")
@@ -29,5 +29,37 @@ public class FriendAo {
 
     public FriendAo(Integer relation) {
         this.relation = relation;
+    }
+
+    public Integer getLikeUserNum() {
+        return likeUserNum;
+    }
+
+    public void setLikeUserNum(Integer likeUserNum) {
+        this.likeUserNum = likeUserNum;
+    }
+
+    public Integer getFansUserNum() {
+        return fansUserNum;
+    }
+
+    public void setFansUserNum(Integer fansUserNum) {
+        this.fansUserNum = fansUserNum;
+    }
+
+    public Integer getRelation() {
+        return relation;
+    }
+
+    public void setRelation(Integer relation) {
+        this.relation = relation;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

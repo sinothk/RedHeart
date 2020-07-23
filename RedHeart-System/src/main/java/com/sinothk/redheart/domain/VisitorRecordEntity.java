@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel(description = "用户访问记录表")
-@Data
-@ToString
+
+
 @TableName(value = "tb_comm_visitor")
 public class VisitorRecordEntity {
 //    /*表： tb_comm_visitor*/------------------------
@@ -52,4 +52,52 @@ public class VisitorRecordEntity {
     @ApiModelProperty(value = "访问次数")
     @TableField("visit_num")
     private Integer visitNum;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(String visitor) {
+        this.visitor = visitor;
+    }
+
+    public Date getVisitTime() {
+        return visitTime;
+    }
+
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
+    }
+
+    public Integer getVisitType() {
+        return visitType;
+    }
+
+    public void setVisitType(Integer visitType) {
+        this.visitType = visitType;
+    }
+
+    public Integer getVisitNum() {
+        return visitNum;
+    }
+
+    public void setVisitNum(Integer visitNum) {
+        this.visitNum = visitNum;
+    }
 }

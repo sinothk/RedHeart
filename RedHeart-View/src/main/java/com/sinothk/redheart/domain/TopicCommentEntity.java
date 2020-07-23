@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel("话题评论实体")
-@Data
-@ToString
+
+
 @TableName(value = "tb_app_topic_comment")
 public class TopicCommentEntity {
 
@@ -49,4 +49,52 @@ public class TopicCommentEntity {
     @ApiModelProperty("发布时间")
     @TableField("create_time")
     private Date createTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
+    }
+
+    public Long getReceiveAccount() {
+        return receiveAccount;
+    }
+
+    public void setReceiveAccount(Long receiveAccount) {
+        this.receiveAccount = receiveAccount;
+    }
+
+    public String getComContent() {
+        return comContent;
+    }
+
+    public void setComContent(String comContent) {
+        this.comContent = comContent;
+    }
+
+    public Long getSendAccount() {
+        return sendAccount;
+    }
+
+    public void setSendAccount(Long sendAccount) {
+        this.sendAccount = sendAccount;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

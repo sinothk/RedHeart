@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel("用户关系(关注/粉丝)实体")
-@Data
-@ToString
+
+
 @TableName(value = "tb_comm_friends")
 public class FriendRelationshipEntity {
 
@@ -32,4 +32,36 @@ public class FriendRelationshipEntity {
     @ApiModelProperty(value = "开始喜欢时间")
     @TableField("like_time")
     private Date likeTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getLikingAccount() {
+        return likingAccount;
+    }
+
+    public void setLikingAccount(Long likingAccount) {
+        this.likingAccount = likingAccount;
+    }
+
+    public Long getLikedAccount() {
+        return likedAccount;
+    }
+
+    public void setLikedAccount(Long likedAccount) {
+        this.likedAccount = likedAccount;
+    }
+
+    public Date getLikeTime() {
+        return likeTime;
+    }
+
+    public void setLikeTime(Date likeTime) {
+        this.likeTime = likeTime;
+    }
 }

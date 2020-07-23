@@ -2,14 +2,14 @@ package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel(description = "用户访问记录表")
-@Data
-@ToString
+
+
 public class VisitorRecordAO {
 
 //    SELECT
@@ -57,4 +57,76 @@ public class VisitorRecordAO {
 
     @ApiModelProperty(value = "访问人头像")
     private String userAvatar;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(String visitor) {
+        this.visitor = visitor;
+    }
+
+    public Date getVisitTime() {
+        return visitTime;
+    }
+
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
+    }
+
+    public Integer getVisitType() {
+        return visitType;
+    }
+
+    public void setVisitType(Integer visitType) {
+        this.visitType = visitType;
+    }
+
+    public Integer getVisitNum() {
+        return visitNum;
+    }
+
+    public void setVisitNum(Integer visitNum) {
+        this.visitNum = visitNum;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
 }

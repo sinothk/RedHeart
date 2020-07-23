@@ -6,14 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel("话题评论返回实体")
-@Data
-@ToString
+
+
 public class TopicCommentVo {
 
 //        "SELECT \n" +
@@ -66,5 +66,91 @@ public class TopicCommentVo {
     @ApiModelProperty("发布人生日")
     private Date userBorthday;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
+    }
+
+    public Long getSendAccount() {
+        return sendAccount;
+    }
+
+    public void setSendAccount(Long sendAccount) {
+        this.sendAccount = sendAccount;
+    }
+
+    public Long getReceiveAccount() {
+        return receiveAccount;
+    }
+
+    public void setReceiveAccount(Long receiveAccount) {
+        this.receiveAccount = receiveAccount;
+    }
+
+    public String getComContent() {
+        return comContent;
+    }
+
+    public void setComContent(String comContent) {
+        this.comContent = comContent;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Date getUserBorthday() {
+        return userBorthday;
+    }
+
+    public void setUserBorthday(Date userBorthday) {
+        this.userBorthday = userBorthday;
+    }
 }

@@ -2,14 +2,14 @@ package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @Api(value = "通知返回实体")
-@Data
-@ToString
+
+
 public class NoticeAo {
 
     @ApiModelProperty("ID")
@@ -50,4 +50,108 @@ public class NoticeAo {
 
     @ApiModelProperty("阅读量")
     private Integer readerNum;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCoverPath() {
+        return coverPath;
+    }
+
+    public void setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getPublicTime() {
+        return publicTime;
+    }
+
+    public void setPublicTime(Date publicTime) {
+        this.publicTime = publicTime;
+    }
+
+    public Long getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Long createAccount) {
+        this.createAccount = createAccount;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Date getBorthday() {
+        return borthday;
+    }
+
+    public void setBorthday(Date borthday) {
+        this.borthday = borthday;
+    }
+
+    public Integer getReaderNum() {
+        return readerNum;
+    }
+
+    public void setReaderNum(Integer readerNum) {
+        this.readerNum = readerNum;
+    }
 }

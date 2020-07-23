@@ -1,11 +1,11 @@
 package com.sinothk.jpush.pushbyjpush;
 
 import com.alibaba.fastjson.JSON;
-import lombok.Data;
-import lombok.ToString;
 
-@Data
-@ToString
+
+
+
+
 public class JPushEntity {
 
     public static int MSG_TYPE_RELATION = 0; // 关注事件提醒
@@ -23,5 +23,21 @@ public class JPushEntity {
         jpushEntity.setMsgType(msgType);
         jpushEntity.setMsgData(JSON.toJSONString(dataObj));
         return JSON.toJSONString(jpushEntity);
+    }
+
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msgType) {
+        this.msgType = msgType;
+    }
+
+    public String getMsgData() {
+        return msgData;
+    }
+
+    public void setMsgData(String msgData) {
+        this.msgData = msgData;
     }
 }

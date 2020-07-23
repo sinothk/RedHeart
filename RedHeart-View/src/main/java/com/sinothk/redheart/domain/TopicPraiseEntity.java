@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 @ApiModel("话题点赞实体")
-@Data
-@ToString
+
+
 @TableName(value = "tb_app_topic_praise")
 public class TopicPraiseEntity {
 //    Field       Type         Collation        Null    Key     Default  Extra           Privileges                       Comment
@@ -36,4 +36,36 @@ public class TopicPraiseEntity {
     @ApiModelProperty("点赞次数")
     @TableField(value = "praise_num")
     private Integer praiseNum;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getAccount() {
+        return account;
+    }
+
+    public void setAccount(Long account) {
+        this.account = account;
+    }
+
+    public String getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
+    }
+
+    public Integer getPraiseNum() {
+        return praiseNum;
+    }
+
+    public void setPraiseNum(Integer praiseNum) {
+        this.praiseNum = praiseNum;
+    }
 }

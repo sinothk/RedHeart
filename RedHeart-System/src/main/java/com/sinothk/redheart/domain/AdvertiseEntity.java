@@ -6,14 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
 
 import java.util.Date;
 
 @Api(value = "广告实体")
-@Data
-@ToString
 @TableName("tb_comm_advertise")
 public class AdvertiseEntity {
 
@@ -86,4 +82,99 @@ public class AdvertiseEntity {
     @TableField(value = "ad_city")
     private String cityName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Long createAccount) {
+        this.createAccount = createAccount;
+    }
+
+    public String getAdId() {
+        return adId;
+    }
+
+    public void setAdId(String adId) {
+        this.adId = adId;
+    }
+
+    public String getAdTitle() {
+        return adTitle;
+    }
+
+    public void setAdTitle(String adTitle) {
+        this.adTitle = adTitle;
+    }
+
+    public String getAdImg() {
+        return adImg;
+    }
+
+    public void setAdImg(String adImg) {
+        this.adImg = adImg;
+    }
+
+    public String getAdUrl() {
+        return adUrl;
+    }
+
+    public void setAdUrl(String adUrl) {
+        this.adUrl = adUrl;
+    }
+
+    public Integer getAdWhere() {
+        return adWhere;
+    }
+
+    public void setAdWhere(Integer adWhere) {
+        this.adWhere = adWhere;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 }

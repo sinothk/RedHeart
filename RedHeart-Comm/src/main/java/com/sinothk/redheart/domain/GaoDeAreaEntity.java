@@ -1,12 +1,7 @@
 package com.sinothk.redheart.domain;
 
-import lombok.Data;
-import lombok.ToString;
-
 import java.util.ArrayList;
 
-@Data
-@ToString
 public class GaoDeAreaEntity {
 //    {
 //        "status" :  "1",
@@ -18,5 +13,11 @@ public class GaoDeAreaEntity {
 
     private ArrayList<AreaEntity> districts;
 
+    public ArrayList<AreaEntity> getDistricts() {
+        return districts;
+    }
 
+    public void setDistricts(ArrayList<AreaEntity> districts) {
+        this.districts = districts;
+    }
 }

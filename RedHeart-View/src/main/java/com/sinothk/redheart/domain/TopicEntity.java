@@ -7,14 +7,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.models.auth.In;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 import java.util.Date;
 
 @ApiModel("话题实体")
-@Data
-@ToString
+
+
 @TableName(value = "tb_app_topic")
 public class TopicEntity {
 
@@ -73,4 +73,116 @@ public class TopicEntity {
     @ApiModelProperty("话题性别分类")
     @TableField("sex_type")
     private Integer sexType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
+    }
+
+    public Long getAccount() {
+        return account;
+    }
+
+    public void setAccount(Long account) {
+        this.account = account;
+    }
+
+    public String getTopicTheme() {
+        return topicTheme;
+    }
+
+    public void setTopicTheme(String topicTheme) {
+        this.topicTheme = topicTheme;
+    }
+
+    public String getTopicTitle() {
+        return topicTitle;
+    }
+
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
+    }
+
+    public String getTopicContent() {
+        return topicContent;
+    }
+
+    public void setTopicContent(String topicContent) {
+        this.topicContent = topicContent;
+    }
+
+    public Double getLocLat() {
+        return locLat;
+    }
+
+    public void setLocLat(Double locLat) {
+        this.locLat = locLat;
+    }
+
+    public Double getLocLng() {
+        return locLng;
+    }
+
+    public void setLocLng(Double locLng) {
+        this.locLng = locLng;
+    }
+
+    public String getLocAddress() {
+        return locAddress;
+    }
+
+    public void setLocAddress(String locAddress) {
+        this.locAddress = locAddress;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getTopicImg() {
+        return topicImg;
+    }
+
+    public void setTopicImg(String topicImg) {
+        this.topicImg = topicImg;
+    }
+
+    public String getTopicCover() {
+        return topicCover;
+    }
+
+    public void setTopicCover(String topicCover) {
+        this.topicCover = topicCover;
+    }
+
+    public Integer getSexType() {
+        return sexType;
+    }
+
+    public void setSexType(Integer sexType) {
+        this.sexType = sexType;
+    }
 }

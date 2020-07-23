@@ -6,12 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
+
+
 
 @ApiModel(description = "用户信息")
-@Data
-@ToString
+
+
 @TableName(value = "tb_comm_user_openid")
 public class WxUserOpenIdEntity {
 //    Field      Type         Collation        Null    Key     Default  Extra           Privileges                       Comment
@@ -40,4 +40,28 @@ public class WxUserOpenIdEntity {
     @ApiModelProperty(value = "微信OpenId")
     @TableField("open_id")
     private String openId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 }

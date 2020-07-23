@@ -6,14 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.ToString;
 
 import java.util.Date;
 
 @ApiModel(value = "版本信息")
-@Data
-@ToString
 @TableName(value = "tb_comm_version")
 public class AppVersionEntity {
 //    /*表： tb_comm_version*/------------------------
@@ -85,4 +81,107 @@ public class AppVersionEntity {
     @TableField(value = "app_status")
     private Integer appStatus;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getAppCode() {
+        return appCode;
+    }
+
+    public void setAppCode(Integer appCode) {
+        this.appCode = appCode;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public Long getAppSize() {
+        return appSize;
+    }
+
+    public void setAppSize(Long appSize) {
+        this.appSize = appSize;
+    }
+
+    public String getAppIcon() {
+        return appIcon;
+    }
+
+    public void setAppIcon(String appIcon) {
+        this.appIcon = appIcon;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getAppUrl() {
+        return appUrl;
+    }
+
+    public void setAppUrl(String appUrl) {
+        this.appUrl = appUrl;
+    }
+
+    public String getAppDescribe() {
+        return appDescribe;
+    }
+
+    public void setAppDescribe(String appDescribe) {
+        this.appDescribe = appDescribe;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getPublicTime() {
+        return publicTime;
+    }
+
+    public void setPublicTime(Date publicTime) {
+        this.publicTime = publicTime;
+    }
+
+    public Boolean getMustUpdate() {
+        return mustUpdate;
+    }
+
+    public void setMustUpdate(Boolean mustUpdate) {
+        this.mustUpdate = mustUpdate;
+    }
+
+    public Long getCreatorAccount() {
+        return creatorAccount;
+    }
+
+    public void setCreatorAccount(Long creatorAccount) {
+        this.creatorAccount = creatorAccount;
+    }
+
+    public Integer getAppStatus() {
+        return appStatus;
+    }
+
+    public void setAppStatus(Integer appStatus) {
+        this.appStatus = appStatus;
+    }
 }
