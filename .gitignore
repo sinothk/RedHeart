@@ -1,2 +1,6 @@
 .idea/
 out/artifacts/
+/RedHeart-Comm/src/test/
+/PushByJPush/src/test/
+/RedHeart-System/src/test/
+/RedHeart-View/src/test/
