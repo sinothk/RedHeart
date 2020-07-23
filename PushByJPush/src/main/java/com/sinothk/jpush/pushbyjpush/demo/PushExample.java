@@ -1,3 +1,4 @@
+/*
 package com.sinothk.jpush.pushbyjpush.demo;
 
 import cn.jiguang.common.ClientConfig;
@@ -182,9 +183,11 @@ public class PushExample {
         }
     }
 
-    /**
+    */
+/**
      * 测试多线程发送 2000 条推送耗时
-     */
+     *//*
+
     public static void testSendPushes() {
         ClientConfig clientConfig = ClientConfig.getInstance();
         final JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY, null, clientConfig);
@@ -526,10 +529,12 @@ public class PushExample {
         }
     }
 
-    /**
+    */
+/**
      * 批量单推接口
      * https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#vip
-     */
+     *//*
+
     public static void testBatchSend() {
 
         JPushClient jPushClient = new JPushClient(MASTER_SECRET, APP_KEY);
@@ -592,9 +597,11 @@ public class PushExample {
         }
     }
 
-    /**
+    */
+/**
      * 自定义发送参数名称, 华为客户可参考该方法
-     */
+     *//*
+
     public static void testSendPushWithCustomField() {
 
         ClientConfig config = ClientConfig.getInstance();
@@ -637,3 +644,4 @@ public class PushExample {
 
 }
 
+*/
