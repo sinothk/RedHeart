@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PushByJPush" />
         <module name="redheart-comm" />
         <module name="redheart-system" />
         <module name="redheart-view" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="push-by-jpush" target="1.8" />
       <module name="PushByJPush" target="1.8" />
       <module name="redheart-comm" target="1.8" />
       <module name="redheart-system" target="1.8" />
@@ -23,6 +23,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="PushByJPush" options="-parameters" />
+      <module name="push-by-jpush" options="-parameters" />
       <module name="redheart-comm" options="-parameters" />
       <module name="redheart-system" options="-parameters" />
       <module name="redheart-view" options="-parameters" />

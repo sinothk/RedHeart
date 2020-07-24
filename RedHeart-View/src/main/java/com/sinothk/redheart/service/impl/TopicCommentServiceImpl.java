@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
-import com.sinothk.jpush.pushbyjpush.JPushEntity;
-import com.sinothk.jpush.pushbyjpush.JPushHelper;
+import com.sinothk.base.push.jpush.JPushEntity;
+import com.sinothk.base.push.jpush.JPushHelper;
 import com.sinothk.redheart.domain.TopicAo;
 import com.sinothk.redheart.domain.TopicCommentEntity;
 import com.sinothk.redheart.domain.TopicCommentVo;
@@ -55,7 +55,7 @@ public class TopicCommentServiceImpl implements TopicCommentService {
                         TopicAo topicAo = topicMapper.getTopicInfo(topicEntity.getTopicId());
 
                         String alias = String.valueOf(topicDbEntity.getAccount());
-                        String data = JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicAo);
+                        String data =JPushEntity.createData(JPushEntity.MSG_TYPE_COMMENT, topicAo);
                         JPushHelper.pushByAlias(alias, "话题新评论", "有人评论了你的话题，快去看看吧 ... ", data);
                     } catch (Exception e) {
                         e.printStackTrace();

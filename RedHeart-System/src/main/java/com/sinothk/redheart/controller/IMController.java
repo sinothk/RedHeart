@@ -1,9 +1,9 @@
 package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.ResultData;
+import com.sinothk.base.push.jpush.im.JMessageHelper;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.jpush.pushbyjpush.im.JMessageHelper;
 import com.sinothk.base.authorization.TokenCheck;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +30,7 @@ public class IMController {
 
         try { // "欢迎加入异趣，很高心在这里遇见您！"
             new Thread(() -> {
-                JMessageHelper jMessageHelper = new JMessageHelper();
-                jMessageHelper.sendTxtMsg(currAccount, jMessageHelper.USER_ADMIN, txtMsg);
+                JMessageHelper.sendTxtMsg(currAccount, JMessageHelper.USER_ADMIN, txtMsg);
             }).start();
             return ResultData.success("发送成功");
         } catch (Exception e) {

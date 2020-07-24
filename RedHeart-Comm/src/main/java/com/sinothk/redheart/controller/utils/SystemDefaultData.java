@@ -6,9 +6,9 @@ import java.util.Random;
 public class SystemDefaultData {
 
 
-    private static HashMap<Integer, String> yearStrMap = null;
+    private HashMap<Integer, String> yearStrMap = null;
 
-    public static String getOneYear() {
+    public String getOneYear() {
 
         if (yearStrMap == null) {
             yearStrMap = new HashMap<>();
@@ -36,12 +36,12 @@ public class SystemDefaultData {
         return yearStrMap.get(num);
     }
 
-    private static Random random = null;
-    private static HashMap<Integer, String> oneWordMap, twoWordMap, threeWordMap, fourWordMap, fiveWordMap;
-    private static HashMap<Integer, String> nicknameMale2Map, nicknameMale3Map;
+    private Random random = null;
+    private HashMap<Integer, String> oneWordMap, twoWordMap, threeWordMap, fourWordMap, fiveWordMap;
+    private HashMap<Integer, String> nicknameMale2Map, nicknameMale3Map;
 
     @Deprecated
-    public static String getNicknameStr(String param, String defaultVal) {
+    public String getNicknameStr(String param, String defaultVal) {
 
         String nickname;
 
@@ -75,7 +75,7 @@ public class SystemDefaultData {
         return nickname;
     }
 
-    private static String get1Word() {
+    private String get1Word() {
         if (oneWordMap == null) {
             oneWordMap = new HashMap<>();
 
@@ -95,7 +95,7 @@ public class SystemDefaultData {
         return oneWordMap.get(random.nextInt(oneWordMap.size()));
     }
 
-    private static String get2Word() {
+    private String get2Word() {
         if (twoWordMap == null) {
             twoWordMap = new HashMap<>();
             twoWordMap.put(0, "小");
@@ -110,7 +110,7 @@ public class SystemDefaultData {
         return twoWordMap.get(key);
     }
 
-    private static String get3Word() {
+    private String get3Word() {
         if (threeWordMap == null) {
             threeWordMap = new HashMap<>();
 
@@ -158,7 +158,7 @@ public class SystemDefaultData {
      * @param defaultVal
      * @return
      */
-    public static String getNickname(Integer sex, String defaultVal) {
+    public String getNickname(Integer sex, String defaultVal) {
         String nickname;
 
         if (random == null) {
@@ -215,7 +215,7 @@ public class SystemDefaultData {
         return nickname;
     }
 
-    private static String getMale2Word() {
+    private String getMale2Word() {
         if (nicknameMale2Map == null) {
             nicknameMale2Map = new HashMap<>();
             nicknameMale2Map.put(0, "小");
@@ -230,7 +230,7 @@ public class SystemDefaultData {
         return nicknameMale2Map.get(key);
     }
 
-    private static String getMale3Word() {
+    private String getMale3Word() {
         if (nicknameMale3Map == null) {
             nicknameMale3Map = new HashMap<>();
 
@@ -272,9 +272,9 @@ public class SystemDefaultData {
     }
 
     //
-    private static HashMap<Integer, String> defaultAvatarMap, defaultMaleAvatarMap;
+    private HashMap<Integer, String> defaultAvatarMap, defaultMaleAvatarMap;
 
-    public static String getDefaultAvatar(Integer sex) {
+    public String getDefaultAvatar(Integer sex) {
 
         if (random == null) {
             random = new Random();

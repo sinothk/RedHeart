@@ -52,14 +52,14 @@ public class UserServiceImpl implements UserService {
 
             if (userVo.getUserType() == -1) {// 系统用户
                 // 设置用户昵称
-                userVo.setNickname(SystemDefaultData.getNickname(userVo.getSex(), String.valueOf(account)));
+                userVo.setNickname(new SystemDefaultData().getNickname(userVo.getSex(), String.valueOf(account)));
                 // 设置默认头像
-                userVo.setAvatar(SystemDefaultData.getDefaultAvatar(userVo.getSex()));
+                userVo.setAvatar(new SystemDefaultData().getDefaultAvatar(userVo.getSex()));
 
                 // 系统用户初始化: 出生日期
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date age = sdf.parse(SystemDefaultData.getOneYear());
+                    Date age = sdf.parse(new SystemDefaultData().getOneYear());
                     userVo.setUserBorthday(age);
                 } catch (ParseException e) {
                     userVo.setUserBorthday(new Date());
