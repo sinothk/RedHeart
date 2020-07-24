@@ -102,7 +102,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 
             if (advList == null || advList.size() == 0) {
                 advList = new ArrayList<>();
-                advList.add(new AdvertiseEntity(DefValue.getWelcomeAdvURL()));
+                advList.add(new AdvertiseEntity(new DefValue().getWelcomeAdvURL()));
             }
             return ResultData.success(advList.get(0));
         } catch (Exception e) {

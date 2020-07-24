@@ -27,7 +27,7 @@ public class WxBizController {
     public ResultData<WxApiEntity> getOpenId(@ApiParam("code") @RequestParam("code") String code) {
         // http://192.168.124.10:8086/redheart/wxBiz/getOpenId?code=043u9z8C1bQu360v3J9C1niD8C1u9z8s
         try {
-            String wxDataStr = WxUtil.getOpenID(code);
+            String wxDataStr = new WxUtil().getOpenID(code);
             WxApiEntity wxApiEntity = JSON.parseObject(wxDataStr, WxApiEntity.class);
             return ResultData.success(wxApiEntity);
         } catch (Exception ex) {
