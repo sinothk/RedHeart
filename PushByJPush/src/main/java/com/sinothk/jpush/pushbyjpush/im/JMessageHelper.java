@@ -10,9 +10,9 @@ import com.sinothk.jpush.pushbyjpush.KeyValue;
 import com.sinothk.jpush.pushbyjpush.TargetType;
 
 public class JMessageHelper {
-    public static String USER_ADMIN = "9999";
+    public String USER_ADMIN = "9999";
 
-    public static void sendTxtMsg(String receivedAccount, String sendAccount, String msg) {
+    public void sendTxtMsg(String receivedAccount, String sendAccount, String msg) {
         new Thread(() -> {
             JMessageClient client = new JMessageClient(KeyValue.APP_KEY, KeyValue.MASTER_SECRET);
 

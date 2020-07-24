@@ -29,7 +29,10 @@ public class IMController {
         }
 
         try { // "欢迎加入异趣，很高心在这里遇见您！"
-            new Thread(() -> JMessageHelper.sendTxtMsg(currAccount, JMessageHelper.USER_ADMIN, txtMsg)).start();
+            new Thread(() -> {
+                JMessageHelper jMessageHelper = new JMessageHelper();
+                jMessageHelper.sendTxtMsg(currAccount, jMessageHelper.USER_ADMIN, txtMsg);
+            }).start();
             return ResultData.success("发送成功");
         } catch (Exception e) {
             return ResultData.error("暂无数据");
