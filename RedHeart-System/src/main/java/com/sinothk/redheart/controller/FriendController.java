@@ -4,7 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
+import com.sinothk.base.authorization.TokenCheck;
 import com.sinothk.redheart.domain.FriendAo;
 import com.sinothk.redheart.domain.FriendEntity;
 import com.sinothk.redheart.domain.FriendRelationshipEntity;

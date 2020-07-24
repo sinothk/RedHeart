@@ -1,10 +1,12 @@
 package com.sinothk.redheart.controller;
 
+import com.sinothk.base.authorization.TokenCheck;
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
+//import com.sinothk.base.authorization.TokenCheck;
+
 import com.sinothk.redheart.domain.AdvertiseEntity;
 import com.sinothk.redheart.service.AdvertiseService;
 import io.swagger.annotations.Api;

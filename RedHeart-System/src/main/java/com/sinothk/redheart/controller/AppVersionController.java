@@ -4,7 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
+import com.sinothk.base.authorization.TokenCheck;
 import com.sinothk.redheart.domain.AppVersionEntity;
 import com.sinothk.redheart.service.AppVersionService;
 import io.swagger.annotations.Api;

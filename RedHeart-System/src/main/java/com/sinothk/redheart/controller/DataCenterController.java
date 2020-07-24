@@ -2,7 +2,7 @@ package com.sinothk.redheart.controller;
 
 import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
-import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
+import com.sinothk.base.authorization.TokenCheck;
 import com.sinothk.redheart.domain.DataCenterEntity;
 import com.sinothk.redheart.domain.UserLoginAO;
 import com.sinothk.redheart.service.DataCenterService;

@@ -5,7 +5,7 @@ import com.sinothk.base.entity.PageVo;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
+import com.sinothk.base.authorization.TokenCheck;
 import com.sinothk.redheart.domain.VisitorRecordAO;
 import com.sinothk.redheart.domain.VisitorRecordEntity;
 import com.sinothk.redheart.domain.VisitorRecordVO;

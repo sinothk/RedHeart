@@ -133,16 +133,17 @@
         </dependency>
 
         <!--sinothk-base-->
+        <!--本地-->
 <!--        <dependency>-->
 <!--            <groupId>com.sinothk.base</groupId>-->
 <!--            <artifactId>sinothk-base</artifactId>-->
-<!--            <version>20.1.0723</version>-->
+<!--            <version>20.1.0725</version>-->
 <!--        </dependency>-->
 
         <dependency>
             <groupId>com.github.sinothk</groupId>
             <artifactId>sinothk-base</artifactId>
-            <version>20.1.0723</version>
+            <version>20.1.0726</version>
         </dependency>
         <!--sinothk-base-->
 
