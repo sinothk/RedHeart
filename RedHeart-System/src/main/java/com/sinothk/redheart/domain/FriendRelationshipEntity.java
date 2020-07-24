@@ -6,14 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-
-
 import java.util.Date;
 
 @ApiModel("用户关系(关注/粉丝)实体")
-
-
 @TableName(value = "tb_comm_friends")
 public class FriendRelationshipEntity {
 

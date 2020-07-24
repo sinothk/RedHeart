@@ -1,12 +1,7 @@
 package com.sinothk.redheart.domain;
 
 import io.swagger.annotations.ApiModelProperty;
-
-
-
 import java.util.Date;
-
-
 
 public class TopicAo {
 
