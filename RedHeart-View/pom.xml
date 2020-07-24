@@ -24,7 +24,7 @@
             <groupId>com.sinothk</groupId>
             <artifactId>redheart-system</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>runtime</scope>
+<!--            <scope>runtime</scope>-->
         </dependency>
 
         <!--Web HTML-->
