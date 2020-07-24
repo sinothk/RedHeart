@@ -142,7 +142,7 @@
         <dependency>
             <groupId>com.github.sinothk</groupId>
             <artifactId>sinothk-base</artifactId>
-            <version>20.1.0727</version>
+            <version>20.2.0728</version>
         </dependency>
         <!--sinothk-base-->
 

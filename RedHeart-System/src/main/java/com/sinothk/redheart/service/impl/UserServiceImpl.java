@@ -8,6 +8,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.AccountUtil;
 import com.sinothk.base.utils.StringUtil;
+import com.sinothk.base.utils.SystemDefaultData;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.redheart.config.AccountInitLoader;
 import com.sinothk.redheart.domain.*;
@@ -15,7 +16,6 @@ import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
-import com.sinothk.redheart.controller.utils.SystemDefaultData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -52,14 +52,14 @@ public class UserServiceImpl implements UserService {
 
             if (userVo.getUserType() == -1) {// 系统用户
                 // 设置用户昵称
-                userVo.setNickname(new SystemDefaultData().getNickname(userVo.getSex(), String.valueOf(account)));
+                userVo.setNickname(SystemDefaultData.getNickname(userVo.getSex(), String.valueOf(account)));
                 // 设置默认头像
-                userVo.setAvatar(new SystemDefaultData().getDefaultAvatar(userVo.getSex()));
+                userVo.setAvatar(SystemDefaultData.getDefaultAvatar(userVo.getSex()));
 
                 // 系统用户初始化: 出生日期
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date age = sdf.parse(new SystemDefaultData().getOneYear());
+                    Date age = sdf.parse(SystemDefaultData.getOneYear());
                     userVo.setUserBorthday(age);
                 } catch (ParseException e) {
                     userVo.setUserBorthday(new Date());
