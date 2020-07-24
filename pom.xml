@@ -13,7 +13,6 @@
 
     <modules>
         <module>RedHeart-Comm</module>
-        <module>PushByJPush</module>
         <module>RedHeart-System</module>
         <module>RedHeart-View</module>
     </modules>
