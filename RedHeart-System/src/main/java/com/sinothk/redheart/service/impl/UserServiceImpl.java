@@ -15,7 +15,7 @@ import com.sinothk.redheart.repository.FriendMapper;
 import com.sinothk.redheart.repository.LoginReordMapper;
 import com.sinothk.redheart.repository.UserMapper;
 import com.sinothk.redheart.service.UserService;
-import com.sinothk.redheart.utils.SystemDefaultData;
+import com.sinothk.redheart.controller.utils.SystemDefaultData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

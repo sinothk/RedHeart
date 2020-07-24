@@ -4,7 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.TopicCommentEntity;
 import com.sinothk.redheart.domain.TopicCommentVo;
 import com.sinothk.redheart.service.TopicCommentService;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 @Api(tags = "话题相关")
 @RestController

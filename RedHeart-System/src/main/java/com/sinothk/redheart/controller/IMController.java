@@ -4,7 +4,7 @@ import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
 import com.sinothk.jpush.pushbyjpush.im.JMessageHelper;
-import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -1,4 +1,4 @@
-package com.sinothk.redheart.utils;
+package com.sinothk.redheart.controller.utils;
 
 import java.util.HashMap;
 import java.util.Random;

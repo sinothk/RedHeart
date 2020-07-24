@@ -1,4 +1,4 @@
-package com.sinothk.redheart.utils.wx;
+package com.sinothk.redheart.controller.utils.wx;
 
 import java.util.HashMap;
 import java.util.Map;

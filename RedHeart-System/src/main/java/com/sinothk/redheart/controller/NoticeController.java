@@ -4,7 +4,7 @@ import com.sinothk.base.entity.PageData;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.NoticeEntity;
 import com.sinothk.redheart.domain.NoticeReaderVo;
 import com.sinothk.redheart.domain.NoticeAo;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 @Api(tags = "通知管理")
 @RestController

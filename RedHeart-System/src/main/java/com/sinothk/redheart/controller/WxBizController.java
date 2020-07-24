@@ -6,7 +6,7 @@ import com.sinothk.redheart.domain.WxApiEntity;
 import com.sinothk.redheart.domain.WxUserEntity;
 import com.sinothk.redheart.domain.WxUserVo;
 import com.sinothk.redheart.service.WxUserService;
-import com.sinothk.redheart.utils.wx.WxUtil;
+import com.sinothk.redheart.controller.utils.wx.WxUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

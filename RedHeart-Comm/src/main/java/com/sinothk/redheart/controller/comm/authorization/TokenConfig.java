@@ -1,4 +1,4 @@
-package com.sinothk.redheart.comm.authorization;
+package com.sinothk.redheart.controller.comm.authorization;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

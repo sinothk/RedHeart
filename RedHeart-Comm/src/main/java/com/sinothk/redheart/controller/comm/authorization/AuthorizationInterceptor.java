@@ -1,8 +1,8 @@
-package com.sinothk.redheart.comm.authorization;
+package com.sinothk.redheart.controller.comm.authorization;
 
 import com.sinothk.base.keyValue.ErrorCode;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.comm.exceptions.NormalException;
+import com.sinothk.redheart.controller.comm.exceptions.NormalException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;

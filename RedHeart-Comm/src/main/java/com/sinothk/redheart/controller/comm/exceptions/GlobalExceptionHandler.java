@@ -1,4 +1,4 @@
-package com.sinothk.redheart.comm.exceptions;
+package com.sinothk.redheart.controller.comm.exceptions;
 
 import com.sinothk.base.entity.ResultData;
 import org.springframework.web.bind.annotation.ExceptionHandler;

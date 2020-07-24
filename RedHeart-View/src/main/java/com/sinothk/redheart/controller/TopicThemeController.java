@@ -3,7 +3,7 @@ package com.sinothk.redheart.controller;
 import com.sinothk.base.entity.ResultData;
 import com.sinothk.base.utils.StringUtil;
 import com.sinothk.base.utils.TokenUtil;
-import com.sinothk.redheart.comm.authorization.TokenCheck;
+import com.sinothk.redheart.controller.comm.authorization.TokenCheck;
 import com.sinothk.redheart.domain.ThemeOtherInfoAo;
 import com.sinothk.redheart.domain.TopicThemeAo;
 import com.sinothk.redheart.domain.TopicThemeEntity;

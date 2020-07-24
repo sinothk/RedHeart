@@ -1,4 +1,4 @@
-package com.sinothk.redheart.utils.wx;
+package com.sinothk.redheart.controller.utils.wx;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
